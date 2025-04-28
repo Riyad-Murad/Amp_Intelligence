@@ -13,11 +13,17 @@ return new class extends Migration
     {
         Schema::create('users', function (Blueprint $table) {
             $table->id();
+            // $table->foreignId('slave_id')->nullable()->constrained()->onDelete('set null');
+            // $table->foreignId('slave_id')->nullable()->constrained('slaves')->onDelete('set null');
+            // $table->unsignedBigInteger('slave_id')->nullable()->after('id');
+            // $table->unsignedBigInteger('slave_id')->nullable();
+            // $table->foreign('slave_id')->references('id')->on('slaves')->onDelete('set null');
+            $table->unsignedBigInteger('slave_id')->nullable();
+            $table->enum('user_type', ['Client', 'Provider', 'Admin']);
             $table->string('name');
             $table->string('email')->unique();
-            $table->timestamp('email_verified_at')->nullable();
             $table->string('password');
-            $table->rememberToken();
+            $table->string('phone_number');
             $table->timestamps();
         });
 
