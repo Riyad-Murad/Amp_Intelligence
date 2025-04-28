@@ -12,6 +12,5 @@ Route::group(["prefix" => "v1"], function () {
     });
 
     //Unauthenticated Users
-    // Route::post("/login", [AuthController::class, "login"])->name("login");
-    // Route::post("/signup", [AuthController::class, "signup"])->name("signup");
+    Route::post("/login", [AuthController::class, "login"])->name("login");
 });
