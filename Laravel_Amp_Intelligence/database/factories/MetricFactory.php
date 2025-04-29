@@ -25,6 +25,7 @@ class MetricFactory extends Factory
             'current' => $this->faker->randomFloat(2, 0, 100),
             'power' => $this->faker->randomFloat(2, 0, 500),
             'energy' => $this->faker->randomFloat(2, 0, 10000),
+            'date_month' => $this->faker->date('m-d'),
         ];
     }
 }
