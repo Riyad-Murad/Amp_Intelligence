@@ -36,14 +36,10 @@ jobs:
         working-directory: ./Laravel_Amp_Intelligence
         run: |
           cp .env.testing .env
-          cat .env
           composer install --prefer-dist --no-progress
           php artisan key:generate
           php artisan jwt:secret --force
           php artisan migrate
-          cat .env
-          php artisan config:clear
-          php artisan cache:clear
           php artisan config:cache
 
       - name: Run Laravel tests
