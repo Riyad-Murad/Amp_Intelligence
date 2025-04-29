@@ -39,7 +39,10 @@ jobs:
           composer install --prefer-dist --no-progress
           php artisan key:generate
           php artisan jwt:secret --force
-          php artisan migrate        
+          php artisan migrate
+          php artisan config:clear
+          php artisan cache:clear
+          php artisan config:cache
 
       - name: Run Laravel tests
         working-directory: ./Laravel_Amp_Intelligence
