@@ -9,6 +9,10 @@ class Slave extends Model
 {
     use HasFactory;
 
+    protected $fillable = [
+        'modbus_id',
+    ];
+
     public function master()
     {
         return $this->belongsTo(Master::class);

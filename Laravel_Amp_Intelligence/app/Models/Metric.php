@@ -9,6 +9,13 @@ class Metric extends Model
 {
     use HasFactory;
 
+    protected $fillable = [
+        'voltage',
+        'current',
+        'power',
+        'energy',
+    ];
+
     public function master()
     {
         return $this->belongsTo(Master::class);
