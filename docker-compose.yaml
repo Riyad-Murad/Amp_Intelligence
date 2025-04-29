@@ -1,0 +1,41 @@
+services:
+  laravel-server:
+    image: riyadmurad44/laravel_amp_intelligence:latest
+    environment:
+      - LARAVEL_DATABASE_HOST=mysql-database
+      - LARAVEL_DATABASE_NAME=amp_intellegence
+      - LARAVEL_DATABASE_USER=root
+      - LARAVEL_DATABASE_PASSWORD=1234
+      - LARAVEL_DATABASE_PORT_NUMBER=3306
+    ports:
+      - 8000:80
+    depends_on:
+      - mysql-database
+    restart: always
+    command: ./dockerShell.sh
+
+  mysql-database:
+    image: mysql:8.0
+    restart: always
+    environment:
+      MYSQL_ROOT_PASSWORD: 1234
+      MYSQL_DATABASE: amp_intellegence
+    volumes:
+      - mysql-data:/var/lib/mysql
+    ports:
+      - 3306:3306
+
+  node-server:
+    image: riyadmurad44/node_amp_intelligence:latest
+    ports:
+      - 3001:3001
+    restart: always
+
+  react-frontend:
+    image: riyadmurad44/react_amp_intelligence:latest
+    ports:
+      - 80:80
+    restart: always
+
+volumes:
+  mysql-data:
