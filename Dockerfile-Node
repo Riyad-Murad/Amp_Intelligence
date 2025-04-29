@@ -2,11 +2,11 @@ FROM node:18-alpine
 
 WORKDIR /app
 
-COPY chat_server/package*.json /app/
+COPY Node_Amp_Intelligence/package*.json /app/
 
 RUN npm install
 
-COPY chat_server/. /app/
+COPY Node_Amp_Intelligence/. /app/
 
 EXPOSE 3001
 
