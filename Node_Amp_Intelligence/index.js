@@ -20,65 +20,24 @@ const io = new Server(server, {
 });
 
 io.on("connection", (socket) => {
-  const userToken = socket.handshake.auth.token;
-  console.log("Socket.IO connected:", socket.id);
-  console.log("Received token on connection:", userToken);
+  console.log("ESP32 connected:", socket.id);
 
-  axios
-    .get(`${LARAVEL_API}/chats`, {
-      headers: {
-        Authorization: `Bearer ${userToken}`,
-      },
-    })
-    .then((res) => {
-      console.log("Chat history fetched successfully:", res.data);
-      socket.emit("chatHistory", res.data);
-    })
-    .catch((err) => {
-      console.error("Failed to fetch chat history:", err.message);
-      console.error("Axios error details (fetch):", err);
-    });
-
-  socket.on("message", (data) => {
-    console.log("Incoming message:", data, "from socket:", socket.id);
-
-    axios
-      .post(
-        `${LARAVEL_API}/chats`,
-        {
-          user_id: data.user_id,
-          message: data.text,
-        },
-        {
-          headers: {
-            Authorization: `Bearer ${userToken}`,
-          },
-        }
-      )
-      .then(() => {
-        console.log("Message saved successfully, fetching updated history.");
-        return axios.get(`${LARAVEL_API}/chats`, {
-          headers: {
-            Authorization: `Bearer ${userToken}`,
-          },
-        });
-      })
-      .then((res) => {
-        console.log("Updated chat history fetched successfully:", res.data);
-        io.emit("chatHistory", res.data);
-      })
-      .catch((err) => {
-        console.error("Error saving or fetching chat messages:", err.message);
-        console.error("Axios error details (save/fetch):", err);
-      });
+  socket.on("message", (data, isBinary) => {
+    if (isBinary) {
+      console.log("Received binary data from ESP32:", data);
+      console.log("Raw bytes:", [...data]); // prints array of byte values
+      // You can save this to DB or forward to Laravel here in the future.
+    } else {
+      console.log("Received text data (not binary):", data.toString());
+    }
   });
 
   socket.on("disconnect", () => {
-    console.log("User disconnected:", socket.id);
+    console.log("ESP32 disconnected:", socket.id);
   });
 });
 
 const PORT = 3001;
 server.listen(PORT, () => {
-  console.log(`Socket.IO server running on port ${PORT}`);
+  console.log(`WebSocket server running on port ${PORT}`);
 });
