@@ -1,0 +1,48 @@
+name: Run Laravel Tests for Production
+
+on:
+  pull_request:
+    branches:
+      - main
+
+jobs:
+  Laravel-Tests:
+    runs-on: ubuntu-latest
+
+    services:
+      mysql:
+        image: mysql:8.0
+        env:
+          MYSQL_ROOT_PASSWORD: root
+          MYSQL_DATABASE: testing
+        ports:
+          - 3306:3306
+        options: >-
+          --health-cmd="mysqladmin ping --silent"
+          --health-interval=10s
+          --health-timeout=5s
+          --health-retries=3
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v3
+
+      - name: Set up PHP
+        uses: shivammathur/setup-php@v2
+        with:
+          php-version: 8.2
+
+      - name: Install PHP dependencies and setup Laravel
+        working-directory: ./Laravel_Amp_Intelligence
+        run: |
+          cp .env.testing .env
+          composer install --prefer-dist --no-progress
+          php artisan config:clear
+          php artisan key:generate --env=testing
+          php artisan jwt:secret --force --env=testing
+          php artisan config:cache
+          php artisan migrate --env=testing
+
+      - name: Run Laravel tests
+        working-directory: ./Laravel_Amp_Intelligence
+        run: php artisan test
