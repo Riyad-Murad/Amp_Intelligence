@@ -33,7 +33,7 @@ jobs:
           php-version: 8.2
 
       - name: Install PHP dependencies and setup Laravel
-        working-directory: ./Laravel_Amp_Intelligence
+        working-directory: ./amp-laravel
         run: |
           cp .env.testing .env
           composer install --prefer-dist --no-progress
@@ -44,5 +44,5 @@ jobs:
           php artisan migrate --env=testing
 
       - name: Run Laravel tests
-        working-directory: ./Laravel_Amp_Intelligence
+        working-directory: ./amp-laravel
         run: php artisan test
