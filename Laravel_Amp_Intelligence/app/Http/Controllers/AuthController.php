@@ -12,10 +12,17 @@ class AuthController extends Controller
     {
         $response = UserLoginService::login($request);
         if (!$response) {
-            return $this->errorMessageResponse(false, [], 'Invalid credentials', 400);            
+            return $this->errorMessageResponse(false, [], 'Invalid credentials', 400);
         }
 
-        return $this->loginMessageResponse(true, "Logged In Successfully", $response, 200);
+        $userData = [
+            'id' => $response->id,
+            'slave_id' => $response->slave_id,
+            'user_type' => $response->user_type,
+            'token' => $response->token,
+        ];
+
+        return $this->loginMessageResponse(true, "Logged In Successfully", $userData, 200);
     }
 
     public function logout()
