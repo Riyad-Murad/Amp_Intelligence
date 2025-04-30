@@ -20,7 +20,7 @@ jobs:
           password: ${{ secrets.DOCKER_TOKEN }}
 
       - name: Build Laravel Docker image
-        run: docker build -t ${{ secrets.DOCKER_USERNAME }}/laravel_amp_intelligence:latest .
+        run: docker build -f ./amp-laravel/Dockerfile-Laravel -t ${{ secrets.DOCKER_USERNAME }}/laravel_amp_intelligence:latest .
 
       - name: Push Laravel Docker image
         run: docker push ${{ secrets.DOCKER_USERNAME }}/laravel_amp_intelligence:latest
@@ -39,7 +39,7 @@ jobs:
           password: ${{ secrets.DOCKER_TOKEN }}
 
       - name: Build Node.js Docker image
-        run: docker build -f Dockerfile-Node -t ${{ secrets.DOCKER_USERNAME }}/node_amp_intelligence:latest .
+        run: docker build -f ./amp-node/Dockerfile-Node -t ${{ secrets.DOCKER_USERNAME }}/node_amp_intelligence:latest .
 
       - name: Push Node.js Docker image
         run: docker push ${{ secrets.DOCKER_USERNAME }}/node_amp_intelligence:latest
@@ -58,7 +58,7 @@ jobs:
           password: ${{ secrets.DOCKER_TOKEN }}
 
       - name: Build React.js Docker image
-        run: docker build -f Dockerfile-React -t ${{ secrets.DOCKER_USERNAME }}/react_amp_intelligence:latest .
+        run: docker build -f ./amp-client/Dockerfile-React -t ${{ secrets.DOCKER_USERNAME }}/react_amp_intelligence:latest .
 
       - name: Push React.js Docker image
         run: docker push ${{ secrets.DOCKER_USERNAME }}/react_amp_intelligence:latest
@@ -73,7 +73,7 @@ jobs:
       - name: Copy docker-compose to EC2
         uses: appleboy/scp-action@v1
         with:
-          host: ${{ secrets.EC2_HOST_STAGING }}
+          host: ${{ secrets.EC2_HOST_PRODUCTION }}
           username: ${{ secrets.EC2_USER }}
           key: ${{ secrets.EC2_KEY }}
           source: "docker-compose.yaml"
@@ -90,7 +90,7 @@ jobs:
       - name: Deploy on EC2
         uses: appleboy/ssh-action@v1
         with:
-          host: ${{ secrets.EC2_HOST_STAGING }}
+          host: ${{ secrets.EC2_HOST_PRODUCTION }}
           username: ${{ secrets.EC2_USER }}
           key: ${{ secrets.EC2_KEY }}
           script: |
