@@ -22,7 +22,7 @@ RUN a2enmod rewrite \
 COPY --from=composer:latest /usr/bin/composer /usr/bin/composer
 
 # Copy Laravel project files
-COPY ./Laravel_Amp_Intelligence /var/www/html
+COPY . /var/www/html
 
 # Install Composer dependencies, excludes dev dependencies and optimized for production
 RUN composer install --no-dev --optimize-autoloader
