@@ -6,7 +6,7 @@ on:
       - main
 
 jobs:
-  Laravel-Tests:
+  Laravel-Tests_Production:
     runs-on: ubuntu-latest
 
     services:
