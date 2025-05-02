@@ -44,7 +44,7 @@ void loop() {
 
   // Send periodic sensor data
   if (checkInSent && now - lastDataSendTime > 30000) {
-    sendMasterSensorData();
+    sendMasterLinesData();
     sendSlaveSensorData();
     lastDataSendTime = now;
   }
@@ -78,14 +78,16 @@ void webSocketEvent(WStype_t type, uint8_t* payload, size_t length) {
 
 // send master check In dummy data on connection
 void sendMasterCheckIn() {
-  uint8_t packet[23];
+  uint8_t packet[9];
   packet[0] = 0x10;
-  memcpy(&packet[1], "MASTR1", 6);  // Master ID
-  for (int i = 7; i < 23; i++) {
-    packet[i] = i;  // Dummy token
-  }
 
-  webSocket.sendBIN(packet, 23);
+  uint16_t userId = 1;
+  packet[1] = (userId >> 8) & 0xFF;
+  packet[2] = userId & 0xFF;
+
+  memcpy(&packet[3], "MASTR1", 6);
+
+  webSocket.sendBIN(packet, 9);
   Serial.println("Master check-in sent");
 }
 
@@ -101,33 +103,73 @@ void sendSlaveCheckIn() {
   Serial.println("Slave check-in sent");
 }
 
-// send master sensor dummy data every 30 seconds 
-void sendMasterSensorData() {
+// send master sensor dummy data every 30 seconds
+void sendMasterLinesData() {
   uint8_t packet[25];
   packet[0] = 0x14;
   memcpy(&packet[1], "MASTR1", 6);  // Master ID
 
-  // Dummy voltage and power (L1, L2, L3)
-  for (int i = 7; i < 25; i++) {
-    packet[i] = i + 1;
+  uint16_t voltage = 220;
+  uint32_t powerL1 = 1000;
+  uint32_t powerL2 = 1200;
+  uint32_t powerL3 = 900;
+
+  // Voltages
+  packet[7] = (voltage >> 8) & 0xFF;
+  packet[8] = voltage & 0xFF;
+  packet[9] = (voltage >> 8) & 0xFF;
+  packet[10] = voltage & 0xFF;
+  packet[11] = (voltage >> 8) & 0xFF;
+  packet[12] = voltage & 0xFF;
+
+  // Powers
+  uint32_t powers[3] = { powerL1, powerL2, powerL3 };
+  int idx = 13;
+  for (int i = 0; i < 3; i++) {
+    packet[idx++] = (powers[i] >> 24) & 0xFF;
+    packet[idx++] = (powers[i] >> 16) & 0xFF;
+    packet[idx++] = (powers[i] >> 8) & 0xFF;
+    packet[idx++] = powers[i] & 0xFF;
   }
 
   webSocket.sendBIN(packet, 25);
   Serial.println("Master sensor data sent");
 }
 
+
 // send slave sensor dummy data every 30 seconds
 void sendSlaveSensorData() {
-  uint8_t packet[25];
+  uint8_t packet[24];
   packet[0] = 0x16;
+
   memcpy(&packet[1], "MASTR1", 6);  // Master ID
-  memcpy(&packet[7], "SLAV01", 5);  // Slave ID
-  packet[12] = 0x01;                // Modbus ID
+  memcpy(&packet[7], "SLAV1", 5);   // Slave ID
 
-  for (int i = 13; i < 25; i++) {
-    packet[i] = i * 2;  // Dummy voltage, current, power, energy
-  }
+  uint16_t voltage = 220;
+  uint16_t current = 10;
+  uint32_t power = 500;
+  uint32_t energy = 12000;
 
-  webSocket.sendBIN(packet, 25);
+  // Voltage
+  packet[12] = (voltage >> 8) & 0xFF;
+  packet[13] = voltage & 0xFF;
+
+  // Current
+  packet[14] = (current >> 8) & 0xFF;
+  packet[15] = current & 0xFF;
+
+  // Power
+  packet[16] = (power >> 24) & 0xFF;
+  packet[17] = (power >> 16) & 0xFF;
+  packet[18] = (power >> 8) & 0xFF;
+  packet[19] = power & 0xFF;
+
+  // Energy
+  packet[20] = (energy >> 24) & 0xFF;
+  packet[21] = (energy >> 16) & 0xFF;
+  packet[22] = (energy >> 8) & 0xFF;
+  packet[23] = energy & 0xFF;
+
+  webSocket.sendBIN(packet, 24);
   Serial.println("Slave sensor data sent");
 }
