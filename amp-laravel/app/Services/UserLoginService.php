@@ -2,32 +2,28 @@
 
 namespace App\Services;
 
-use Throwable;
 use App\Models\User;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Auth\AuthenticationException;
 use PHPOpenSourceSaver\JWTAuth\Facades\JWTAuth;
 
 class UserLoginService
 {
     public static function login($request)
     {
-        try {
-            $credentials = $request->only('email', 'password');
+        $credentials = $request->only('email', 'password');
 
-            $token = JWTAuth::attempt($credentials);
-            if (!$token) {
-                return;
-            }
-
-            $authUser = Auth::user();
-            $user = User::find($authUser->id);
-            $user->save();
-            $user->token = $token;
-
-            return $user;
-        } catch (\Throwable $e) {
-            return $e->getMessage();
+        $token = JWTAuth::attempt($credentials);
+        if (!$token) {
+            throw new AuthenticationException('Invalid credentials');
         }
+
+        $authUser = Auth::user();
+        $user = User::find($authUser->id);
+        $user->save();
+        $user->token = $token;
+
+        return $user;
     }
 
     public static function logout()
