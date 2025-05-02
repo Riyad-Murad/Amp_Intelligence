@@ -1,9 +1,7 @@
 <?php
 
-use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
-use App\Http\Controllers\AuthController;
-use App\Http\Controllers\ChatController;
+use App\Http\Controllers\Common\AuthController;
 
 Route::group(["prefix" => "v1"], function () {
     //Authenticated Users
