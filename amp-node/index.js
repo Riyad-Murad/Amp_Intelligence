@@ -1,39 +1,27 @@
 import http from "http";
-import cors from "cors";
 import axios from "axios";
-import express from "express";
-import { Server } from "socket.io";
+import WebSocket, { WebSocketServer } from "ws";
 
-const app = express();
-app.use(cors());
-app.use(express.json());
+const server = http.createServer();
+const wss = new WebSocketServer({ server });
 
-const server = http.createServer(app);
 const LARAVEL_API = "http://server:80/api/v1";
 // const LARAVEL_API = "http://localhost:8000/api/v1";
 
-const io = new Server(server, {
-  cors: {
-    origin: "*",
-    methods: ["GET", "POST"],
-  },
-});
+wss.on("connection", (ws) => {
+  console.log("ESP32 connected");
 
-io.on("connection", (socket) => {
-  console.log("ESP32 connected:", socket.id);
-
-  socket.on("message", (data, isBinary) => {
+  ws.on("message", (data, isBinary) => {
     if (isBinary) {
-      console.log("Received binary data from ESP32:", data);
-      console.log("Raw bytes:", [...data]); // prints array of byte values
-      // You can save this to DB or forward to Laravel here in the future.
+      console.log("Binary data received:", data);
+      console.log("Raw bytes:", [...data]);
     } else {
-      console.log("Received text data (not binary):", data.toString());
+      console.log("Text message received:", data.toString());
     }
   });
 
-  socket.on("disconnect", () => {
-    console.log("ESP32 disconnected:", socket.id);
+  ws.on("close", () => {
+    console.log("ESP32 disconnected");
   });
 });
 
