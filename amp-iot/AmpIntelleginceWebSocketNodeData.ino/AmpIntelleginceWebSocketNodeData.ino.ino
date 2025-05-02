@@ -45,7 +45,7 @@ void loop() {
   // Send periodic sensor data
   if (checkInSent && now - lastDataSendTime > 30000) {
     sendMasterLinesData();
-    sendSlaveSensorData();
+    sendSlaveMetricData();
     lastDataSendTime = now;
   }
 }
@@ -138,7 +138,7 @@ void sendMasterLinesData() {
 
 
 // send slave sensor dummy data every 30 seconds
-void sendSlaveSensorData() {
+void sendSlaveMetricData() {
   uint8_t packet[24];
   packet[0] = 0x16;
 
@@ -171,5 +171,5 @@ void sendSlaveSensorData() {
   packet[23] = energy & 0xFF;
 
   webSocket.sendBIN(packet, 24);
-  Serial.println("Slave sensor data sent");
+  Serial.println("Slave metric data sent");
 }
