@@ -24,8 +24,8 @@ class ProviderRequestCheckin extends FormRequest
     public function rules(): array
     {
         return [
-            'masterId' => 'required|string',
-            'userId' => 'required|integer|exists:users,id',
+            'master_id' => 'required|string',
+            'user_id' => 'required|integer|exists:users,id',
         ];
     }
 }
