@@ -15,7 +15,8 @@ class EnsureAdmin
      */
     public function handle(Request $request, Closure $next): Response
     {
-        $user_type = $request->user_type;
+        $user = $request->user();
+        $user_type = $user?->user_type;
 
         if ($user_type === "Admin") {
             return $next($request);
