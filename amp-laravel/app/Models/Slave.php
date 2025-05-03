@@ -11,6 +11,7 @@ class Slave extends Model
 
     protected $fillable = [
         'modbus_id',
+        'master_id',
     ];
 
     public function master()
