@@ -9,8 +9,8 @@ class ProviderCheckinService
     public static function checkin(array $data)
     {
         $master = Master::firstOrCreate(
-            ['name' => $data['masterId']],
-            ['user_id' => $data['userId']]
+            ['name' => $data['master_id']],
+            ['user_id' => $data['user_id']]
         );
 
         return $master->toArray();
