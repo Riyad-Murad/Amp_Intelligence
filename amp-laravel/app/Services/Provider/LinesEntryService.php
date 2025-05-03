@@ -8,7 +8,7 @@ class LinesEntryService
 {
     public static function addLines(array $data)
     {
-        $master = Master::where('name', $data['masterId'])->firstOrFail();
+        $master = Master::where('name', $data['master_id'])->firstOrFail();
 
         $line = $master->lines()->create([
             'voltage_l1' => $data['voltageL1'],
