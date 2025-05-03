@@ -24,8 +24,7 @@ class ClientRequestMetric extends FormRequest
     public function rules(): array
     {
         return [
-            'masterId' => 'required|string',
-            'modbusId' => 'required|string',
+            'master_id' => 'required|string',
             'voltage'  => 'required|numeric',
             'current'  => 'required|numeric',
             'power'    => 'required|numeric',
