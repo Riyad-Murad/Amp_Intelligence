@@ -24,7 +24,7 @@ class AuthController extends Controller
 
             return $this->loginMessageResponse(true, "Logged In Successfully", $userData, 200);
         } catch (AuthenticationException $e) {
-            return $this->errorMessageResponse(false, "Authentication Error", $e->getMessage(), 401);
+            return $this->errorMessageResponse(false, "Authentication Error", $e->getMessage(), 400);
         } catch (Throwable $e) {
             return $this->errorMessageResponse(false, "Something went wrong during login", $e->getMessage(), 500);
         }
