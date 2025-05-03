@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Http\Controllers\Provider;
+namespace App\Http\Controllers\Admin;
 
 use Throwable;
 use App\Http\Controllers\Controller;

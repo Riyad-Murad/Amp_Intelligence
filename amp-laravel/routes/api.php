@@ -2,10 +2,14 @@
 
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\Common\AuthController;
-use App\Http\Controllers\Client\MetricsController;
-use App\Http\Controllers\Client\ClientCheckinController;
-use App\Http\Controllers\Provider\LinesController;
-use App\Http\Controllers\Provider\ProviderCheckinController;
+use App\Http\Controllers\Admin\MetricsController;
+use App\Http\Controllers\Admin\ClientCheckinController;
+use App\Http\Controllers\Admin\LinesController;
+use App\Http\Controllers\Admin\ProviderCheckinController;
+// use App\Http\Controllers\Client\MetricsController;
+// use App\Http\Controllers\Client\ClientCheckinController;
+// use App\Http\Controllers\Provider\LinesController;
+// use App\Http\Controllers\Provider\ProviderCheckinController;
 
 Route::group(["prefix" => "v1"], function () {
     //Authenticated Users
