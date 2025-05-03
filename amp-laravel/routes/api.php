@@ -10,6 +10,9 @@ use App\Http\Controllers\Admin\ProviderCheckinController;
 Route::group(["prefix" => "v1"], function () {
     //Authenticated Users
     Route::group(["middleware" => "auth:api"], function () {
+        // Logout for all users
+        Route::post("/logout", [AuthController::class, "logout"]);
+
         // Slave/Client Users
         Route::group(["prefix" => "slaves", "middleware" => "isClient"], function () {});
 
