@@ -24,7 +24,7 @@ class ProviderRequestLine extends FormRequest
     public function rules(): array
     {
         return [
-            'masterId'   => 'required|string',
+            'master_id'   => 'required|string',
             'voltageL1'  => 'required|numeric',
             'voltageL2'  => 'required|numeric',
             'voltageL3'  => 'required|numeric',
