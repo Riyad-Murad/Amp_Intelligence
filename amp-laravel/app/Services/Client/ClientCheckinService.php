@@ -4,15 +4,20 @@ namespace App\Services\Client;
 
 use App\Models\Slave;
 use App\Models\Master;
+use InvalidArgumentException;
 
 class ClientCheckinService
 {
-    public static function checkin(array $data)
+    public static function checkin(array $data): array
     {
-        $master = Master::where('name', $data['masterId'])->firstOrFail();
+        if (empty($data['master_id']) || empty($data['modbus_id'])) {
+            throw new InvalidArgumentException('master_id and modbus_id are required.');
+        }
 
-        $slave = Slave::firstOrCreate(
-            ['modbus_id' => $data['modbusId']],
+        $master = Master::where('id', $data['master_id'])->firstOrFail();
+
+        $slave = Slave::updateOrCreate(
+            ['modbus_id' => $data['modbus_id']],
             ['master_id' => $master->id]
         );
 
