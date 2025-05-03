@@ -24,13 +24,13 @@ class ProviderRequestLine extends FormRequest
     public function rules(): array
     {
         return [
-            'master_id'   => 'required|string',
-            'voltageL1'  => 'required|numeric',
-            'voltageL2'  => 'required|numeric',
-            'voltageL3'  => 'required|numeric',
-            'powerL1'    => 'required|numeric',
-            'powerL2'    => 'required|numeric',
-            'powerL3'    => 'required|numeric',
+            'master_id'   => 'required|integer|exists:masters,id',
+            'voltage_l1'  => 'required|numeric',
+            'voltage_l2'  => 'required|numeric',
+            'voltage_l3'  => 'required|numeric',
+            'power_l1'    => 'required|numeric',
+            'power_l2'    => 'required|numeric',
+            'power_l3'    => 'required|numeric',
         ];
     }
 }

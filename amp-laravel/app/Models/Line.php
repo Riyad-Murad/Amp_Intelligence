@@ -10,6 +10,7 @@ class Line extends Model
     use HasFactory;
 
     protected $fillable = [
+        'master_id',
         'voltage_l1',
         'voltage_l2',
         'voltage_l3',

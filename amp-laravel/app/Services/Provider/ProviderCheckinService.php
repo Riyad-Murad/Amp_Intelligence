@@ -3,13 +3,14 @@
 namespace App\Services\Provider;
 
 use App\Models\Master;
+use InvalidArgumentException;
 
 class ProviderCheckinService
 {
     public static function checkin(array $data)
     {
-        $master = Master::firstOrCreate(
-            ['name' => $data['master_id']],
+        $master = Master::updateOrCreate(
+            ['name' => $data['name']],
             ['user_id' => $data['user_id']]
         );
 
