@@ -24,8 +24,8 @@ class ClientRequestCheckin extends FormRequest
     public function rules(): array
     {
         return [
-            'masterId' => 'required|string',
-            'modbusId' => 'required|string',
+            'master_id' => 'required|integer|exists:masters,id',
+            'modbus_id' => 'required|integer',
         ];
     }
 }
