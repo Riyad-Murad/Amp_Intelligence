@@ -14,13 +14,13 @@ Route::group(["prefix" => "v1"], function () {
         Route::group(["prefix" => "clients", "middleware" => "isClient"], function () {});
 
         // Slave Users
-        Route::group(["prefix" => "slaves", "middleware" => "isSlave"], function () {
+        Route::group(["prefix" => "slaves", "middleware" => "isClient"], function () {
             Route::post("/checkin", [ClientCheckinController::class, "slaveCheckin"]);
             Route::post("/metrics", [MetricsController::class, "slaveMetrics"]);
         });
 
         // Master Users
-        Route::group(["prefix" => "masters", "middleware" => "isMaster"], function () {
+        Route::group(["prefix" => "masters", "middleware" => "isProvider"], function () {
             Route::post("/checkin", [ProviderCheckinController::class, "masterCheckin"]);
             Route::post("/lines", [LinesController::class, "masterLines"]);
         });
