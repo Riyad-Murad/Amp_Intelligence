@@ -10,18 +10,24 @@ use App\Http\Controllers\Provider\ProviderCheckinController;
 Route::group(["prefix" => "v1"], function () {
     //Authenticated Users
     Route::group(["middleware" => "auth:api"], function () {
-        // Client Users
-        Route::group(["prefix" => "clients", "middleware" => "isClient"], function () {});
-
-        // Slave Users
+        // Slave/Client Users
         Route::group(["prefix" => "slaves", "middleware" => "isClient"], function () {
-            Route::post("/checkin", [ClientCheckinController::class, "slaveCheckin"]);
-            Route::post("/metrics", [MetricsController::class, "slaveMetrics"]);
+            // Route::post("/checkin", [ClientCheckinController::class, "slaveCheckin"]);
+            // Route::post("/metrics", [MetricsController::class, "slaveMetrics"]);
+        });
+        
+        // Master/Provider Users
+        Route::group(["prefix" => "masters", "middleware" => "isProvider"], function () {
+            // Route::post("/checkin", [ProviderCheckinController::class, "masterCheckin"]);
+            // Route::post("/lines", [LinesController::class, "masterLines"]);
         });
 
-        // Master Users
-        Route::group(["prefix" => "masters", "middleware" => "isProvider"], function () {
-            Route::post("/checkin", [ProviderCheckinController::class, "masterCheckin"]);
+        // Admin Users
+        Route::group(["prefix" => "admins", "middleware" => "isAdmin"], function () {
+            Route::post("/slaveCheckIn", [ClientCheckinController::class, "slaveCheckin"]);
+            Route::post("/metrics", [MetricsController::class, "slaveMetrics"]);
+
+            Route::post("/masterCheckIn", [ProviderCheckinController::class, "masterCheckin"]);
             Route::post("/lines", [LinesController::class, "masterLines"]);
         });
     });
