@@ -24,11 +24,13 @@ class ClientRequestMetric extends FormRequest
     public function rules(): array
     {
         return [
-            'master_id' => 'required|string',
-            'voltage'  => 'required|numeric',
-            'current'  => 'required|numeric',
-            'power'    => 'required|numeric',
-            'energy'   => 'required|numeric',
+            'master_id' => 'required|integer|exists:masters,id',
+            'slave_id' => 'required|integer|exists:slaves,id',
+            'voltage'   => 'required|numeric',
+            'current'   => 'required|numeric',
+            'power'     => 'required|numeric',
+            'energy'    => 'required|numeric',
+            'date_month' => 'required|string',
         ];
     }
 }
