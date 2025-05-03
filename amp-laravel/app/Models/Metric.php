@@ -10,10 +10,13 @@ class Metric extends Model
     use HasFactory;
 
     protected $fillable = [
+        'master_id',
+        'slave_id',
         'voltage',
         'current',
         'power',
         'energy',
+        'date_month',
     ];
 
     public function master()
