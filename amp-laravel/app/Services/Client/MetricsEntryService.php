@@ -10,8 +10,8 @@ class MetricsEntryService
 {
     public static function addMetrics(array $data)
     {
-        $master = Master::where('name', $data['masterId'])->firstOrFail();
-        $slave = Slave::where('modbus_id', $data['modbusId'])->firstOrFail();
+        $master = Master::where('name', $data['master_id'])->firstOrFail();
+        $slave = Slave::where('modbus_id', $data['modbus_id'])->firstOrFail();
 
         $metric = Metric::create([
             'voltage' => $data['voltage'],
