@@ -15,14 +15,14 @@ Route::group(["prefix" => "v1"], function () {
 
         // Slave Users
         Route::group(["prefix" => "slaves", "middleware" => "isSlave"], function () {
-            Route::post("/checkin", [ClientCheckinController::class, "slave-checkin"]);
-            Route::post("/metrics", [MetricsController::class, "slave-metrics"]);
+            Route::post("/checkin", [ClientCheckinController::class, "slaveCheckin"]);
+            Route::post("/metrics", [MetricsController::class, "slaveMetrics"]);
         });
 
         // Master Users
         Route::group(["prefix" => "masters", "middleware" => "isMaster"], function () {
-            Route::post("/checkin", [ProviderCheckinController::class, "master-checkin"]);
-            Route::post("/lines", [LinesController::class, "master-lines"]);
+            Route::post("/checkin", [ProviderCheckinController::class, "masterCheckin"]);
+            Route::post("/lines", [LinesController::class, "masterLines"]);
         });
     });
 
