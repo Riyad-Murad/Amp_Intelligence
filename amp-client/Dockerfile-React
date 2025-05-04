@@ -8,26 +8,24 @@ COPY ./package*.json ./
 RUN npm install
 
 # Now copy the rest of the app
-COPY ./amp-client ./
+COPY . .
 
 # Build the app
 RUN npm run build
 
-# Step 2: Serve the built app with Apache
-FROM httpd:2.4
+# Step 2: Serve with Nginx
+FROM nginx:alpine
 
-# Remove the default Apache page (optional)
-RUN rm -rf /usr/local/apache2/htdocs/*
+# Remove default Nginx static content
+RUN rm -rf /usr/share/nginx/html/*
 
-# Enable rewirte mode
-RUN sed -i '/LoadModule rewrite_module/s/^#//g' /usr/local/apache2/conf/httpd.conf
-RUN sed -i '/<Directory "\/usr\/local\/apache2\/htdocs">/,/<\/Directory>/s/AllowOverride None/AllowOverride All/' /usr/local/apache2/conf/httpd.conf
+# Copy built React app from previous stage
+COPY --from=reactbuild /app/amp-client/dist /usr/share/nginx/html
 
-# Copy built app into Apache's public folder
-COPY --from=reactbuild /app/amp-client/dist/ /usr/local/apache2/htdocs/
+# Copy custom Nginx config (supports React routing)
+COPY nginx.conf /etc/nginx/conf.d/default.conf
 
 # Expose port 80
 EXPOSE 80
 
-# Start Apache
-CMD ["httpd-foreground"]
+CMD ["nginx", "-g", "daemon off;"]
