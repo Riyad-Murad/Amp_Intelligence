@@ -25,15 +25,13 @@ wss.on("connection", (ws) => {
     switch (packetType) {
       case 0x10: {
         // Master Check-in
-        const user_id = (data[1] << 8) | data[2];
-        const name = Buffer.from(data.slice(3, 9)).toString();
+        const name = Buffer.from(data.slice(1, 7)).toString();
 
         console.log(">> Parsed Master Check-in");
-        console.log({ user_id, name });
+        console.log(name);
 
         axios
           .post(`${LARAVEL_API}/masterCheckIn`, {
-            user_id,
             name,
           })
           .catch((err) => console.error("Master Check-in Error:", err.message));
