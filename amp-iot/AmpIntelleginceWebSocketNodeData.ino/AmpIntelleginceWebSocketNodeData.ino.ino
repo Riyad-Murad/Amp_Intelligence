@@ -96,8 +96,7 @@ void sendSlaveCheckIn() {
   uint8_t packet[13];
   packet[0] = 0x12;
   memcpy(&packet[1], "MASTR1", 6);  // Master ID
-  memcpy(&packet[7], "SLAV01", 5);  // Slave ID
-  packet[12] = 0x01;                // Modbus ID
+  packet[7] = 0x01;                // Modbus ID
 
   webSocket.sendBIN(packet, 13);
   Serial.println("Slave check-in sent");
@@ -109,21 +108,23 @@ void sendMasterLinesData() {
   packet[0] = 0x14;
   memcpy(&packet[1], "MASTR1", 6);  // Master ID
 
-  uint16_t voltage = 220;
-  uint32_t powerL1 = 1000;
-  uint32_t powerL2 = 1200;
-  uint32_t powerL3 = 900;
+  uint16_t voltage_l1 = 220;
+  uint16_t voltage_l2 = 220;
+  uint16_t voltage_l3 = 220;
+  uint32_t power_l1 = 1000;
+  uint32_t power_l2 = 1200;
+  uint32_t power_l3 = 900;
 
   // Voltages
-  packet[7] = (voltage >> 8) & 0xFF;
-  packet[8] = voltage & 0xFF;
-  packet[9] = (voltage >> 8) & 0xFF;
-  packet[10] = voltage & 0xFF;
-  packet[11] = (voltage >> 8) & 0xFF;
-  packet[12] = voltage & 0xFF;
+  packet[7] = (voltage_l1 >> 8) & 0xFF;
+  packet[8] = voltage_l1 & 0xFF;
+  packet[9] = (voltage_l2 >> 8) & 0xFF;
+  packet[10] = voltage_l2 & 0xFF;
+  packet[11] = (voltage_l3 >> 8) & 0xFF;
+  packet[12] = voltage_l3 & 0xFF;
 
   // Powers
-  uint32_t powers[3] = { powerL1, powerL2, powerL3 };
+  uint32_t powers[3] = { power_l1, power_l2, power_l3 };
   int idx = 13;
   for (int i = 0; i < 3; i++) {
     packet[idx++] = (powers[i] >> 24) & 0xFF;
