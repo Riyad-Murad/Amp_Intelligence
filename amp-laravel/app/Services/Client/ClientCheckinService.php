@@ -2,6 +2,7 @@
 
 namespace App\Services\Client;
 
+use App\Models\User;
 use App\Models\Slave;
 use App\Models\Master;
 use InvalidArgumentException;
@@ -20,6 +21,13 @@ class ClientCheckinService
             ['modbus_id' => $data['modbus_id']],
             ['master_id' => $master->id]
         );
+
+        if ($slave->wasRecentlyCreated) {
+            User::create([
+                'slave_id' => $slave->id,
+                'user_type' => 'Client',
+            ]);
+        }
 
         return $slave->toArray();
     }
