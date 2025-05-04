@@ -25,16 +25,16 @@ wss.on("connection", (ws) => {
     switch (packetType) {
       case 0x10: {
         // Master Check-in
-        const userId = (data[1] << 8) | data[2];
-        const masterId = Buffer.from(data.slice(3, 9)).toString();
+        const user_id = (data[1] << 8) | data[2];
+        const master_id = Buffer.from(data.slice(3, 9)).toString();
 
         console.log(">> Parsed Master Check-in");
-        console.log({ userId, masterId });
+        console.log({ user_id, master_id });
 
         axios
-          .post(`${LARAVEL_API}/masters/checkin`, {
-            user_id: userId,
-            master_id: masterId,
+          .post(`${LARAVEL_API}/masterCheckIn`, {
+            user_id,
+            master_id,
           })
           .catch((err) => console.error("Master Check-in Error:", err.message));
 
@@ -43,18 +43,16 @@ wss.on("connection", (ws) => {
 
       case 0x12: {
         // Slave Check-in
-        const masterId = Buffer.from(data.slice(1, 7)).toString();
-        const slaveId = Buffer.from(data.slice(7, 12)).toString();
-        const modbusId = data[12];
+        const master_id = Buffer.from(data.slice(1, 7)).toString();
+        const modbus_id = data[7];
 
         console.log(">> Parsed Slave Check-in");
-        console.log({ masterId, slaveId, modbusId });
+        console.log({ master_id, modbus_id });
 
         axios
-          .post(`${LARAVEL_API}/slaves/checkin`, {
-            master_id: masterId,
-            slave_id: slaveId,
-            modbus_id: modbusId,
+          .post(`${LARAVEL_API}/slaveCheckIn`, {
+            master_id,
+            modbus_id,
           })
           .catch((err) => console.error("Slave Check-in Error:", err.message));
 
@@ -65,37 +63,37 @@ wss.on("connection", (ws) => {
         // Master Lines Data
         const masterId = Buffer.from(data.slice(1, 7)).toString();
 
-        const voltageL1 = (data[7] << 8) | data[8];
-        const voltageL2 = (data[9] << 8) | data[10];
-        const voltageL3 = (data[11] << 8) | data[12];
+        const voltage_l1 = (data[7] << 8) | data[8];
+        const voltage_l2 = (data[9] << 8) | data[10];
+        const voltage_l3 = (data[11] << 8) | data[12];
 
-        const powerL1 =
+        const power_l1 =
           (data[13] << 24) | (data[14] << 16) | (data[15] << 8) | data[16];
-        const powerL2 =
+        const power_l2 =
           (data[17] << 24) | (data[18] << 16) | (data[19] << 8) | data[20];
-        const powerL3 =
+        const power_l3 =
           (data[21] << 24) | (data[22] << 16) | (data[23] << 8) | data[24];
 
         console.log(">> Parsed Master Lines Data");
         console.log({
           masterId,
-          voltageL1,
-          voltageL2,
-          voltageL3,
-          powerL1,
-          powerL2,
-          powerL3,
+          voltage_l1,
+          voltage_l2,
+          voltage_l3,
+          power_l1,
+          power_l2,
+          power_l3,
         });
 
         axios
-          .post(`${LARAVEL_API}/masters/lines`, {
+          .post(`${LARAVEL_API}/lines`, {
             master_id: masterId,
-            voltage_l1: voltageL1,
-            voltage_l2: voltageL2,
-            voltage_l3: voltageL3,
-            power_l1: powerL1,
-            power_l2: powerL2,
-            power_l3: powerL3,
+            voltage_l1,
+            voltage_l2,
+            voltage_l3,
+            power_l1,
+            power_l2,
+            power_l3,
           })
           .catch((err) =>
             console.error("Master Lines Data Error:", err.message)
@@ -106,8 +104,8 @@ wss.on("connection", (ws) => {
 
       case 0x16: {
         // Slave Metric Data
-        const masterId = Buffer.from(data.slice(1, 7)).toString();
-        const slaveId = Buffer.from(data.slice(7, 12)).toString();
+        const master_id = Buffer.from(data.slice(1, 7)).toString();
+        const slave_id = Buffer.from(data.slice(7, 12)).toString();
 
         const voltage = (data[12] << 8) | data[13];
         const current = (data[14] << 8) | data[15];
@@ -118,8 +116,8 @@ wss.on("connection", (ws) => {
 
         console.log(">> Parsed Slave Metric Data");
         console.log({
-          masterId,
-          slaveId,
+          master_id,
+          slave_id,
           voltage,
           current,
           power,
@@ -127,9 +125,9 @@ wss.on("connection", (ws) => {
         });
 
         axios
-          .post(`${LARAVEL_API}/slaves/metrics`, {
-            master_id: masterId,
-            slave_id: slaveId,
+          .post(`${LARAVEL_API}/metrics`, {
+            master_id,
+            slave_id,
             voltage,
             current,
             power,
