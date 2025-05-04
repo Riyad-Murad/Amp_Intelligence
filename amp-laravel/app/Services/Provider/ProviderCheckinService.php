@@ -11,13 +11,15 @@ class ProviderCheckinService
     {
         $master = Master::updateOrCreate(
             ['name' => $data['name']],
-            ['user_id' => $data['user_id']]
         );
 
         if ($master->wasRecentlyCreated) {
-            User::create([
+            $user = User::create([
                 'user_type' => 'Provider',
             ]);
+
+            $master->user_id = $user->id;
+            $master->save();
         }
 
         return $master->toArray();

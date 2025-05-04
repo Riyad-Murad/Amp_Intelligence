@@ -81,13 +81,9 @@ void sendMasterCheckIn() {
   uint8_t packet[9];
   packet[0] = 0x10;
 
-  uint16_t user_id = 1;
-  packet[1] = (user_id >> 8) & 0xFF;
-  packet[2] = user_id & 0xFF;
+  memcpy(&packet[1], "MASTR1", 6);
 
-  memcpy(&packet[3], "MASTR1", 6);
-
-  webSocket.sendBIN(packet, 9);
+  webSocket.sendBIN(packet, 7);
   Serial.println("Master check-in sent");
 }
 
