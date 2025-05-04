@@ -5,7 +5,7 @@
 const char* ssid = "Wise net/rida murad";
 const char* password = "1234murad@";
 
-const char* websocket_server = "192.168.1.104";
+const char* websocket_server = "13.38.59.230";
 const uint16_t websocket_port = 3001;
 const char* websocket_path = "/";
 
