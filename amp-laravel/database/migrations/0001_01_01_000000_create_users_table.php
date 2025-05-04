@@ -15,10 +15,10 @@ return new class extends Migration
             $table->id();
             $table->unsignedBigInteger('slave_id')->nullable();
             $table->enum('user_type', ['Client', 'Provider', 'Admin']);
-            $table->string('name');
-            $table->string('email')->unique();
-            $table->string('password');
-            $table->string('phone_number');
+            $table->string('name')->nullable();
+            $table->string('email')->unique()->nullable();
+            $table->string('password')->nullable();
+            $table->string('phone_number')->nullable();
             $table->timestamps();
         });
 
