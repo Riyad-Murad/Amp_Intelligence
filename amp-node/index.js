@@ -112,6 +112,11 @@ wss.on("connection", (ws) => {
         const energy =
           (data[13] << 24) | (data[14] << 16) | (data[15] << 8) | data[16];
 
+        const now = new Date();
+        const month = (now.getMonth() + 1).toString().padStart(2, "0");
+        const day = now.getDate().toString().padStart(2, "0");
+        const date_month = `${month}-${day}`;
+
         console.log(">> Parsed Slave Metric Data");
         console.log({
           master_id,
@@ -120,6 +125,7 @@ wss.on("connection", (ws) => {
           current,
           power,
           energy,
+          date_month,
         });
 
         axios
@@ -130,6 +136,7 @@ wss.on("connection", (ws) => {
             current,
             power,
             energy,
+            date_month,
           })
           .catch((err) => console.error("Slave Metrics Error:", err.message));
 
