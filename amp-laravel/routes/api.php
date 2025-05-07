@@ -6,6 +6,7 @@ use App\Http\Controllers\Common\LinesController;
 use App\Http\Controllers\Common\MetricsController;
 use App\Http\Controllers\Common\ClientCheckinController;
 use App\Http\Controllers\Common\ProviderCheckinController;
+use App\Http\Controllers\Admin\AdminFunctionsController;
 use App\Http\Controllers\Clients\ClientFunctionsController;
 use App\Http\Controllers\Provider\ProviderFunctionsController;
 
@@ -21,7 +22,7 @@ Route::group(["prefix" => "v1"], function () {
 
             Route::post("/editProfile", [ClientFunctionsController::class, "editProfile"]);
         });
-        
+
         // Master/Provider Users
         Route::group(["prefix" => "providers", "middleware" => "isProvider"], function () {
             Route::get("/providerReport", [ProviderFunctionsController::class, "generateReport"]);
@@ -32,7 +33,7 @@ Route::group(["prefix" => "v1"], function () {
 
             Route::post("/editProfile", [ProviderFunctionsController::class, "editProfile"]);
             Route::post("/editUser/{id}", [ProviderFunctionsController::class, "editUser"]);
-        });        
+        });
 
         // Admin Users
         Route::group(["prefix" => "admins", "middleware" => "isAdmin"], function () {});
