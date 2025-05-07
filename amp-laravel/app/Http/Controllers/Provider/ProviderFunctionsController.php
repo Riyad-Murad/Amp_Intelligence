@@ -29,4 +29,8 @@ class ProviderFunctionsController extends Controller
     public function getUsers(Request $request){
     
     }
+
+    public function getMetrics(Request $request){
+    
+    }
 }
