@@ -8,18 +8,17 @@ use App\Services\Client\GeneratingReportService;
 
 class ClientFunctionsController extends Controller
 {
-    // public function generateReport(Request $request)
-    public function generateReport()
+    // public function generateReport()
+    public function generateReport(Request $request)
     {
         try {
-            // $id = $request->header('id');
+            $id = $request->header('id');
 
-            // if (!$id) {
-            //     return $this->messageResponse(false, "Header ID not provided", 400, null);
-            // }
+            if (!$id) {
+                return $this->messageResponse(false, "Header ID not provided", 400, null);
+            }
 
-            $report = GeneratingReportService::generateReport();
-            // $report = GeneratingReportService::generateReport($id);
+            $report = GeneratingReportService::generateReport($id);
             return $this->messageResponse(true, "Report Generated", 200, $report);
         } catch (\Exception $e) {
             return $this->messageResponse(false, "Failed to generate report: " . $e->getMessage(), 500, null);
