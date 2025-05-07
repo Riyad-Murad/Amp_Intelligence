@@ -25,4 +25,8 @@ class ProviderFunctionsController extends Controller
     public function editUser(Request $request){
 
     }
+
+    public function getUsers(Request $request){
+    
+    }
 }
