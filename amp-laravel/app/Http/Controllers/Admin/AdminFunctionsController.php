@@ -18,4 +18,8 @@ class AdminFunctionsController extends Controller
     public function editProvider(Request $request){
         
     }
+
+    public function deleteMessage(Request $request){
+        
+    }
 }
