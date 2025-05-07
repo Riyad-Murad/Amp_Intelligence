@@ -11,10 +11,12 @@ use Prism\Prism\Schema\StringSchema;
 
 class GeneratingReportService
 {
+    // public static function generateReport($id)
     public static function generateReport()
     {
         $schema = new ObjectSchema(
             name: 'movie_review',
+            // description: 'A structured movie review for client ID: ' . $id,
             description: 'A structured movie review',
             properties: [
                 new StringSchema('title', 'The movie title'),
@@ -27,6 +29,7 @@ class GeneratingReportService
         $response = Prism::structured()
             ->using(Provider::OpenAI, 'o4-mini')
             ->withSchema($schema)
+            // ->withPrompt('Review the movie Inception for client ID: ' . $id)
             ->withPrompt('Review the movie Inception')
             ->asStructured();
 
