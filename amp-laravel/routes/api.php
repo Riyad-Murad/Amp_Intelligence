@@ -6,6 +6,7 @@ use App\Http\Controllers\Common\LinesController;
 use App\Http\Controllers\Common\MetricsController;
 use App\Http\Controllers\Common\ClientCheckinController;
 use App\Http\Controllers\Common\ProviderCheckinController;
+use App\Http\Controllers\Admin\AdminFunctionsController;
 use App\Http\Controllers\Clients\ClientFunctionsController;
 use App\Http\Controllers\Provider\ProviderFunctionsController;
 
@@ -18,15 +19,30 @@ Route::group(["prefix" => "v1"], function () {
         // Slave/Client Users
         Route::group(["prefix" => "clients", "middleware" => "isClient"], function () {
             Route::get("/clientReport", [ClientFunctionsController::class, "generateReport"]);
+
+            Route::post("/editProfile", [ClientFunctionsController::class, "editProfile"]);
         });
-        
+
         // Master/Provider Users
         Route::group(["prefix" => "providers", "middleware" => "isProvider"], function () {
             Route::get("/providerReport", [ProviderFunctionsController::class, "generateReport"]);
-        });        
 
+            Route::get("/getAllUsers", [ProviderFunctionsController::class, "getUsers"]);
+            Route::get("/getAllMetrics", [ProviderFunctionsController::class, "getMetrics"]);
+            Route::get("/getAllLines", [ProviderFunctionsController::class, "getLines"]);
+            
+            Route::post("/editProfile", [ProviderFunctionsController::class, "editProfile"]);
+            Route::post("/editUser/{id}", [ProviderFunctionsController::class, "editUser"]);
+        });
+        
         // Admin Users
-        Route::group(["prefix" => "admins", "middleware" => "isAdmin"], function () {});
+        Route::group(["prefix" => "admins", "middleware" => "isAdmin"], function () {
+            Route::get("/getAllProviders", [AdminFunctionsController::class, "getProviders"]);
+            Route::get("/getAllContactMessages", [AdminFunctionsController::class, "getContactMessages"]);
+
+            Route::post("/editProvider/{id}", [AdminFunctionsController::class, "editProvider"]);
+            Route::delete("/deleteContactMessage/{id}", [AdminFunctionsController::class, "deleteMessage"]);
+        });
     });
 
     // Public Routes for Data Entry
