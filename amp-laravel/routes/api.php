@@ -41,6 +41,7 @@ Route::group(["prefix" => "v1"], function () {
             Route::get("/getAllContactMessages", [AdminFunctionsController::class, "getContactMessages"]);
 
             Route::post("/editProvider/{id}", [AdminFunctionsController::class, "editProvider"]);
+            Route::delete("/deleteContactMessage", [AdminFunctionsController::class, "deleteMessage"]);
         });
     });
 
