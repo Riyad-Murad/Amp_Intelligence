@@ -12,5 +12,8 @@ use Prism\Prism\Schema\StringSchema;
 
 class GeneratingReportService
 {
-    
+    public static function generateReport()
+    {
+        $metrics = Metric::orderBy('date_month', 'desc')->get();
+    }
 }
