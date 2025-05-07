@@ -25,7 +25,7 @@ class GeneratingReportService
         );
 
         $response = Prism::structured()
-            ->using(Provider::OpenAI, 'gpt-4o')
+            ->using(Provider::OpenAI, 'o4-mini')
             ->withSchema($schema)
             ->withPrompt('Review the movie Inception')
             ->asStructured();
