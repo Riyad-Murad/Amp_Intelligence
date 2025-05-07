@@ -30,13 +30,15 @@ Route::group(["prefix" => "v1"], function () {
             Route::get("/getAllUsers", [ProviderFunctionsController::class, "getUsers"]);
             Route::get("/getAllMetrics", [ProviderFunctionsController::class, "getMetrics"]);
             Route::get("/getAllLines", [ProviderFunctionsController::class, "getLines"]);
-
+            
             Route::post("/editProfile", [ProviderFunctionsController::class, "editProfile"]);
             Route::post("/editUser/{id}", [ProviderFunctionsController::class, "editUser"]);
         });
-
+        
         // Admin Users
-        Route::group(["prefix" => "admins", "middleware" => "isAdmin"], function () {});
+        Route::group(["prefix" => "admins", "middleware" => "isAdmin"], function () {
+            Route::get("/getAllProviders", [ProviderFunctionsController::class, "getProviders"]);
+        });
     });
 
     // Public Routes for Data Entry
