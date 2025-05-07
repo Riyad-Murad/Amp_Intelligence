@@ -39,6 +39,8 @@ Route::group(["prefix" => "v1"], function () {
         Route::group(["prefix" => "admins", "middleware" => "isAdmin"], function () {
             Route::get("/getAllProviders", [AdminFunctionsController::class, "getProviders"]);
             Route::get("/getAllContactMessages", [AdminFunctionsController::class, "getContactMessages"]);
+
+            Route::post("/editProvider", [AdminFunctionsController::class, "editProvider"]);
         });
     });
 
