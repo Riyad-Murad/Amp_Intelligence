@@ -6,7 +6,7 @@ use App\Http\Controllers\Common\LinesController;
 use App\Http\Controllers\Common\MetricsController;
 use App\Http\Controllers\Common\ClientCheckinController;
 use App\Http\Controllers\Common\ProviderCheckinController;
-
+use App\Http\Controllers\Clients\ClientFunctionsController;
 
 Route::group(["prefix" => "v1"], function () {
     //Authenticated Users
@@ -15,7 +15,9 @@ Route::group(["prefix" => "v1"], function () {
         Route::post("/logout", [AuthController::class, "logout"]);
 
         // Slave/Client Users
-        Route::group(["prefix" => "clients", "middleware" => "isClient"], function () {});
+        Route::group(["prefix" => "clients", "middleware" => "isClient"], function () {
+            Route::post("/clientReport", [ClientFunctionsController::class, "generateReport"]);
+        });
 
         // Master/Provider Users
         Route::group(["prefix" => "providers", "middleware" => "isProvider"], function () {});
