@@ -17,4 +17,8 @@ class ProviderFunctionsController extends Controller
             return $this->errorMessageResponse(false, "Failed to generate report ", $e->getMessage(), 500);
         }
     }
+
+    public function editProfile(Request $request){
+        
+    }
 }
