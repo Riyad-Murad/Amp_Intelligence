@@ -31,6 +31,7 @@ Route::group(["prefix" => "v1"], function () {
             Route::get("/getAllLines", [ProviderFunctionsController::class, "getLines"]);
 
             Route::post("/editProfile", [ProviderFunctionsController::class, "editProfile"]);
+            Route::post("/editUser", [ProviderFunctionsController::class, "editUser"]);
         });        
 
         // Admin Users
