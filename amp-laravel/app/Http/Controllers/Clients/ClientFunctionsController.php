@@ -8,7 +8,6 @@ use App\Services\Client\GeneratingReportService;
 
 class ClientFunctionsController extends Controller
 {
-    // public function generateReport()
     public function generateReport(Request $request)
     {
         try {
@@ -23,5 +22,9 @@ class ClientFunctionsController extends Controller
         } catch (\Exception $e) {
             return $this->messageResponse(false, "Failed to generate report: " . $e->getMessage(), 500, null);
         }
+    }
+
+    public function editProfile(Request $request){
+        
     }
 }
