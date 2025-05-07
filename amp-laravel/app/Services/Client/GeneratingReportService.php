@@ -18,5 +18,9 @@ class GeneratingReportService
             ->orderBy('date_month', 'desc')
             ->take(10)
             ->get();
+
+        if ($metrics->isEmpty()) {
+            throw new \Exception('No metrics found for the specified device.');
+        }
     }
 }
