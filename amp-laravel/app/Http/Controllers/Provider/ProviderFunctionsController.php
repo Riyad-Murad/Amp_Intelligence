@@ -2,9 +2,10 @@
 
 namespace App\Http\Controllers\Provider;
 
-use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use App\Services\Provider\GeneratingReportService;
+use App\Http\Requests\Provider\EditUserRequest;
+use App\Http\Requests\Provider\EditProfileRequest;
 
 class ProviderFunctionsController extends Controller
 {
@@ -18,23 +19,23 @@ class ProviderFunctionsController extends Controller
         }
     }
 
-    public function editProfile(Request $request){
+    public function editProfile(EditProfileRequest $request){
         
     }
 
-    public function editUser(Request $request){
+    public function editUser(EditUserRequest $request){
 
     }
 
-    public function getUsers(Request $request){
+    public function getUsers(){
     
     }
 
-    public function getMetrics(Request $request){
+    public function getMetrics(){
     
     }
 
-    public function getLines(Request $request){
+    public function getLines(){
     
     }
 }
