@@ -17,6 +17,10 @@ class ClientEditProfileService
         if (isset($data['email'])) {
             $user->email = $data['email'];
         }
+        
+        if (!empty($data['password'])) {
+            $user->password = bcrypt($data['password']);
+        }
 
         $user->save();
 
