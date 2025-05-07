@@ -22,5 +22,9 @@ class GeneratingReportService
         if ($metrics->isEmpty()) {
             throw new \Exception('No metrics found for the specified device.');
         }
+
+        $metricsText = $metrics->map(function ($m) {
+            return "Date: {$m->date_month}, Voltage: {$m->voltage}V, Current: {$m->current}A, Power: {$m->power}W, Energy: {$m->energy}kWh";
+        })->implode("\n");
     }
 }
