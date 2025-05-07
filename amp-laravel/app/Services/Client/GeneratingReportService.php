@@ -54,5 +54,11 @@ class GeneratingReportService
             ],
             requiredFields: ['summary', 'voltageInsights', 'powerInsights', 'energyInsights']
         );
+
+        $response = Prism::structured()
+            ->using(Provider::OpenAI, 'o4-mini')
+            ->withSchema($schema)
+            ->withPrompt($prompt)
+            ->asStructured();
     }
 }
