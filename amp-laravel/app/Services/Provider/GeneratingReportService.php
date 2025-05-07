@@ -15,5 +15,9 @@ class GeneratingReportService
     public static function generateReport()
     {
         $metrics = Metric::orderBy('date_month', 'desc')->get();
+
+        if ($metrics->isEmpty()) {
+            throw new \Exception('No metrics found across devices.');
+        }
     }
 }
