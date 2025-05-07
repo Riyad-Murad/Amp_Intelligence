@@ -60,5 +60,12 @@ class GeneratingReportService
             ->withSchema($schema)
             ->withPrompt($prompt)
             ->asStructured();
+
+        $structured = $response->structured;
+
+        $structured['recommendations'] = str_replace('\n', "\n", $structured['recommendations']);
+        $structured['summary'] = preg_replace('/device\s+\d+/i', 'the device', $structured['summary']);
+
+        return $structured;
     }
 }
