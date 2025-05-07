@@ -24,7 +24,7 @@ class EditProviderRequest extends FormRequest
         return [
             'name' => 'sometimes|required|string|max:255',
             'email' => 'sometimes|required|email|max:255',
-            'password' => 'nullable|string|min:6',
+            'password' => 'sometimes|nullable|string|min:6',
             'phone' => 'required|string|max:20',
         ];
     }
