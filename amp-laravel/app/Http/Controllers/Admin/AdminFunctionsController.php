@@ -2,12 +2,13 @@
 
 namespace App\Http\Controllers\Admin;
 
-use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
+use App\Http\Controllers\Controller;
+use App\Http\Requests\Admin\EditProviderRequest;
 
 class AdminFunctionsController extends Controller
 {
-    public function getProviders(Request $request){
+    public function getProviders(){
         
     }
 
@@ -15,11 +16,11 @@ class AdminFunctionsController extends Controller
         
     }
 
-    public function editProvider(Request $request){
+    public function editProvider(EditProviderRequest $request){
         
     }
 
-    public function deleteMessage(Request $request){
+    public function deleteMessage($id){
         
     }
 }
