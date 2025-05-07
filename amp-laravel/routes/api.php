@@ -26,7 +26,7 @@ Route::group(["prefix" => "v1"], function () {
         Route::group(["prefix" => "providers", "middleware" => "isProvider"], function () {
             Route::get("/providerReport", [ProviderFunctionsController::class, "generateReport"]);
 
-            Route::get("/getUsers", [ProviderFunctionsController::class, "getUsers"]);
+            Route::get("/getAllUsers", [ProviderFunctionsController::class, "getUsers"]);
         });        
 
         // Admin Users
