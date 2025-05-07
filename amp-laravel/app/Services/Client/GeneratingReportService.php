@@ -26,5 +26,20 @@ class GeneratingReportService
         $metricsText = $metrics->map(function ($m) {
             return "Date: {$m->date_month}, Voltage: {$m->voltage}V, Current: {$m->current}A, Power: {$m->power}W, Energy: {$m->energy}kWh";
         })->implode("\n");
+
+        $prompt = <<<EOT
+                    You are an AI assistant that analyzes monthly energy usage metrics and generates structured reports.
+
+                    Based on the following readings, provide:
+
+                    - A concise performance summary
+                    - Voltage insights
+                    - Power usage insights
+                    - Energy usage insights
+                    - Actionable recommendations (start each on a new line, no device ID mention)
+
+                    Data:
+                    $metricsText
+                    EOT;
     }
 }
