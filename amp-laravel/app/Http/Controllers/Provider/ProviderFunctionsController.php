@@ -33,4 +33,8 @@ class ProviderFunctionsController extends Controller
     public function getMetrics(Request $request){
     
     }
+
+    public function getLines(Request $request){
+    
+    }
 }
