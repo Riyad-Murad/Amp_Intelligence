@@ -2,13 +2,11 @@
 
 namespace App\Services\Admin;
 
+use PHPOpenSourceSaver\JWTAuth\Facades\JWTAuth;
+
 class editProfileService
 {
-    /**
-     * Create a new class instance.
-     */
-    public function __construct()
-    {
-        //
+    public static function editProfile(array $data){
+        
     }
 }
