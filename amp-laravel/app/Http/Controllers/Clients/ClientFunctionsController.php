@@ -34,9 +34,10 @@ class ClientFunctionsController extends Controller
 
         // Access your structured data
         $review = $response->structured;
-        echo $review['title'];    // "Inception"
-        echo $review['rating'];   // "5 stars"
-        echo $review['summary'];  // "A mind-bending..."
+        return response()->json($review);
+        // echo $review['title'];    // "Inception"
+        // echo $review['rating'];   // "5 stars"
+        // echo $review['summary'];  // "A mind-bending..."
 
         // $response = Prism::text()
         //     ->using(Provider::Anthropic, 'o4-mini')
