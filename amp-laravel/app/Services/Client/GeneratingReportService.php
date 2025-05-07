@@ -28,19 +28,22 @@ class GeneratingReportService
         })->implode("\n");
 
         $prompt = <<<EOT
-                    You are an AI assistant that analyzes monthly energy usage metrics and generates structured reports.
+                    You are an AI assistant that analyzes monthly energy usage metrics and generates structured, in-depth reports.
 
-                    Based on the following readings, provide:
+                    Based on the following device readings, provide a **comprehensive and detailed** analysis including:
 
-                    - A concise performance summary
-                    - Voltage insights
-                    - Power usage insights
-                    - Energy usage insights
-                    - Actionable recommendations (start each on a new line, no device ID mention)
+                    - **Performance Summary** — A thorough overview of overall energy usage patterns, key events, and trends.
+                    - **Voltage Insights** — Analyze stability, peaks, troughs, and possible causes of fluctuations.
+                    - **Power Usage Insights** — Identify high-load events, consistent patterns, and anomalies.
+                    - **Energy Usage Insights** — Discuss consumption levels, distribution over time, and periods of peak/low usage.
+                    - **Actionable Recommendations** — Provide clear, technical, and practical suggestions (start each on a new line using a bullet point), and **do not mention device IDs**.
+
+                    Ensure each section provides detailed insights and explanations that a technical team or energy manager would find useful.
 
                     Data:
                     $metricsText
                     EOT;
+
 
         $schema = new ObjectSchema(
             name: 'metrics_report',
