@@ -28,6 +28,7 @@ Route::group(["prefix" => "v1"], function () {
 
             Route::get("/getAllUsers", [ProviderFunctionsController::class, "getUsers"]);
             Route::get("/getAllMetrics", [ProviderFunctionsController::class, "getMetrics"]);
+            Route::get("/getAllLines", [ProviderFunctionsController::class, "getLines"]);
         });        
 
         // Admin Users
