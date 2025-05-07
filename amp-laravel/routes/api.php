@@ -2,10 +2,12 @@
 
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\Common\AuthController;
+use App\Http\Controllers\Common\LinesController;
 use App\Http\Controllers\Common\MetricsController;
 use App\Http\Controllers\Common\ClientCheckinController;
-use App\Http\Controllers\Common\LinesController;
 use App\Http\Controllers\Common\ProviderCheckinController;
+use App\Http\Controllers\Clients\ClientFunctionsController;
+use App\Http\Controllers\Provider\ProviderFunctionsController;
 
 Route::group(["prefix" => "v1"], function () {
     //Authenticated Users
@@ -14,10 +16,14 @@ Route::group(["prefix" => "v1"], function () {
         Route::post("/logout", [AuthController::class, "logout"]);
 
         // Slave/Client Users
-        Route::group(["prefix" => "slaves", "middleware" => "isClient"], function () {});
-
+        Route::group(["prefix" => "clients", "middleware" => "isClient"], function () {
+            Route::get("/clientReport", [ClientFunctionsController::class, "generateReport"]);
+        });
+        
         // Master/Provider Users
-        Route::group(["prefix" => "masters", "middleware" => "isProvider"], function () {});
+        Route::group(["prefix" => "providers", "middleware" => "isProvider"], function () {
+            Route::get("/providerReport", [ProviderFunctionsController::class, "generateReport"]);
+        });        
 
         // Admin Users
         Route::group(["prefix" => "admins", "middleware" => "isAdmin"], function () {});
