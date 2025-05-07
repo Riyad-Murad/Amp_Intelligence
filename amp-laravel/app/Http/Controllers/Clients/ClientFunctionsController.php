@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Clients;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use App\Services\Client\GeneratingReportService;
+use App\Http\Requests\Client\EditProfileRequest;
 
 class ClientFunctionsController extends Controller
 {
@@ -24,7 +25,7 @@ class ClientFunctionsController extends Controller
         }
     }
 
-    public function editProfile(Request $request){
+    public function editProfile(EditProfileRequest $request){
 
     }
 }
