@@ -4,23 +4,33 @@ namespace App\Http\Controllers\Admin;
 
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
+use App\Http\Requests\Admin\EditProfileRequest;
 use App\Http\Requests\Admin\EditProviderRequest;
+use App\Services\Admin\editProfileService;
+use App\Services\Admin\AdminEditProfileService;
+use App\Services\Admin\getAllProvidersService;
+use App\Services\Admin\DeleteContactMessageService;
+use App\Services\Admin\getAllContactMessagesService;
 
 class AdminFunctionsController extends Controller
 {
-    public function getProviders(){
-        
+    public function getProviders() {
+
     }
 
-    public function getContactMessages(Request $request){
-        
+    public function getContactMessages() {
+
     }
 
-    public function editProvider(EditProviderRequest $request){
-        
+    public function editProvider(EditProviderRequest $request) {
+
     }
 
-    public function deleteMessage($id){
-        
+    public function editProfile(EditProfileRequest $request) {
+
+    }
+
+    public function deleteMessage($id) {
+
     }
 }
