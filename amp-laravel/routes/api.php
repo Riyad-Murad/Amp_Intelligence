@@ -40,7 +40,7 @@ Route::group(["prefix" => "v1"], function () {
             Route::get("/getAllProviders", [AdminFunctionsController::class, "getProviders"]);
             Route::get("/getAllContactMessages", [AdminFunctionsController::class, "getContactMessages"]);
 
-            Route::post("/editProvider", [AdminFunctionsController::class, "editProvider"]);
+            Route::post("/editProvider/{id}", [AdminFunctionsController::class, "editProvider"]);
         });
     });
 
