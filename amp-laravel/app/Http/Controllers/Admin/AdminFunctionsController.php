@@ -14,4 +14,8 @@ class AdminFunctionsController extends Controller
     public function getContactMessages(Request $request){
         
     }
+
+    public function editProvider(Request $request){
+        
+    }
 }
