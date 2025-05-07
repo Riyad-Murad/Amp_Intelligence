@@ -7,5 +7,8 @@ use Illuminate\Http\Request;
 
 class AdminFunctionsController extends Controller
 {
-    //
+    public function getProviders(Request $request){
+        
+    }
+
 }
