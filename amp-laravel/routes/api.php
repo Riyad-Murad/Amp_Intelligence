@@ -37,7 +37,8 @@ Route::group(["prefix" => "v1"], function () {
         
         // Admin Users
         Route::group(["prefix" => "admins", "middleware" => "isAdmin"], function () {
-            Route::get("/getAllProviders", [ProviderFunctionsController::class, "getProviders"]);
+            Route::get("/getAllProviders", [AdminFunctionsController::class, "getProviders"]);
+
         });
     });
 
