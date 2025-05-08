@@ -7,6 +7,7 @@ use App\Services\Provider\GeneratingReportService;
 use App\Http\Requests\Provider\EditUserRequest;
 use App\Http\Requests\Provider\EditProfileRequest;
 use App\Services\Provider\EditClientUserService;
+use App\Services\Provider\GetAllLinesService;
 
 class ProviderFunctionsController extends Controller
 {
