@@ -2,11 +2,16 @@
 
 namespace App\Services\Admin;
 
-use PHPOpenSourceSaver\JWTAuth\Facades\JWTAuth;
+use App\Models\User;
 
 class AdminEditProviderProfileService
 {
-    public static function editProfile(array $data){
+    public static function editProfile(int $id, array $data)
+    {
+        $user = User::where('id', $id)->where('user_type', 'Provider')->firstOrFail();        
 
+        $user->save();
+
+        return $user;
     }
 }
