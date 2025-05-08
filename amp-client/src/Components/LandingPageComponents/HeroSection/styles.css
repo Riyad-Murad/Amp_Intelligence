@@ -33,3 +33,10 @@
   max-width: 800px;
   margin: 0 auto;
 }
+
+/* Media Queries */
+@media screen and (max-width: 1024px) {
+  .hero-section h1 {
+    font-size: 2.2rem;
+  }
+}
