@@ -26,7 +26,16 @@ class AdminFunctionsController extends Controller
         }
     }
 
-    public function getContactMessages() {}
+    public function getContactMessages()
+    {
+        try {
+            $messages = getAllContactMessagesService::getAll();
+
+            return $this->messageResponse(true, "Messages retrieved successfully", 200, $messages);
+        } catch (\Exception $e) {
+            return $this->errorMessageResponse(false, $e->getMessage(), "Failed to retrieve messages", 500);
+        }
+    }
 
     public function editProvider(EditProviderRequest $request, $id)
     {
