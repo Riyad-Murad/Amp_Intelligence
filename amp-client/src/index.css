@@ -80,3 +80,23 @@ h3 {
   font-weight: 500;
   font-size: 10px;
 }
+
+/* Semi Bold Fonts */
+
+.navbar-title {
+  font-family: "Inter", sans-serif;
+  font-weight: 600;
+  font-size: 28px;
+}
+
+.section-titles {
+  font-family: "Inter", sans-serif;
+  font-weight: 600;
+  font-size: 32px;
+}
+
+.sidebar {
+  font-family: "Inter", sans-serif;
+  font-weight: 600;
+  font-size: 21px;
+}
