@@ -12,6 +12,14 @@ const AboutUsSection = () => {
         and sustainability, we strive to empower individuals and businesses with
         the tools and insights they need to optimize their energy consumption.
       </p>
+      <p className="about-us-text">
+        Our team comprises experienced engineers, software developers, and
+        industry experts dedicated to developing cutting-edge technologies that
+        simplify the complexities of electrical provisioning and management. We
+        believe in a future where energy is used intelligently and responsibly,
+        contributing to a more sustainable and cost-effective environment for
+        all.
+      </p>
     </section>
   );
 };
