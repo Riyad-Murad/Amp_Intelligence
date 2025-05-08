@@ -1,0 +1,35 @@
+/* HeroSection styles */
+.hero-section {
+  position: relative;
+  width: 100%;
+  height: 550px;
+  background-image: url("../../../assets/landing-bg.png");
+  background-size: cover;
+  background-position: center;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+  color: white;
+  padding: 0 20px;
+  box-sizing: border-box;
+}
+
+.hero-overlay {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: #233a7e;
+  opacity: 0.4;
+  backdrop-filter: blur(5px);
+}
+
+.hero-section h1 {
+  position: relative;
+  z-index: 10;
+  font-size: 2.5rem;
+  max-width: 800px;
+  margin: 0 auto;
+}
