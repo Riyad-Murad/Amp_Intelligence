@@ -20,6 +20,13 @@ const AboutUsSection = () => {
         contributing to a more sustainable and cost-effective environment for
         all.
       </p>
+      <p className="about-us-text">
+        We are constantly evolving, adapting to the ever-changing landscape of
+        the energy sector to ensure our solutions remain at the forefront of
+        innovation. Our focus is not just on providing tools, but on building
+        lasting partnerships with our clients, understanding their unique needs,
+        and delivering tailored solutions that drive tangible results.
+      </p>
     </section>
   );
 };
