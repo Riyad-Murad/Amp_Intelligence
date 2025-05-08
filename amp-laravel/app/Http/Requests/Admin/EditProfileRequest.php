@@ -4,7 +4,7 @@ namespace App\Http\Requests\Admin;
 
 use Illuminate\Foundation\Http\FormRequest;
 
-class EditProviderRequest extends FormRequest
+class EditProfileRequest extends FormRequest
 {
     /**
      * Determine if the user is authorized to make this request.
@@ -24,7 +24,7 @@ class EditProviderRequest extends FormRequest
         return [
             'name' => 'sometimes|required|string|max:255',
             'email' => 'sometimes|required|email|max:255',
-            'password' => 'sometimes|nullable|string|min:6',
+            'password' => 'sometimes|string|min:6',
             'phone_number' => 'sometimes|required|string|max:20',
         ];
     }
