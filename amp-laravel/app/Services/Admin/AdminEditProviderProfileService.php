@@ -14,6 +14,10 @@ class AdminEditProviderProfileService
             $user->name = $data['name'];
         }
 
+        if (isset($data['email'])) {
+            $user->email = $data['email'];
+        }
+
         $user->save();
 
         return $user;
