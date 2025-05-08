@@ -11,6 +11,7 @@ use App\Services\Admin\getAllProvidersService;
 use App\Services\Admin\DeleteContactMessageService;
 use App\Services\Admin\getAllContactMessagesService;
 use App\Services\Admin\AdminEditProviderProfileService;
+use Illuminate\Database\Eloquent\ModelNotFoundException;
 
 class AdminFunctionsController extends Controller
 {
@@ -41,5 +42,16 @@ class AdminFunctionsController extends Controller
         }
     }
 
-    public function deleteMessage($id) {}
+    public function deleteMessage($id)
+{
+    try {
+        DeleteContactMessageService::delete($id);
+
+        return $this->messageResponse(true, "Message deleted successfully", 200);
+    } catch (ModelNotFoundException $e) {
+        return $this->errorMessageResponse(false, "ID not Found", $e->getMessage(), 404);
+    } catch (\Exception $e) {
+        return $this->errorMessageResponse(false, $e->getMessage(), "Failed to delete message", 500);
+    }
+}
 }
