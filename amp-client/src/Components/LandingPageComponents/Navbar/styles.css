@@ -1,7 +1,12 @@
+/* NavBar Styles */
+
+/* Base styles */
 body {
   margin: 0;
+  overflow-x: hidden;
 }
 
+/* Navbar styles */
 .navbar {
   display: flex;
   align-items: center;
@@ -10,6 +15,8 @@ body {
   height: 80px;
   padding: 0 30px;
   font-family: "Inter", sans-serif;
+  width: 100%;
+  box-sizing: border-box;
 }
 
 .navbar-left {
@@ -24,7 +31,7 @@ body {
 
 .navbar-title {
   font-size: 28px;
-  font-weight: 600; /* Semi-bold */
+  font-weight: 600;
   color: #ffffff;
   text-decoration: none;
 }
@@ -44,4 +51,14 @@ body {
 .navbar-right {
   display: flex;
   align-items: center;
+}
+
+/* Mobile menu */
+.mobile-menu-button {
+  display: none;
+  background: none;
+  border: none;
+  color: white;
+  font-size: 24px;
+  cursor: pointer;
 }
