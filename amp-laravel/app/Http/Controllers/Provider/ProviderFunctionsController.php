@@ -8,6 +8,7 @@ use App\Http\Requests\Provider\EditUserRequest;
 use App\Http\Requests\Provider\EditProfileRequest;
 use App\Services\Provider\EditClientUserService;
 use App\Services\Provider\GetAllLinesService;
+use App\Services\Provider\GetAllClientUsersService;
 
 class ProviderFunctionsController extends Controller
 {
