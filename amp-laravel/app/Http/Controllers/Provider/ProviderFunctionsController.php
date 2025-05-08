@@ -24,7 +24,16 @@ class ProviderFunctionsController extends Controller
         }
     }
 
-    public function editProfile(EditProfileRequest $request) {}
+    public function editProfile(EditProfileRequest $request)
+    {
+        try {
+            ProviderEditProfileService::editProfile($request->validated());
+
+            return $this->messageResponse(true, "Profile updated successfully", 200);
+        } catch (\Exception $e) {
+            return $this->errorMessageResponse(false, $e->getMessage(), "Failed to update profile", 500);
+        }
+    }
 
     public function editUser(EditUserRequest $request, $id)
     {
