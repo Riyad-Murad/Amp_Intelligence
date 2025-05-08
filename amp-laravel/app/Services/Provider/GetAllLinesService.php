@@ -2,13 +2,12 @@
 
 namespace App\Services\Provider;
 
+use App\Models\Line;
+
 class GetAllLinesService
 {
-    /**
-     * Create a new class instance.
-     */
-    public function __construct()
+    public static function getAll()
     {
-        //
+        return Line::all();
     }
 }
