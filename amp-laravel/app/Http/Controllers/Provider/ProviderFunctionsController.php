@@ -46,7 +46,16 @@ class ProviderFunctionsController extends Controller
         }
     }
 
-    public function getUsers() {}
+    public function getUsers()
+    {
+        try {
+            $users = GetAllClientUsersService::getAll();
+
+            return $this->messageResponse(true, "Messages retrieved successfully", 200, $users);
+        } catch (\Exception $e) {
+            return $this->errorMessageResponse(false, $e->getMessage(), "Failed to retrieve messages", 500);
+        }
+    }
 
     public function getMetrics() {}
 
