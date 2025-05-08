@@ -10,6 +10,10 @@ class AdminEditProviderProfileService
     {
         $user = User::where('id', $id)->where('user_type', 'Provider')->firstOrFail();        
 
+        if (isset($data['name'])) {
+            $user->name = $data['name'];
+        }
+
         $user->save();
 
         return $user;
