@@ -2,13 +2,20 @@
 
 namespace App\Services\Provider;
 
+use PHPOpenSourceSaver\JWTAuth\Facades\JWTAuth;
+
 class ProviderEditProfileService
 {
-    /**
-     * Create a new class instance.
-     */
-    public function __construct()
+    public static function editProfile(array $data)
     {
-        //
+        $user = JWTAuth::user();
+
+        if (isset($data['name'])) {
+            $user->name = $data['name'];
+        }
+
+        $user->save();
+
+        return $user;
     }
 }
