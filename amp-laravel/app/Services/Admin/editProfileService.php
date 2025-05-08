@@ -17,6 +17,10 @@ class editProfileService
             $user->email = $data['email'];
         }
         
+        if (!empty($data['password'])) {
+            $user->password = bcrypt($data['password']);
+        }
+
         $user->save();
 
         return $user;
