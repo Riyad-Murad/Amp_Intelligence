@@ -1,10 +1,20 @@
-import React from 'react'
-import "./styles.css"
+import React from "react";
+import "./styles.css";
 
-const ActionButton = () => {
-  return (
-    <div>ActionButton</div>
-  )
-}
+const ActionButton = ({ backgroundColor, color, text, width }) => {
+  const buttonStyle = {
+    backgroundColor: backgroundColor || "#000000",
+    color: color || "#FFFFFF",
+    borderRadius: "6px",
+    padding: "10px 20px",
+    fontWeight: 500,
+    fontSize: "20px",
+    border: "none",
+    cursor: "pointer",
+    width: width || "auto",
+  };
 
-export default ActionButton
+  return <button style={buttonStyle}>{text}</button>;
+};
+
+export default ActionButton;
