@@ -24,8 +24,8 @@ class EditProfileRequest extends FormRequest
         return [
             'name' => 'sometimes|required|string|max:255',
             'email' => 'sometimes|required|email|max:255',
-            'password' => 'sometimes|nullable|string|min:6',
-            'phone' => 'sometimes|required|string|max:20',
+            'password' => 'sometimes|string|min:6',
+            'phone_number' => 'sometimes|required|string|max:20',
         ];
     }
 }
