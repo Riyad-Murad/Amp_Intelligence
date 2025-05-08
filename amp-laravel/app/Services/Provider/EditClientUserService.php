@@ -22,6 +22,10 @@ class EditClientUserService
             $user->password = bcrypt($data['password']);
         }
 
+        if (isset($data['phone_number'])) {
+            $user->phone_number = $data['phone_number'];
+        }
+
         $user->save();
 
         return $user;
