@@ -9,6 +9,7 @@ use App\Http\Requests\Provider\EditProfileRequest;
 use App\Services\Provider\EditClientUserService;
 use App\Services\Provider\GetAllLinesService;
 use App\Services\Provider\GetAllClientUsersService;
+use App\Services\Provider\ProviderEditProfileService;
 
 class ProviderFunctionsController extends Controller
 {
