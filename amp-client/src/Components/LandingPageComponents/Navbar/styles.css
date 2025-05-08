@@ -1,9 +1,5 @@
-/* Import Inter font (You can also include this in your HTML head if needed) */
-@import url("https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&display=swap");
-
 body {
   margin: 0;
-  font-family: "Inter", sans-serif;
 }
 
 .navbar {
@@ -30,6 +26,7 @@ body {
   font-size: 28px;
   font-weight: 600; /* Semi-bold */
   color: #ffffff;
+  text-decoration: none;
 }
 
 .navbar-links {
@@ -48,45 +45,3 @@ body {
   display: flex;
   align-items: center;
 }
-
-/* .navbar {
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  background-color: #f9a43a;
-  padding: 15px 30px;
-}
-
-.navbar-left {
-  display: flex;
-  align-items: center;
-  gap: 10px;
-}
-
-.logo {
-  height: 40px;
-  margin-right: 50px;
-}
-
-.navbar-title {
-  font-size: 28px;
-  font-weight: 600;
-  color: #ffffff;
-}
-
-.navbar-links {
-  display: flex;
-  gap: 30px;
-}
-
-.navbar-links a {
-  font-size: 21px;
-  font-weight: 600;
-  text-decoration: none;
-  color: #ffffff;
-}
-
-.navbar-right {
-  display: flex;
-  align-items: center;
-} */
