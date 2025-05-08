@@ -15,7 +15,16 @@ use Illuminate\Database\Eloquent\ModelNotFoundException;
 
 class AdminFunctionsController extends Controller
 {
-    public function getProviders() {}
+    public function getProviders()
+    {
+        try {
+            $providers = getAllProvidersService::getAll();
+
+            return $this->messageResponse(true, "Providers retrieved successfully", 200, $providers);
+        } catch (\Exception $e) {
+            return $this->errorMessageResponse(false, $e->getMessage(), "Failed to retrieve providers", 500);
+        }
+    }
 
     public function getContactMessages() {}
 
@@ -43,15 +52,15 @@ class AdminFunctionsController extends Controller
     }
 
     public function deleteMessage($id)
-{
-    try {
-        DeleteContactMessageService::delete($id);
+    {
+        try {
+            DeleteContactMessageService::delete($id);
 
-        return $this->messageResponse(true, "Message deleted successfully", 200);
-    } catch (ModelNotFoundException $e) {
-        return $this->errorMessageResponse(false, "ID not Found", $e->getMessage(), 404);
-    } catch (\Exception $e) {
-        return $this->errorMessageResponse(false, $e->getMessage(), "Failed to delete message", 500);
+            return $this->messageResponse(true, "Message deleted successfully", 200);
+        } catch (ModelNotFoundException $e) {
+            return $this->errorMessageResponse(false, "ID not Found", $e->getMessage(), 404);
+        } catch (\Exception $e) {
+            return $this->errorMessageResponse(false, $e->getMessage(), "Failed to delete message", 500);
+        }
     }
-}
 }
