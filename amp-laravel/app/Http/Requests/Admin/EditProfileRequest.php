@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Http\Requests\Client;
+namespace App\Http\Requests\Admin;
 
 use Illuminate\Foundation\Http\FormRequest;
 
@@ -24,7 +24,8 @@ class EditProfileRequest extends FormRequest
         return [
             'name' => 'sometimes|required|string|max:255',
             'email' => 'sometimes|required|email|max:255',
-            'password' => 'sometimes|nullable|string|min:6',
+            'password' => 'sometimes|string|min:6',
+            'phone_number' => 'sometimes|required|string|max:20',
         ];
     }
 }

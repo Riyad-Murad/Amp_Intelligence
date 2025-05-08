@@ -1,13 +1,12 @@
 <?php
 
-namespace App\Services\Client;
+namespace App\Services\Admin;
 
 use PHPOpenSourceSaver\JWTAuth\Facades\JWTAuth;
 
-class ClientEditProfileService
+class editProfileService
 {
-    public static function editProfile(array $data)
-    {
+    public static function editProfile(array $data){
         $user = JWTAuth::user();
 
         if (isset($data['name'])) {
@@ -20,6 +19,10 @@ class ClientEditProfileService
         
         if (!empty($data['password'])) {
             $user->password = bcrypt($data['password']);
+        }
+
+        if (isset($data['phone_number'])) {
+            $user->phone_number = $data['phone_number'];
         }
 
         $user->save();

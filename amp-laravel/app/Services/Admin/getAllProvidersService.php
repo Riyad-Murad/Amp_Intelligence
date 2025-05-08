@@ -2,13 +2,12 @@
 
 namespace App\Services\Admin;
 
+use App\Models\User;
+
 class getAllProvidersService
 {
-    /**
-     * Create a new class instance.
-     */
-    public function __construct()
+    public static function getAll()
     {
-        //
+        return User::where('user_type', 'Provider')->get();
     }
 }
