@@ -2,13 +2,12 @@
 
 namespace App\Services\Admin;
 
+use App\Models\ContactForm;
+
 class getAllContactMessagesService
 {
-    /**
-     * Create a new class instance.
-     */
-    public function __construct()
+    public static function getAll()
     {
-        //
+        return ContactForm::all();
     }
 }
