@@ -5,7 +5,20 @@ import logo from "../../../assets/logo.png";
 
 const Navbar = () => {
   return (
-    <div>Navbar</div>
+    <div className="navbar">
+      <div className="navbar-left">
+        <img src={logo} alt="Logo" className="logo" />
+        <span className="navbar-title">Amp Intelligence</span>
+      </div>
+      <div className="navbar-links">
+        <a href="#">Services</a>
+        <a href="#">About Us</a>
+        <a href="#">Contact Us</a>
+      </div>
+      <div className="navbar-right">
+        <ActionButton backgroundColor="#233A7E" color="#FFFFFF" text="Login" />
+      </div>
+    </div>
   );
 };
 
