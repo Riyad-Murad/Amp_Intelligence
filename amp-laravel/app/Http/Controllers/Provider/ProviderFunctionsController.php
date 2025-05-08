@@ -10,6 +10,7 @@ use App\Services\Provider\EditClientUserService;
 use App\Services\Provider\GetAllLinesService;
 use App\Services\Provider\GetAllClientUsersService;
 use App\Services\Provider\ProviderEditProfileService;
+use App\Services\Provider\GetAllClientMetricsService;
 
 class ProviderFunctionsController extends Controller
 {
