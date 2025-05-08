@@ -6,6 +6,7 @@ use App\Http\Controllers\Controller;
 use App\Services\Provider\GeneratingReportService;
 use App\Http\Requests\Provider\EditUserRequest;
 use App\Http\Requests\Provider\EditProfileRequest;
+use App\Services\Provider\EditClientUserService;
 
 class ProviderFunctionsController extends Controller
 {
@@ -19,23 +20,22 @@ class ProviderFunctionsController extends Controller
         }
     }
 
-    public function editProfile(EditProfileRequest $request){
-        
+    public function editProfile(EditProfileRequest $request) {}
+
+    public function editUser(EditUserRequest $request, $id)
+    {
+        try {
+            EditClientUserService::editUser($id, $request->validated());
+
+            return $this->messageResponse(true, "Profile updated successfully", 200);
+        } catch (\Exception $e) {
+            return $this->errorMessageResponse(false, $e->getMessage(), "Failed to update profile", 500);
+        }
     }
 
-    public function editUser(EditUserRequest $request){
+    public function getUsers() {}
 
-    }
+    public function getMetrics() {}
 
-    public function getUsers(){
-    
-    }
-
-    public function getMetrics(){
-    
-    }
-
-    public function getLines(){
-    
-    }
+    public function getLines() {}
 }
