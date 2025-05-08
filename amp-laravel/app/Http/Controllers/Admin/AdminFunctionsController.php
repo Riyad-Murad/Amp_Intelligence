@@ -14,17 +14,14 @@ use App\Services\Admin\AdminEditProviderProfileService;
 
 class AdminFunctionsController extends Controller
 {
-    public function getProviders() {
+    public function getProviders() {}
 
-    }
+    public function getContactMessages() {}
 
-    public function getContactMessages() {
-
-    }
-
-    public function editProvider(EditProviderRequest $request) {
+    public function editProvider(EditProviderRequest $request, $id)
+    {
         try {
-            AdminEditProviderProfileService::editProfile($request->validated());
+            AdminEditProviderProfileService::editProfile($id, $request->validated());
 
             return $this->messageResponse(true, "Profile updated successfully", 200);
         } catch (\Exception $e) {
@@ -32,7 +29,9 @@ class AdminFunctionsController extends Controller
         }
     }
 
-    public function editProfile(EditProfileRequest $request) {
+
+    public function editProfile(EditProfileRequest $request)
+    {
         try {
             editProfileService::editProfile($request->validated());
 
@@ -42,7 +41,5 @@ class AdminFunctionsController extends Controller
         }
     }
 
-    public function deleteMessage($id) {
-
-    }
+    public function deleteMessage($id) {}
 }
