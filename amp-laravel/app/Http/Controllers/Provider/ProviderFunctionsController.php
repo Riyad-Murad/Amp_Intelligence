@@ -57,7 +57,16 @@ class ProviderFunctionsController extends Controller
         }
     }
 
-    public function getMetrics() {}
+    public function getMetrics()
+    {
+        try {
+            $metrics = GetAllClientMetricsService::getAll();
+
+            return $this->messageResponse(true, "Messages retrieved successfully", 200, $metrics);
+        } catch (\Exception $e) {
+            return $this->errorMessageResponse(false, $e->getMessage(), "Failed to retrieve messages", 500);
+        }
+    }
 
     public function getLines() {}
 }
