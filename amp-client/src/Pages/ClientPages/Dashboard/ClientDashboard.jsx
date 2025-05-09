@@ -1,9 +1,13 @@
-import './styles.css'
+import "./styles.css";
+import ClientNavbar from "../../../Components/ClientComponents/ClientNavbar/ClientNavbar";
 
 const ClientDashboard = () => {
   return (
-    <div>ClientDashboard</div>
-  )
-}
+    <>
+      <ClientNavbar />
+      <h2>Client Dashboard</h2>
+    </>
+  );
+};
 
-export default ClientDashboard
+export default ClientDashboard;
