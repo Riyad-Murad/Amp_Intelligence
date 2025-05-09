@@ -18,8 +18,15 @@ const Features = () => {
     },
   ];
 
-  return(
-    <div>Features</div>
+  return (
+    <section className="features-section sub-sections">
+      <h2 className="section-titles primary-color">Features</h2>
+      <div className="features-grid">
+        {featuresData.map((feature, index) => (
+          <FeatureCard key={index} title={feature.title} text={feature.text} />
+        ))}
+      </div>
+    </section>
   );
 };
 
