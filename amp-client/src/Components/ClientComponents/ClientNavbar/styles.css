@@ -65,6 +65,94 @@ body {
   cursor: pointer;
 }
 
+/* Profile */
+
+.profile-icon-container {
+  position: relative;
+  cursor: pointer;
+  margin-left: 20px;
+}
+
+.profile-icon {
+  font-size: 2em;
+  color: #ffffff;
+}
+
+.dropdown-menu {
+  position: absolute;
+  top: 100%; /* Position below the icon */
+  right: 0;
+  background-color: #233a7e;
+  border-radius: 4px;
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
+  z-index: 10; /* Ensure it's above other elements */
+}
+
+.dropdown-menu a {
+  display: flex;
+  align-items: center;
+  padding: 10px 15px;
+  text-decoration: none;
+  color: #ffffff;
+  font-size: 1em;
+  transition: background-color 0.2s ease;
+}
+
+.dropdown-menu a:hover {
+  background-color: rgba(255, 255, 255, 0.1);
+}
+
+.dropdown-icon {
+  margin-right: 8px;
+  font-size: 1.2em;
+}
+
+/* Logout */
+
+.dropdown-logout-button {
+  display: flex;
+  align-items: center;
+  padding: 10px 15px;
+  text-decoration: none;
+  color: #ffffff;
+  font-size: 1em;
+  background: none;
+  border: none;
+  cursor: pointer;
+  width: 100%;
+  text-align: left;
+  transition: background-color 0.2s ease;
+}
+
+.dropdown-logout-button:hover {
+  background-color: rgba(255, 255, 255, 0.1);
+}
+
+.dropdown-logout-button .dropdown-icon {
+  margin-right: 8px;
+  font-size: 1.2em;
+}
+
+/* Style for the logout button in the mobile menu */
+.mobile-menu-logout-button {
+  display: block;
+  font-size: 18px;
+  font-weight: 600;
+  text-decoration: none;
+  color: #ffffff;
+  padding: 15px 0;
+  border: none;
+  background: none;
+  cursor: pointer;
+  width: 100%;
+  text-align: left;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.2);
+}
+
+.mobile-menu-logout-button:last-child {
+  border-bottom: none;
+}
+
 /* Media Queries */
 @media screen and (max-width: 1024px) {
   .navbar-title {
@@ -119,6 +207,12 @@ body {
 
   .mobile-menu a:last-child {
     border-bottom: none;
+  }
+}
+
+@media (max-width: 768px) {
+  .profile-icon-container {
+    display: none;
   }
 }
 
