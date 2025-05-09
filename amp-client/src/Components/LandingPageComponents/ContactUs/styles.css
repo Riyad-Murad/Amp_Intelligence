@@ -1,0 +1,44 @@
+/* ContactUsSection.css */
+.section-center {
+  text-align: center;
+  padding: 30px;
+}
+
+.contact-us-section {
+  padding: 30px 20px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 20px;
+}
+
+.contact-info {
+  text-align: center;
+}
+
+.contact-form {
+  background-color: #fff9f3;
+  width: 500px;
+  height: 650px;
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+  align-items: center;
+  padding-bottom: 10px;
+}
+
+/* Responsive adjustments */
+@media (max-width: 992px) {
+  .contact-us-section {
+    flex-direction: column;
+    text-align: center;
+  }
+
+  .contact-info {
+    margin-bottom: 40px;
+  }
+
+  .contact-form {
+    width: 90%;
+  }
+}
