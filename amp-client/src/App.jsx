@@ -6,6 +6,7 @@ import ClientPowerPlan from './Pages/ClientPages/PowerPlan/ClientPowerPlan'
 import ClientProfile from './Pages/ClientPages/ClientProfile/ClientProfile'
 
 import ProviderUsers from './Pages/ProviderPages/ProviderUsers/ProviderUsers'
+import ProviderProfile from './Pages/ProviderPages/ProviderProfile/ProviderProfile'
 
 // import ProtectedRoute from './Components/CommonComponents/ProtectedRoutes/ProtectedRoute'
 
@@ -20,6 +21,7 @@ function App() {
 
 
         <Route path='/provider-users' element={<ProviderUsers />} />
+        <Route path='/provider-profile' element={<ProviderProfile />} />
 
       {/* </Route> */}
     </Routes>
