@@ -1,0 +1,5 @@
+/* ProviderProfile.css */
+.provider-profile-container {
+  display: flex;
+  flex-direction: row;
+}
