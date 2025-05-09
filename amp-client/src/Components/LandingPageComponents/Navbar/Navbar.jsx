@@ -3,7 +3,7 @@ import { useState } from "react";
 import { Link } from "react-router-dom";
 import logo from "../../../assets/logo.png";
 import LoginForm from "../LoginForm/LoginForm";
-import ActionButton from "../ActionButton/ActionButton";
+import ActionButton from "../../CommonComponents/ActionButton/ActionButton";
 
 const Navbar = () => {
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
