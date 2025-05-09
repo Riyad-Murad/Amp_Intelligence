@@ -1,9 +1,13 @@
-import './styles.css'
+import "./styles.css";
+import ProviderSidebar from "../../../Components/ProviderComponents/ProviderSidebar/ProviderSidebar";
 
 const ProviderPowerPrediction = () => {
   return (
-    <div>ProviderPowerPrediction</div>
-  )
-}
+    <>
+      <ProviderSidebar />
+      <div>ProviderPowerPrediction</div>
+    </>
+  );
+};
 
-export default ProviderPowerPrediction
+export default ProviderPowerPrediction;
