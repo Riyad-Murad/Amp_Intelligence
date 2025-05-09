@@ -1,8 +1,7 @@
 import "./styles.css";
-import React from "react";
 import FeatureCard from "../FeatureCard/FeatureCard";
 
-const Features = () => {
+const Features = ({ id }) => {
   const featuresData = [
     {
       title: "Real-time Monitoring",
@@ -19,7 +18,7 @@ const Features = () => {
   ];
 
   return (
-    <section className="features-section sub-sections">
+    <section className="features-section sub-sections" id={id}>
       <h2 className="section-titles primary-color">Features</h2>
       <div className="features-grid">
         {featuresData.map((feature, index) => (
