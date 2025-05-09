@@ -4,8 +4,12 @@ import ProviderSidebar from "../../../Components/ProviderComponents/ProviderSide
 const ProviderPowerPrediction = () => {
   return (
     <>
-      <ProviderSidebar />
-      <div>ProviderPowerPrediction</div>
+      <div className="provider-power-prediction-container">
+        <ProviderSidebar />
+        <div className="main-content">
+          <h1 className="main-content-title section-titles">Power Prediction</h1>
+        </div>
+      </div>
     </>
   );
 };
