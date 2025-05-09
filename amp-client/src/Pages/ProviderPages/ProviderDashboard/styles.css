@@ -1,0 +1,5 @@
+/* ProviderDashboard.css */
+.provider-dashboard-container {
+  display: flex;
+  flex-direction: row;
+}
