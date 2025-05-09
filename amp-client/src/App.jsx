@@ -7,6 +7,7 @@ import ClientProfile from './Pages/ClientPages/ClientProfile/ClientProfile'
 
 import ProviderUsers from './Pages/ProviderPages/ProviderUsers/ProviderUsers'
 import ProviderProfile from './Pages/ProviderPages/ProviderProfile/ProviderProfile'
+import ProviderDashboard from './Pages/ProviderPages/ProviderDashboard/ProviderDashboard'
 
 // import ProtectedRoute from './Components/CommonComponents/ProtectedRoutes/ProtectedRoute'
 
@@ -22,6 +23,7 @@ function App() {
 
         <Route path='/provider-users' element={<ProviderUsers />} />
         <Route path='/provider-profile' element={<ProviderProfile />} />
+        <Route path='/provider-dashboard' element={<ProviderDashboard />} />
 
       {/* </Route> */}
     </Routes>
