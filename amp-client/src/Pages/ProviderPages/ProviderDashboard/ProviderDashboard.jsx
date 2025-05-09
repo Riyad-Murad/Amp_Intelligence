@@ -1,9 +1,13 @@
-import './styles.css'
+import "./styles.css";
+import ProviderSidebar from "../../../Components/ProviderComponents/ProviderSidebar/ProviderSidebar";
 
 const ProviderDashboard = () => {
   return (
-    <div>ProviderDashboard</div>
-  )
-}
+    <>
+      <ProviderSidebar />
+      <div>ProviderDashboard</div>
+    </>
+  );
+};
 
-export default ProviderDashboard
+export default ProviderDashboard;
