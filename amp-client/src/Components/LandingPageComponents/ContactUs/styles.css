@@ -27,6 +27,12 @@
   padding-bottom: 10px;
 }
 
+.contact-image {
+  width: 444px;
+  height: 650px;
+  object-fit: cover;
+}
+
 /* Responsive adjustments */
 @media (max-width: 992px) {
   .contact-us-section {
