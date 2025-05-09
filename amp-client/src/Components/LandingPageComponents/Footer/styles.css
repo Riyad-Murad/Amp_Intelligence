@@ -1,0 +1,104 @@
+/* Footer.css */
+.footer {
+  background: #233a7e;
+  color: white;
+  padding: 24px;
+  height: 280px;
+  position: relative;
+  overflow: hidden;
+}
+
+.footer .nav-main {
+  width: 622px;
+  height: 48px;
+  position: absolute;
+  left: 40px;
+  top: 164px;
+}
+
+.footer .right-footer {
+  display: flex;
+  flex-direction: column;
+  gap: 90px;
+  align-items: flex-start;
+  justify-content: flex-start;
+  width: 622px;
+  position: absolute;
+  left: 794px;
+  top: 24px;
+}
+
+.footer .copyright-footer {
+  display: flex;
+  flex-direction: row;
+  align-items: flex-start;
+  justify-content: space-between;
+  align-self: stretch;
+  flex-shrink: 0;
+  position: relative;
+}
+
+.footer .nav-secondary {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+  align-items: flex-start;
+  justify-content: flex-start;
+  flex-shrink: 0;
+  position: relative;
+}
+
+.footer .contact-buttons {
+  display: flex;
+  flex-direction: row;
+  align-items: flex-end;
+  justify-content: space-between;
+  align-self: stretch;
+  flex-shrink: 0;
+  position: relative;
+}
+
+.footer .contacts {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+  align-items: flex-start;
+  justify-content: flex-start;
+  flex-shrink: 0;
+  position: relative;
+}
+
+.footer .list {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+  align-items: flex-start;
+  justify-content: flex-start;
+  flex-shrink: 0;
+  position: relative;
+}
+
+.footer .social-media {
+  display: flex;
+  flex-direction: row;
+  gap: 8px;
+  align-items: flex-start;
+  justify-content: flex-start;
+  flex-shrink: 0;
+  position: relative;
+}
+
+.footer .item {
+  border-radius: 40px;
+  border-style: solid;
+  border-color: rgba(255, 255, 255, 0.24);
+  border-width: 1px;
+  padding: 6px 20px 6px 20px;
+  display: flex;
+  flex-direction: row;
+  gap: 0px;
+  align-items: flex-start;
+  justify-content: flex-start;
+  flex-shrink: 0;
+  position: relative;
+}
