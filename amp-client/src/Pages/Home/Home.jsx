@@ -1,6 +1,6 @@
 import "./styles.css";
-import React from "react";
 import Navbar from "../../Components/LandingPageComponents/Navbar/Navbar";
+import Footer from "../../Components/LandingPageComponents/Footer/Footer";
 import Features from "../../Components/LandingPageComponents/Features/Features";
 import HeroSection from "../../Components/LandingPageComponents/HeroSection/HeroSection";
 import AboutUsSection from "../../Components/LandingPageComponents/AboutUs/AboutUsSection";
@@ -16,6 +16,7 @@ const Home = () => {
       <Features />
       <PricesSection />
       <ContactUsSection />
+      <Footer />
     </>
   );
 };
