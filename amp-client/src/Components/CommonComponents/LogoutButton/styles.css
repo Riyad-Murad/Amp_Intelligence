@@ -1,0 +1,25 @@
+.logout-button {
+  border: 2px solid #223a7a;
+  color: #223a7a;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  width: 100%;
+  padding: 10px;
+  font-size: 18px;
+  background-color: transparent;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+}
+
+.logout-button:hover {
+  background-color: rgba(34, 58, 122, 0.1);
+  color: #223a7a;
+}
+
+.logout-icon {
+  margin-right: 5px;
+  height: 1em;
+  width: 1em;
+}

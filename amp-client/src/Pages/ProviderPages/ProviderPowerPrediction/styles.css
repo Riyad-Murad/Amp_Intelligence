@@ -1,0 +1,5 @@
+/* ProviderPowerPrediction.css */
+.provider-power-prediction-container {
+  display: flex;
+  flex-direction: row;
+}
