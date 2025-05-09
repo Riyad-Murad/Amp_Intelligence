@@ -1,8 +1,7 @@
 import "./styles.css";
-import React from "react";
 import PriceCard from "../PriceCard/PriceCard";
 
-function PricesSection() {
+function PricesSection({ id }) {
   const pricingData = [
     {
       title: "Basic Plan",
@@ -26,7 +25,7 @@ function PricesSection() {
   ];
 
   return (
-    <section className="prices-section">
+    <section className="prices-section" id={id}>
       <h2 className="section-titles primary-color">Pricing</h2>
       <p className="text black-color">
         These are the different kinds of services that we offer based on your
