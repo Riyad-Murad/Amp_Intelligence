@@ -1,5 +1,5 @@
 import "./styles.css";
-import React, { useState } from "react";
+import { useState } from "react";
 import { Link } from "react-router-dom";
 import logo from "../../../assets/logo.png";
 import ActionButton from "../ActionButton/ActionButton";
@@ -9,6 +9,24 @@ const Navbar = () => {
 
   const toggleMobileMenu = () => {
     setMobileMenuOpen(!mobileMenuOpen);
+  };
+
+  const scrollToSection = (id) => {
+    const element = document.getElementById(id);
+    if (element) {
+      const offset = 100;
+      const elementPosition = element.getBoundingClientRect().top;
+      const offsetPosition = elementPosition + window.pageYOffset - offset;
+
+      window.scrollTo({
+        top: offsetPosition,
+        behavior: "smooth",
+      });
+
+      if (mobileMenuOpen) {
+        setMobileMenuOpen(false);
+      }
+    }
   };
 
   return (
@@ -22,9 +40,10 @@ const Navbar = () => {
 
       {/* Desktop navigation links */}
       <div className="navbar-links">
-        <a href="#services">Services</a>
-        <a href="#about-us">About Us</a>
-        <a href="#contact-us">Contact Us</a>
+        <a href="#about-us" onClick={() => scrollToSection("about-us")}>About Us</a>
+        <a href="#features" onClick={() => scrollToSection("features")}>Features</a>
+        <a href="#prices" onClick={() => scrollToSection("prices")}>Prices</a>
+        <a href="#contact-us" onClick={() => scrollToSection("contact-us")}>Contact Us</a>
       </div>
 
       <div className="navbar-right">
@@ -37,13 +56,16 @@ const Navbar = () => {
       {/* Mobile navigation menu */}
       {mobileMenuOpen && (
         <div className={`mobile-menu ${mobileMenuOpen ? "open" : ""}`}>
-          <a href="#services" onClick={toggleMobileMenu}>
-            Services
-          </a>
-          <a href="#about-us" onClick={toggleMobileMenu}>
+          <a href="#about-us" onClick={() => scrollToSection("about-us")}>
             About Us
           </a>
-          <a href="#contact-us" onClick={toggleMobileMenu}>
+          <a href="#features" onClick={() => scrollToSection("features")}>
+            Features
+          </a>
+          <a href="#prices" onClick={() => scrollToSection("prices")}>
+            Prices
+          </a>
+          <a href="#contact-us" onClick={() => scrollToSection("contact-us")}>
             Contact Us
           </a>
         </div>
