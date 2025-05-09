@@ -1,0 +1,41 @@
+/* PriceCard.css */
+.price-card {
+  width: 400px;
+  height: 400px;
+  border-radius: 8px;
+  padding: 30px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  text-align: center;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.price-card .section-titles {
+  font-size: 24px;
+  margin-bottom: 20px;
+}
+
+.price-card ul {
+  list-style-type: disc;
+  padding-left: 20px;
+  margin-bottom: auto;
+  text-align: left;
+  width: 80%;
+}
+
+.price-card li.text {
+  font-size: 16px;
+  line-height: 1.5;
+  margin-bottom: 10px;
+}
+
+.price-card p.subtitle {
+  font-size: 24px;
+  font-weight: 500;
+  margin-top: 30px;
+}
+
+.price-card .black-color {
+  color: black;
+}
