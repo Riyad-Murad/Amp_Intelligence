@@ -1,27 +1,42 @@
 import "./styles.css";
-import { Link } from 'react-router-dom';
+import { Link } from "react-router-dom";
 import logo from "../../../assets/logo.png";
 import LogoutButton from "../../CommonComponents/LogoutButton/LogoutButton";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import {
+  faTachometerAlt,
+  faUsers,
+  faBolt,
+  faUser,
+} from "@fortawesome/free-solid-svg-icons";
 
 const ProviderSidebar = () => {
   return (
     <div className="provider-sidebar">
       <div className="sidebar-header">
-        <img src={logo} alt="Logo" className="logo" />
-        <h1 className="navbar-title">Amp Intelligence</h1>
+        <Link to="/provider-dashboard" className="un-underlined">
+          <img src={logo} alt="Logo" className="logo" />
+        </Link>
+        <Link to="/provider-dashboard" className="un-underlined">
+          <h1 className="navbar-title">Amp Intelligence</h1>
+        </Link>
       </div>
       <nav className="sidebar-nav">
         <Link to="/provider-dashboard" className="sidebar-link">
-          Dashboard
+          <FontAwesomeIcon icon={faTachometerAlt} className="sidebar-icon" />
+          <span className="link-text">Dashboard</span>
         </Link>
         <Link to="/provider-users" className="sidebar-link">
-          Users
+          <FontAwesomeIcon icon={faUsers} className="sidebar-icon" />
+          <span className="link-text">Users</span>
         </Link>
         <Link to="/provider-power-prediction" className="sidebar-link">
-          Power Prediction
+          <FontAwesomeIcon icon={faBolt} className="sidebar-icon" />
+          <span className="link-text">Power Prediction</span>
         </Link>
         <Link to="/provider-profile" className="sidebar-link">
-          Profile
+          <FontAwesomeIcon icon={faUser} className="sidebar-icon" />
+          <span className="link-text">Profile</span>
         </Link>
       </nav>
       <div className="sidebar-footer">
