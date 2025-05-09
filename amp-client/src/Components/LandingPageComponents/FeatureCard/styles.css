@@ -26,10 +26,3 @@
 .feature-card .black-color {
   color: black;
 }
-
-/* Make the card more responsive */
-@media (max-width: 768px) {
-  .feature-card {
-    width: 100%;
-  }
-}
