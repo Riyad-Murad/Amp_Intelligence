@@ -26,3 +26,19 @@
   align-items: center;
   padding-bottom: 10px;
 }
+
+/* Responsive adjustments */
+@media (max-width: 992px) {
+  .contact-us-section {
+    flex-direction: column;
+    text-align: center;
+  }
+
+  .contact-info {
+    margin-bottom: 40px;
+  }
+
+  .contact-form {
+    width: 90%;
+  }
+}
