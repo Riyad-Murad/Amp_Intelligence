@@ -18,11 +18,11 @@ const ContactUsSection = ({ id }) => {
         </div>
         <div className="contact-form">
           <h2 className="section-titles primary-color section-center">Contact Us</h2>
-            <InputField label="Full Name" placeholder="Full Name" width="80%" />
-            <InputField label="Email" placeholder="Email" width="80%" />
-            <InputField label="Phone Number" placeholder="Phone Number" width="80%" />
-            <InputField label="Message" placeholder="Message" textarea width="80%" />
-            <ActionButton backgroundColor="#233a7e" color="white" text="Submit" width="60%" />
+          <InputField label="Full Name" placeholder="Full Name" width="80%" />
+          <InputField label="Email" placeholder="Email" width="80%" />
+          <InputField label="Phone Number" placeholder="Phone Number" width="80%" />
+          <InputField label="Message" placeholder="Message" textarea width="80%" />
+          <ActionButton backgroundColor="#233a7e" color="white" text="Submit" width="60%" />
         </div>
       </section>
     </div>

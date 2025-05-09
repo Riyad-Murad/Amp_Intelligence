@@ -1,7 +1,6 @@
-import React from "react";
 import "./styles.css";
 
-const ActionButton = ({ backgroundColor, color, text, width }) => {
+const ActionButton = ({ backgroundColor, color, text, width, onClick  }) => {
   const buttonStyle = {
     backgroundColor: backgroundColor || "#000000",
     color: color || "#FFFFFF",
@@ -14,7 +13,7 @@ const ActionButton = ({ backgroundColor, color, text, width }) => {
     width: width || "auto",
   };
 
-  return <button style={buttonStyle}>{text}</button>;
+  return <button style={buttonStyle} onClick={onClick}>{text}</button>;
 };
 
 export default ActionButton;
