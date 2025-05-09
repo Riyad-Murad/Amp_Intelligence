@@ -18,6 +18,13 @@ const ProtectedRoute = () => {
         <Outlet />
       </>
     );
+  } else if (userType === "Provider") {
+    return (
+      <>
+        <ProviderNavbar />
+        <Outlet />
+      </>
+    );
   }
 };
 
