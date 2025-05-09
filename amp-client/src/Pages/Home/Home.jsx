@@ -4,6 +4,7 @@ import Navbar from "../../Components/LandingPageComponents/Navbar/Navbar";
 import Features from "../../Components/LandingPageComponents/Features/Features";
 import HeroSection from "../../Components/LandingPageComponents/HeroSection/HeroSection";
 import AboutUsSection from "../../Components/LandingPageComponents/AboutUs/AboutUsSection";
+import PricesSection from "../../Components/LandingPageComponents/PricesSection/PricesSection";
 
 const Home = () => {
   return (
@@ -12,6 +13,7 @@ const Home = () => {
       <HeroSection />
       <AboutUsSection />
       <Features />
+      <PricesSection />
     </>
   );
 };
