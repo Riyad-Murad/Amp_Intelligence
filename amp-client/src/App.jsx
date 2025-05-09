@@ -4,6 +4,9 @@ import { Route, Routes } from 'react-router-dom'
 import ClientDashboard from './Pages/ClientPages/Dashboard/ClientDashboard'
 import ClientPowerPlan from './Pages/ClientPages/PowerPlan/ClientPowerPlan'
 import ClientProfile from './Pages/ClientPages/ClientProfile/ClientProfile'
+
+import ProviderUsers from './Pages/ProviderPages/ProviderUsers/ProviderUsers'
+
 // import ProtectedRoute from './Components/CommonComponents/ProtectedRoutes/ProtectedRoute'
 
 function App() {
@@ -14,6 +17,10 @@ function App() {
         <Route path='/client-dashboard' element={<ClientDashboard />} />
         <Route path='/client-power-plan' element={<ClientPowerPlan />} />
         <Route path='/client-profile' element={<ClientProfile />} />
+
+
+        <Route path='/provider-users' element={<ProviderUsers />} />
+
       {/* </Route> */}
     </Routes>
   )
