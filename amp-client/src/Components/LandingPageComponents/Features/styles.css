@@ -1,0 +1,14 @@
+/* FeaturesSection.css */
+.features-section {
+  height: 550px;
+  padding: 35px 20px;
+  text-align: center;
+}
+
+.features-grid {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 30px;
+  margin-top: 20px;
+}
