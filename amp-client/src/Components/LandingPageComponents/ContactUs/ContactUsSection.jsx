@@ -1,7 +1,7 @@
 import "./styles.css";
-import InputField from "../InputField/InputField";
-import ActionButton from "../ActionButton/ActionButton";
 import contactUs from "../../../assets/contact-us.png";
+import InputField from "../../CommonComponents/InputField/InputField";
+import ActionButton from "../../CommonComponents/ActionButton/ActionButton";
 
 const ContactUsSection = ({ id }) => {
   return (
