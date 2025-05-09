@@ -4,8 +4,12 @@ import ProviderSidebar from "../../../Components/ProviderComponents/ProviderSide
 const ProviderProfile = () => {
   return (
     <>
-      <ProviderSidebar />
-      <div>ProviderProfile</div>
+      <div className="provider-profile-container">
+        <ProviderSidebar />
+        <div className="main-content">
+          <h1 className="main-content-title section-titles">Provider Profile</h1>
+        </div>
+      </div>
     </>
   );
 };
