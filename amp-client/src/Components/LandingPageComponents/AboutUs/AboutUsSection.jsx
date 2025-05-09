@@ -1,9 +1,8 @@
 import "./styles.css";
-import React from "react";
 
-const AboutUsSection = () => {
+const AboutUsSection = ({ id }) => {
   return (
-    <section className="about-us-section">
+    <section className="about-us-section" id={id}>
       <h2 className="section-titles primary-color">About Us</h2>
       <p className="about-us-text">
         At Amp Intelligence, we are driven by a passion for innovation and a
