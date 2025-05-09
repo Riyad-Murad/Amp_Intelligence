@@ -2,10 +2,20 @@ import "./styles.css";
 import { useState } from "react";
 import { Link } from "react-router-dom";
 import logo from "../../../assets/logo.png";
+import LoginForm from "../LoginForm/LoginForm";
 import ActionButton from "../ActionButton/ActionButton";
 
 const Navbar = () => {
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
+  const [isLoginFormVisible, setIsLoginFormVisible] = useState(false);
+
+  const handleLoginClick = () => {
+    setIsLoginFormVisible(true);
+  };
+
+  const handleCloseLoginForm = () => {
+    setIsLoginFormVisible(false);
+  };
 
   const toggleMobileMenu = () => {
     setMobileMenuOpen(!mobileMenuOpen);
@@ -47,7 +57,8 @@ const Navbar = () => {
       </div>
 
       <div className="navbar-right">
-        <ActionButton backgroundColor="#233A7E" color="#FFFFFF" text="Login" />
+        <ActionButton backgroundColor="#233A7E" color="#FFFFFF" text="Login" onClick={handleLoginClick} />
+        {isLoginFormVisible && <LoginForm onClose={handleCloseLoginForm} />}
         <button className="mobile-menu-button" onClick={toggleMobileMenu}>
           {mobileMenuOpen ? "✕" : "☰"}
         </button>
