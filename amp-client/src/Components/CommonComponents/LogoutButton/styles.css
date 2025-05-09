@@ -3,6 +3,7 @@
   color: #223a7a;
   display: flex;
   align-items: center;
+  justify-content: center;
   gap: 8px;
   width: 100%;
   padding: 10px;
