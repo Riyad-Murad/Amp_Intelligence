@@ -1,9 +1,13 @@
-import './styles.css'
+import "./styles.css";
+import ClientNavbar from "../../../Components/ClientComponents/ClientNavbar/ClientNavbar";
 
 const ClientProfile = () => {
   return (
-    <div>ClientProfile</div>
-  )
-}
+    <>
+      <ClientNavbar />
+      <h2>Client Profile</h2>
+    </>
+  );
+};
 
-export default ClientProfile
+export default ClientProfile;
