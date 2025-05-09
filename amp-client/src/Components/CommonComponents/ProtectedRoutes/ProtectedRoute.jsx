@@ -25,6 +25,13 @@ const ProtectedRoute = () => {
         <Outlet />
       </>
     );
+  } else if (userType === "Admin") {
+    return (
+      <>
+        <AdminNavbar />
+        <Outlet />
+      </>
+    );
   }
 };
 
