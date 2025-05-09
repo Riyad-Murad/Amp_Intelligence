@@ -1,10 +1,13 @@
-import './styles.css'
-import React from 'react'
+import "./styles.css";
+import React from "react";
 
-const FeatureCard = () => {
+function FeatureCard({ title, text }) {
   return (
-    <div>FeatureCard</div>
-  )
+    <div className="feature-card">
+      <h3 className="section-titles primary-color">{title}</h3>
+      <p className="text black-color">{text}</p>
+    </div>
+  );
 }
 
-export default FeatureCard
+export default FeatureCard;
