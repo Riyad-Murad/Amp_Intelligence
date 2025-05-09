@@ -14,7 +14,7 @@ const ContactUsSection = ({ id }) => {
       </div>
       <section className="contact-us-section">
         <div className="contact-info">
-          <img src={contactUs} alt="Contact Us" width="444" height="650" />
+          <img src={contactUs} alt="Contact Us" className="contact-image" />
         </div>
         <div className="contact-form">
           <h2 className="section-titles primary-color section-center">Contact Us</h2>
