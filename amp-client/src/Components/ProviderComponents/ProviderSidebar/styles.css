@@ -2,7 +2,7 @@
 .provider-sidebar {
   display: flex;
   flex-direction: column;
-  width: 240px;
+  width: 280px;
   height: 100vh;
   background-color: #f9a43a;
   color: #fff;
@@ -13,20 +13,21 @@
 .sidebar-header {
   display: flex;
   flex-direction: column;
-  align-items: flex-start;
+  align-items: center;
   margin-bottom: 40px;
+}
+
+.un-underlined {
+  text-decoration: none;
+}
+
+.link-text {
+  margin: 10px;
 }
 
 .logo {
   height: 50px;
   margin-bottom: 10px;
-}
-
-.navbar-title {
-  font-size: 24px;
-  font-weight: 600;
-  color: #ffffff;
-  text-decoration: none;
 }
 
 .sidebar-nav {
