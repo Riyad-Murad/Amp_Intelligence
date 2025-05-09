@@ -33,7 +33,6 @@
 .sidebar-nav {
   display: flex;
   flex-direction: column;
-  gap: 15px;
   margin-bottom: auto;
 }
 
@@ -42,6 +41,8 @@
   color: #ffffff;
   text-decoration: none;
   transition: color 0.2s ease;
+  display: flex;
+  align-items: center;
 }
 
 .sidebar-link:hover {
@@ -51,4 +52,15 @@
 .sidebar-footer {
   padding-top: 20px;
   border-top: 1px solid rgba(255, 255, 255, 0.2);
+}
+
+.main-content {
+  flex: 1;
+  margin-left: 20px;
+  margin-top: 20px;
+}
+
+.main-content-title {
+  margin-top: 40px;
+  margin-left: 40px;
 }
