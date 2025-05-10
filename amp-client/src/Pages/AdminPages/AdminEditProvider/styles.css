@@ -1,0 +1,5 @@
+/* AdminEditProvider.css */
+.admin-edit-provider-container {
+  display: flex;
+  flex-direction: row;
+}
