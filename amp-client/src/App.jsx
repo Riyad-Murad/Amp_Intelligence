@@ -13,6 +13,7 @@ import ProviderPowerPrediction from './Pages/ProviderPages/ProviderPowerPredicti
 import AdminEditProvider from './Pages/AdminPages/AdminEditProvider/AdminEditProvider'
 import AdminViewProviders from './Pages/AdminPages/AdminViewProviders/AdminViewProviders'
 import AdminNavigationPage from './Pages/AdminPages/AdminNavigationPage/AdminNavigationPage'
+import AdminContactMessages from './Pages/AdminPages/AdminContactMessages/AdminContactMessages'
 
 // import ProtectedRoute from './Components/CommonComponents/ProtectedRoutes/ProtectedRoute'
 
@@ -33,6 +34,7 @@ function App() {
         <Route path='/admin-edit-provider' element={<AdminEditProvider />} />
         <Route path='/admin-view-providers' element={<AdminViewProviders />} />
         <Route path='/admin-navigation-page' element={<AdminNavigationPage />} />
+        <Route path='/admin-contact-messages' element={<AdminContactMessages />} />
 
       {/* </Route> */}
     </Routes>
