@@ -1,0 +1,5 @@
+/* AdminViewProviders.css */
+.admin-view-providers-container {
+  display: flex;
+  flex-direction: row;
+}

@@ -10,6 +10,11 @@ import ProviderProfile from './Pages/ProviderPages/ProviderProfile/ProviderProfi
 import ProviderDashboard from './Pages/ProviderPages/ProviderDashboard/ProviderDashboard'
 import ProviderPowerPrediction from './Pages/ProviderPages/ProviderPowerPrediction/ProviderPowerPrediction' 
 
+import AdminEditProvider from './Pages/AdminPages/AdminEditProvider/AdminEditProvider'
+import AdminViewProviders from './Pages/AdminPages/AdminViewProviders/AdminViewProviders'
+import AdminNavigationPage from './Pages/AdminPages/AdminNavigationPage/AdminNavigationPage'
+import AdminContactMessages from './Pages/AdminPages/AdminContactMessages/AdminContactMessages'
+
 // import ProtectedRoute from './Components/CommonComponents/ProtectedRoutes/ProtectedRoute'
 
 function App() {
@@ -21,11 +26,15 @@ function App() {
         <Route path='/client-power-plan' element={<ClientPowerPlan />} />
         <Route path='/client-profile' element={<ClientProfile />} />
 
-
         <Route path='/provider-users' element={<ProviderUsers />} />
         <Route path='/provider-profile' element={<ProviderProfile />} />
         <Route path='/provider-dashboard' element={<ProviderDashboard />} />
         <Route path='/provider-power-prediction' element={<ProviderPowerPrediction />} />
+
+        <Route path='/admin-edit-provider' element={<AdminEditProvider />} />
+        <Route path='/admin-view-providers' element={<AdminViewProviders />} />
+        <Route path='/admin-navigation-page' element={<AdminNavigationPage />} />
+        <Route path='/admin-contact-messages' element={<AdminContactMessages />} />
 
       {/* </Route> */}
     </Routes>
