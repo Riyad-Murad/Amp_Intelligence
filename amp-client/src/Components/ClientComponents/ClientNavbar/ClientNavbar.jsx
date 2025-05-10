@@ -30,8 +30,11 @@ const ClientNavbar = () => {
   const handleLogout = async () => {
     try {
       const response = await axiosBaseUrl.post("/logout");
-      localStorage.clear();
-      navigate("/");
+
+      if (response.data.success === true || response.data.success === "true") {
+        localStorage.clear();
+        navigate("/");
+      }
     } catch (error) {
       console.error("Logout failed:", error);
     }
@@ -52,7 +55,7 @@ const ClientNavbar = () => {
         <Link to="/client-power-plan">Power Plan</Link>
       </div>
 
-      <div className="navbar-right">        
+      <div className="navbar-right">
         {/* Conditionally render profile icon container */}
         {!mobileMenuOpen && (
           <div

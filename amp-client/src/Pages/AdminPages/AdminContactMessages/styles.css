@@ -1,0 +1,5 @@
+/* AdminContactMessages.css */
+.admin-contact-messages-container {
+  display: flex;
+  flex-direction: row;
+}

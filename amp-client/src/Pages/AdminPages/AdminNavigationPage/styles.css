@@ -1,0 +1,5 @@
+/* AdminNavigationPage.css */
+.admin-navigation-page-container {
+  display: flex;
+  flex-direction: row;
+}
