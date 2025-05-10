@@ -4,7 +4,7 @@ import AdminSidebar from "../../../Components/AdminComponents/AdminSidebar/Admin
 const AdminEditProvider = () => {
   return (
     <>
-      <div className="provider-users-container">
+      <div className="admin-edit-provider-container">
         <AdminSidebar />        
         <div className="main-content">
           <h1 className="main-content-title section-titles"></h1>
