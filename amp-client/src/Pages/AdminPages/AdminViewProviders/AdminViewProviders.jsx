@@ -7,7 +7,7 @@ const AdminViewProviders = () => {
       <div className="admin-view-providers-container">
         <AdminSidebar />
         <div className="main-content">
-          <h1 className="main-content-title section-titles"></h1>
+          <h1 className="main-content-title section-titles">View Providers</h1>
         </div>
       </div>
     </>
