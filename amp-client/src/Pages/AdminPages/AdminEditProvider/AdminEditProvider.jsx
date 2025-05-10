@@ -1,7 +1,7 @@
 import "./styles.css";
 import AdminSidebar from "../../../Components/AdminComponents/AdminSidebar/AdminSidebar";
 
-const AdminAddProvider = () => {
+const AdminEditProvider = () => {
   return (
     <>
       <div className="provider-users-container">
@@ -14,4 +14,4 @@ const AdminAddProvider = () => {
   );
 };
 
-export default AdminAddProvider;
+export default AdminEditProvider;
