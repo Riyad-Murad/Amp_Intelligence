@@ -1,9 +1,17 @@
-import './styles.css'
+import "./styles.css";
+import AdminSidebar from "../../../Components/AdminComponents/AdminSidebar/AdminSidebar";
 
 const AdminNavigationPage = () => {
   return (
-    <div>AdminNavigationPage</div>
-  )
-}
+    <>
+      <div className="admin-navigation-page-container">
+        <AdminSidebar />
+        <div className="main-content">
+          <h1 className="main-content-title section-titles"></h1>
+        </div>
+      </div>
+    </>
+  );
+};
 
-export default AdminNavigationPage
+export default AdminNavigationPage;
