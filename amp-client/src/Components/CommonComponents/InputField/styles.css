@@ -8,7 +8,7 @@
   margin-bottom: 10px;
 }
 
-.input-field-container input[type="text"],
+.input-field-container input,
 .input-field-container textarea {
   padding: 10px;
   border: 1px solid #ccc;

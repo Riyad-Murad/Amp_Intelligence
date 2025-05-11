@@ -1,8 +1,8 @@
 import "./styles.css";
 import { useState } from "react";
+import { Link } from "react-router-dom";
 import logo from "../../../assets/logo.png";
 import axiosBaseUrl from "../../../Axios/axios";
-import { Link, useNavigate } from "react-router-dom";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import {
   faUserCircle,
@@ -11,11 +11,13 @@ import {
   faUser,
   faSignOutAlt,
 } from "@fortawesome/free-solid-svg-icons";
+import { useLogout } from "../../../Hooks/useLogoutHook";
 
 const ClientNavbar = () => {
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
   const [profileDropdownOpen, setProfileDropdownOpen] = useState(false);
-  const navigate = useNavigate();
+
+  const logout = useLogout();
 
   const toggleMobileMenu = () => {
     setMobileMenuOpen(!mobileMenuOpen);
@@ -29,12 +31,7 @@ const ClientNavbar = () => {
 
   const handleLogout = async () => {
     try {
-      const response = await axiosBaseUrl.post("/logout");
-
-      if (response.data.success === true || response.data.success === "true") {
-        localStorage.clear();
-        navigate("/");
-      }
+      await logout();
     } catch (error) {
       console.error("Logout failed:", error);
     }

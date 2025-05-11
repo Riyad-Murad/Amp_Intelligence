@@ -43,6 +43,10 @@ body {
   gap: 30px;
 }
 
+.navbar-links a:hover {
+ color: #233a7e; 
+}
+
 .navbar-links a {
   font-size: 21px;
   font-weight: 600;

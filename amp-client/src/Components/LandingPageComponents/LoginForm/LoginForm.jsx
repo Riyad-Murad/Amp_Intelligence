@@ -1,8 +1,54 @@
 import "./styles.css";
+import { useState } from "react";
+import { toast } from "react-toastify";
+import { useNavigate } from "react-router-dom";
+import axiosBaseUrl from "../../../Axios/axios";
+import { useDispatch, useSelector } from "react-redux";
+import { storeData } from "../../../Redux/Slices/UserSlice";
 import InputField from "../../CommonComponents/InputField/InputField";
 import ActionButton from "../../CommonComponents/ActionButton/ActionButton";
+import { toggleLoad } from "../../../Redux/Slices/loadingSlice";
 
 const LoginForm = ({ onClose }) => {
+  const [email, setEmail] = useState("");
+  const [password, setPassword] = useState("");
+
+  const loading = useSelector((state) => state.loading.loadingState);
+
+  const dispatch = useDispatch();
+
+  const navigate = useNavigate();
+
+  const handleLogin = async (e) => {
+    e.preventDefault();
+
+    try {
+      dispatch(toggleLoad(true));
+
+      const response = await axiosBaseUrl.post("/login", { email, password });
+      
+      const userType = response.data.data.user_type;
+
+      localStorage.setItem("Token", response.data.data.token);
+      dispatch(storeData(response.data.data));
+
+      if (userType === "Client") {
+        toast.success("Hello Client");
+        navigate("/client-dashboard");
+      } else if (userType === "Provider") {
+        toast.success("Hello Provider");
+        navigate("/provider-dashboard");
+      } else if (userType === "Admin") {
+        toast.success("Hello Admin");
+        navigate("/admin-navigation-page");
+      }
+    } catch (error) {
+      toast.error("Login failed. Please try again.");
+    } finally {
+      dispatch(toggleLoad(false));
+    }
+  };
+
   return (
     <div className="login-layer">
       <div className="login-form">
@@ -13,19 +59,36 @@ const LoginForm = ({ onClose }) => {
           </button>
         </div>
         <div className="login-content">
-          <InputField label="Email" placeholder="Email" width="80%" />
-          <InputField
-            label="Password"
-            placeholder="Password"
-            type="password"
-            width="80%"
-          />
-          <ActionButton
-            backgroundColor="#F9A43A"
-            color="#233A7E"
-            text={<h3>Login</h3>}
-            width="60%"
-          />
+          {loading ? (
+            <div className="spinner-container">
+              <div className="spinner"></div>
+            </div>
+          ) : (
+            <>
+              <InputField
+                label="Email"
+                placeholder="Email"
+                width="80%"
+                value={email}
+                onChange={(e) => setEmail(e.target.value)}
+              />
+              <InputField
+                label="Password"
+                placeholder="Password"
+                type="password"
+                width="80%"
+                value={password}
+                onChange={(e) => setPassword(e.target.value)}
+              />
+              <ActionButton
+                backgroundColor="#F9A43A"
+                color="#233A7E"
+                text={<h3>Login</h3>}
+                width="60%"
+                onClick={handleLogin}
+              />
+            </>
+          )}
         </div>
       </div>
     </div>
