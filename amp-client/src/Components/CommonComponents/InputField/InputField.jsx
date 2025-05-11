@@ -1,7 +1,6 @@
 import './styles.css'
-import React from 'react'
 
-const InputField = ({ label, placeholder, value, onChange, width, textarea }) => {
+const InputField = ({ label, placeholder, value, onChange, width, textarea, type }) => {
   return (
     <div className="input-field-container" style={{ width: width || '100%' }}>
       <label className="subtitle black-color">{label}*</label>
@@ -13,7 +12,7 @@ const InputField = ({ label, placeholder, value, onChange, width, textarea }) =>
         />
       ) : (
         <input
-          type="text"
+          type={type?type:"text"}
           placeholder={placeholder}
           value={value}
           onChange={onChange}
