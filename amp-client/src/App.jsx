@@ -15,7 +15,7 @@ import AdminViewProviders from "./Pages/AdminPages/AdminViewProviders/AdminViewP
 import AdminNavigationPage from "./Pages/AdminPages/AdminNavigationPage/AdminNavigationPage";
 import AdminContactMessages from "./Pages/AdminPages/AdminContactMessages/AdminContactMessages";
 
-// import ProtectedRoute from "./Components/CommonComponents/ProtectedRoutes/ProtectedRoute";
+import ProtectedRoute from "./Components/CommonComponents/ProtectedRoutes/ProtectedRoute";
 
 function App() {
   return (
@@ -23,27 +23,27 @@ function App() {
       <Route path="/" element={<Home />} />
 
       {/* Client Protected Routes */}
-      {/* <Route element={<ProtectedRoute requiredRole="Client" />}> */}
-        <Route path="/client-dashboard" element={<ClientDashboard />} />
-        <Route path="/client-power-plan" element={<ClientPowerPlan />} />
-        <Route path="/client-profile" element={<ClientProfile />} />
-      {/* </Route> */}
+      <Route path="/client" element={<ProtectedRoute requiredRole="Client" />}>
+        <Route path="/client/dashboard" element={<ClientDashboard />} />
+        <Route path="/client/power-plan" element={<ClientPowerPlan />} />
+        <Route path="/client/profile" element={<ClientProfile />} />
+      </Route>
 
       {/* Provider Protected Routes */}
-      {/* <Route element={<ProtectedRoute requiredRole="Provider" />}> */}
-        <Route path="/provider-users" element={<ProviderUsers />} />
-        <Route path="/provider-profile" element={<ProviderProfile />} />
-        <Route path="/provider-dashboard" element={<ProviderDashboard />} />
-        <Route path="/provider-power-prediction" element={<ProviderPowerPrediction />} />
-      {/* </Route> */}
+      <Route path="/provider" element={<ProtectedRoute requiredRole="Provider" />}>
+        <Route path="/provider/users" element={<ProviderUsers />} />
+        <Route path="/provider/profile" element={<ProviderProfile />} />
+        <Route path="/provider/dashboard" element={<ProviderDashboard />} />
+        <Route path="/provider/power-prediction" element={<ProviderPowerPrediction />} />
+      </Route>
 
       {/* Admin Protected Routes */}
-      {/* <Route element={<ProtectedRoute requiredRole="Admin" />}> */}
-        <Route path="/admin-edit-provider" element={<AdminEditProvider />} />
-        <Route path="/admin-view-providers" element={<AdminViewProviders />} />
-        <Route path="/admin-navigation-page" element={<AdminNavigationPage />} />
-        <Route path="/admin-contact-messages" element={<AdminContactMessages />} />
-      {/* </Route> */}
+      <Route path="/admin" element={<ProtectedRoute requiredRole="Admin" />}>
+        <Route path="/admin/edit-provider" element={<AdminEditProvider />} />
+        <Route path="/admin/view-providers" element={<AdminViewProviders />} />
+        <Route path="/admin/navigation-page" element={<AdminNavigationPage />} />
+        <Route path="/admin/contact-messages" element={<AdminContactMessages />} />
+      </Route>
     </Routes>
   );
 }

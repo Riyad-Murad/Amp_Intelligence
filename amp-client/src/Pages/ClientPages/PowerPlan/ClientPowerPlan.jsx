@@ -3,12 +3,11 @@ import { useState } from "react";
 import axiosBaseUrl from "../../../Axios/axios";
 import { useDispatch, useSelector } from "react-redux";
 import { toggleLoad } from "../../../Redux/Slices/loadingSlice";
-import ClientNavbar from "../../../Components/ClientComponents/ClientNavbar/ClientNavbar";
 
 const ClientPowerPlan = () => {
   const [reportData, setReportData] = useState(null);
   const loading = useSelector((state) => state.loading.loadingState);
-  const userId = useSelector((state) => state.user.payload.id);
+  const userId = useSelector((state) => state.user.id);
   const dispatch = useDispatch();
 
   const fetchPowerPlanReport = async () => {
@@ -29,7 +28,6 @@ const ClientPowerPlan = () => {
 
   return (
     <>
-      <ClientNavbar />
       <div className="power-plan-container">
         <h2>Power Plan</h2>
         {!reportData && !loading && (
