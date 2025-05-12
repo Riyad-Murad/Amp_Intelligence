@@ -6,7 +6,7 @@ export const userSlice = createSlice({
   name: "user",
   initialState,
   reducers: {
-    storeData: (currentState, payload) => {
+    storeData: (currentState, {payload}) => {
       currentState = payload;
       return currentState;
     },
