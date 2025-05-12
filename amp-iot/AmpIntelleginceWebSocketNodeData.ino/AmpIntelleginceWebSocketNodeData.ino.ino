@@ -2,10 +2,10 @@
 #include <WebSocketsClient.h>
 
 // WiFi credentials
-const char* ssid = "Wise net/rida murad";
-const char* password = "1234murad@";
+const char* ssid = "Galaxy A22 5G6345";
+const char* password = "12345678";
 
-const char* websocket_server = "13.38.59.230";
+const char* websocket_server = "35.159.105.106";
 const uint16_t websocket_port = 3001;
 const char* websocket_path = "/";
 
