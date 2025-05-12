@@ -18,7 +18,7 @@ Route::group(["prefix" => "v1"], function () {
 
         // Slave/Client Users
         Route::group(["prefix" => "clients", "middleware" => "isClient"], function () {
-            Route::get("/clientReport", [ClientFunctionsController::class, "generateReport"]);
+            Route::get("/clientReport/{id}", [ClientFunctionsController::class, "generateReport"]);
 
             Route::post("/editProfile", [ClientFunctionsController::class, "editProfile"]);
         });
