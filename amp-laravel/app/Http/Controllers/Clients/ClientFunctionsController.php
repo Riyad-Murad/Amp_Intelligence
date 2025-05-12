@@ -10,13 +10,12 @@ use App\Http\Requests\Client\EditProfileRequest;
 
 class ClientFunctionsController extends Controller
 {
-    public function generateReport(Request $request)
+    public function generateReport($id)
     {
         try {
-            $id = $request->header('id');
 
             if (!$id) {
-                return $this->messageResponse(false, "Header ID not provided", 400, null);
+                return $this->messageResponse(false, "Route ID not provided", 400, null);
             }
 
             $report = GeneratingReportService::generateReport($id);
