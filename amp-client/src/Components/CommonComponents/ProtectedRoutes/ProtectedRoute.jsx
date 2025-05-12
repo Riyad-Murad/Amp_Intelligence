@@ -7,23 +7,9 @@ import ClientNavbar from "../../ClientComponents/ClientNavbar/ClientNavbar";
 import ProviderSidebar from "../../ProviderComponents/ProviderSidebar/ProviderSidebar";
 
 const ProtectedRoute = ({ requiredRole }) => {
-  const userType = useSelector((state) => state.user.user_type);
-  const loading = useSelector((state) => state.loading);
-  // const loading = useSelector((state) => state.loading.loadingState);
+  const userType = useSelector((state) => state.user.user_type);  
   const navigate = useNavigate();
   const dispatch = useDispatch();
-
-  // useEffect(() => {
-  //   if (userType) {
-  //     setIsAuthenticated(true);
-  //     if (userType !== requiredRole) {
-  //       console.log("User Type:", userType, "Required Role:", requiredRole); // Debugging
-  //       navigate("/");
-  //     }
-  //   } else {
-  //     setIsAuthenticated(false);
-  //   }
-  // }, [userType, requiredRole, navigate]);
 
   useEffect(() => {
     dispatch(toggleLoad(true));
