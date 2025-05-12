@@ -26,7 +26,7 @@ jobs:
       - name: Push Laravel Docker image
         run: docker push ${{ secrets.DOCKER_USERNAME }}/laravel_amp_intelligence:latest
 
-  Build-NodeJS-And-Push-Dockerhub:
+  Build-NodeJS-And-Deploy-On-S3-Bucket:
     runs-on: ubuntu-latest
 
     steps:
@@ -53,18 +53,29 @@ jobs:
       - name: Checkout repository
         uses: actions/checkout@v3
 
-      - name: Login to Docker Hub
-        uses: docker/login-action@v3
+      - name: Setup Node.js environment
+        uses: actions/setup-node@v3
         with:
-          username: ${{ secrets.DOCKER_USERNAME }}
-          password: ${{ secrets.DOCKER_TOKEN }}
+          node-version: "20"
+          cache: "npm"
 
-      - name: Build React.js Docker image
+      - name: Install dependencies
         working-directory: amp-client
-        run: docker build -f Dockerfile-React -t ${{ secrets.DOCKER_USERNAME }}/react_amp_intelligence:latest .
+        run: npm i
 
-      - name: Push React.js Docker image
-        run: docker push ${{ secrets.DOCKER_USERNAME }}/react_amp_intelligence:latest
+      - name: Build React Project
+        working-directory: amp-client
+        run: npm run build
+
+      - name: Configure AWS credentials
+        uses: aws-actions/configure-aws-credentials@v2
+        with:
+          aws-access-key-id: ${{ secrets.AWS_ACCESS_KEY_ID }}
+          aws-secret-access-key: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
+          aws-region: eu-central-1
+
+      - name: Deploy to S3
+        run: aws s3 cp amp-client/dist/ s3://riyad-project/ --recursive
 
   Copy-docker-compose-To-EC2:
     runs-on: ubuntu-latest
@@ -83,7 +94,13 @@ jobs:
           target: "/home/${{ secrets.EC2_USER }}/"
 
   Deploy-To-EC2:
-    needs: [Build-Laravel-And-Push-Dockerhub, Build-NodeJS-And-Push-Dockerhub, Build-ReactJS-And-Push-Dockerhub, Copy-docker-compose-To-EC2]
+    needs:
+      [
+        Build-Laravel-And-Push-Dockerhub,
+        Build-NodeJS-And-Push-Dockerhub,
+        Build-NodeJS-And-Deploy-On-S3-Bucket,
+        Copy-docker-compose-To-EC2,
+      ]
     runs-on: ubuntu-latest
 
     steps:
@@ -97,8 +114,7 @@ jobs:
           username: ${{ secrets.EC2_USER }}
           key: ${{ secrets.EC2_KEY }}
           script: |
-            docker-compose down
+            docker compose down
             docker rmi ${{ secrets.DOCKER_USERNAME }}/laravel_amp_intelligence:latest
-            docker rmi ${{ secrets.DOCKER_USERNAME }}/node_amp_intelligence:latest
-            docker rmi ${{ secrets.DOCKER_USERNAME }}/react_amp_intelligence:latest
-            docker-compose up -d
+            docker rmi ${{ secrets.DOCKER_USERNAME }}/node_amp_intelligence:latest            
+            docker compose up -d
