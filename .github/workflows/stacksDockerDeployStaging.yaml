@@ -57,14 +57,19 @@ jobs:
         uses: actions/setup-node@v3
         with:
           node-version: "20"
-          cache: "npm"
+
+      - name: Check Node.js version
+        run: node -v
+
+      - name: Check npm version
+        run: npm -v
 
       - name: Install dependencies
-        working-directory: amp-client
-        run: npm i
+        working-directory: ./amp-client
+        run: npm install
 
       - name: Build React Project
-        working-directory: amp-client
+        working-directory: ./amp-client
         run: npm run build
 
       - name: Configure AWS credentials
