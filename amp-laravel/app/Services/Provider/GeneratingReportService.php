@@ -55,7 +55,8 @@ class GeneratingReportService
         );
 
         $response = Prism::structured()
-            ->using(Provider::OpenAI, 'o4-mini')
+            // ->using(Provider::OpenAI, 'o4-mini')
+            ->using(Provider::OpenAI, 'gpt-4.1')
             ->withSchema($schema)
             ->withPrompt($prompt)
             ->asStructured();
