@@ -26,7 +26,7 @@ jobs:
       - name: Push Laravel Docker image
         run: docker push ${{ secrets.DOCKER_USERNAME }}/laravel_amp_intelligence:latest
 
-  Build-NodeJS-And-Deploy-On-S3-Bucket:
+  Build-NodeJS-And-Push-Dockerhub:
     runs-on: ubuntu-latest
 
     steps:
@@ -46,7 +46,7 @@ jobs:
       - name: Push Node.js Docker image
         run: docker push ${{ secrets.DOCKER_USERNAME }}/node_amp_intelligence:latest
 
-  Build-ReactJS-And-Push-Dockerhub:
+  Build-ReactJS-And-Deploy-On-S3-Bucket:
     runs-on: ubuntu-latest
 
     steps:
@@ -57,14 +57,19 @@ jobs:
         uses: actions/setup-node@v3
         with:
           node-version: "20"
-          cache: "npm"
+
+      - name: Check Node.js version
+        run: node -v
+
+      - name: Check npm version
+        run: npm -v
 
       - name: Install dependencies
-        working-directory: amp-client
-        run: npm i
+        working-directory: ./amp-client
+        run: npm install
 
       - name: Build React Project
-        working-directory: amp-client
+        working-directory: ./amp-client
         run: npm run build
 
       - name: Configure AWS credentials
@@ -98,7 +103,7 @@ jobs:
       [
         Build-Laravel-And-Push-Dockerhub,
         Build-NodeJS-And-Push-Dockerhub,
-        Build-NodeJS-And-Deploy-On-S3-Bucket,
+        Build-ReactJS-And-Deploy-On-S3-Bucket,
         Copy-docker-compose-To-EC2,
       ]
     runs-on: ubuntu-latest
