@@ -34,13 +34,13 @@ const LoginForm = ({ onClose }) => {
 
       if (userType === "Client") {
         toast.success("Hello Client");
-        navigate("/client-dashboard");
+        navigate("/client/dashboard");
       } else if (userType === "Provider") {
         toast.success("Hello Provider");
-        navigate("/provider-dashboard");
+        navigate("/provider/dashboard");
       } else if (userType === "Admin") {
         toast.success("Hello Admin");
-        navigate("/admin-navigation-page");
+        navigate("/admin/navigation-page");
       }
     } catch (error) {
       toast.error("Login failed. Please try again.");
