@@ -3,8 +3,6 @@
 namespace Database\Factories;
 
 use Illuminate\Database\Eloquent\Factories\Factory;
-use Illuminate\Support\Facades\Hash;
-use Illuminate\Support\Str;
 
 /**
  * @extends \Illuminate\Database\Eloquent\Factories\Factory<\App\Models\User>
@@ -24,8 +22,8 @@ class UserFactory extends Factory
     public function definition(): array
     {
         return [
-            'slave_id' => null, // We'll manually assign later
-            'user_type' => $this->faker->randomElement(['Client', 'Provider', 'Admin']),
+            'slave_id' => null,
+            'user_type' => 'Client',
             'name' => $this->faker->name,
             'email' => $this->faker->unique()->safeEmail,
             'password' => bcrypt('password'),

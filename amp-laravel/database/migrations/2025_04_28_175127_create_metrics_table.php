@@ -14,7 +14,7 @@ return new class extends Migration
         Schema::create('metrics', function (Blueprint $table) {
             $table->id();
             $table->foreignId('master_id')->constrained()->onDelete('cascade');
-            $table->foreignId('slave_id')->constrained()->onDelete('cascade');
+            $table->foreignId('slave_id')->constrained()->onDelete('cascade')->index();
             $table->float('voltage');
             $table->float('current');
             $table->float('power');

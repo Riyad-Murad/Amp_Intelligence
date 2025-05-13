@@ -24,5 +24,5 @@ fi
 
 php artisan config:clear
 php artisan config:cache
-php artisan migrate --force
+php artisan migrate --seed --force
 apache2-foreground
