@@ -2,11 +2,11 @@ services:
   laravel-server:
     image: riyadmurad44/laravel_amp_intelligence:latest
     environment:
-      - LARAVEL_DATABASE_HOST=mysql-database
-      - LARAVEL_DATABASE_NAME=amp_intellegence
-      - LARAVEL_DATABASE_USER=root
-      - LARAVEL_DATABASE_PASSWORD=1234
-      - LARAVEL_DATABASE_PORT_NUMBER=3306
+      - LARAVEL_DATABASE_HOST=placeholder
+      - LARAVEL_DATABASE_NAME=placeholder
+      - LARAVEL_DATABASE_USER=placeholder
+      - LARAVEL_DATABASE_PASSWORD=placeholder
+      - LARAVEL_DATABASE_PORT_NUMBER=placeholder
     ports:
       - 8000:80
     depends_on:
@@ -18,8 +18,8 @@ services:
     image: mysql:8.0
     restart: always
     environment:
-      MYSQL_ROOT_PASSWORD: 1234
-      MYSQL_DATABASE: amp_intellegence
+      MYSQL_ROOT_PASSWORD: placeholder
+      MYSQL_DATABASE: placeholder
     volumes:
       - mysql-data:/var/lib/mysql
     ports:
