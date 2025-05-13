@@ -3,7 +3,9 @@ import "./styles.css";
 const ClientProfile = () => {
   return (
     <>
-      <h2>Client Profile</h2>
+      <div className="client-profile-container">
+        <h2>Client Profile</h2>
+      </div>
     </>
   );
 };
