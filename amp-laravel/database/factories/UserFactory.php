@@ -23,7 +23,7 @@ class UserFactory extends Factory
     {
         return [
             'slave_id' => null,
-            'user_type' => null,
+            'user_type' => 'Client',
             'name' => $this->faker->name,
             'email' => $this->faker->unique()->safeEmail,
             'password' => bcrypt('password'),
