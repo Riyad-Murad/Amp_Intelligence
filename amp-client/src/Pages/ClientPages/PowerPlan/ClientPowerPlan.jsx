@@ -28,7 +28,7 @@ const ClientPowerPlan = () => {
 
   return (
     <>
-      <div className="power-plan-container">
+      <div className="client-power-plan-container">
         <h2>Power Plan</h2>
         {!reportData && !loading && (
           <div className="generate-report-section">
@@ -74,8 +74,10 @@ const ClientPowerPlan = () => {
                     ))}
                 </ul>
               </div>
+              <div className="centering-button">
 
               <button className="download-button">Download Plan Report</button>
+              </div>
             </div>
           )
         )}
