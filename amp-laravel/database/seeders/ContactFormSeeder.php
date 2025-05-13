@@ -2,16 +2,20 @@
 
 namespace Database\Seeders;
 
-use Illuminate\Database\Console\Seeds\WithoutModelEvents;
+use App\Models\User;
+use App\Models\ContactForm;
 use Illuminate\Database\Seeder;
 
 class ContactFormSeeder extends Seeder
 {
-    /**
-     * Run the database seeds.
-     */
     public function run(): void
     {
-        //
+        $users = User::inRandomOrder()->limit(10)->get();
+
+        foreach ($users as $user) {
+            ContactForm::factory()->create([
+                'user_id' => $user->id,
+            ]);
+        }
     }
 }
