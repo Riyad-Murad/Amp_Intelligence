@@ -16,6 +16,10 @@
   top: 164px;
 }
 
+.nav-main > h2 {
+  font-size: 35px;
+}
+
 .footer .right-footer {
   display: flex;
   flex-direction: column;
