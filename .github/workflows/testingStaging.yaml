@@ -29,8 +29,7 @@ jobs:
 
       - name: Build Laravel Docker image
         working-directory: ./amp-laravel
-        run: |
-          docker build -f Dockerfile-Laravel -t laravel_test_image .
+        run: docker build -f Dockerfile-Laravel -t laravel_test_image .
 
       - name: Run Laravel Tests inside Docker
         working-directory: ./amp-laravel
@@ -48,6 +47,5 @@ jobs:
             -e SESSION_DRIVER=array \
             -e QUEUE_CONNECTION=sync \
             --entrypoint "" \
-            your-dockerhub-username/laravel_amp_intelligence:latest \
+            laravel_test_image \
             sh -c "cp .env.testing .env && php artisan config:clear && php artisan key:generate && php artisan jwt:secret --force && php artisan migrate && php artisan test"
-
