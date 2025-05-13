@@ -8,8 +8,14 @@ done
 echo "Database is ready."
 
 if [ ! -f .env ]; then
-  echo ".env not found, creating from .env.example"
-  cp .env.example .env
+  echo ".env not found"
+  if [ "$APP_ENV" = "testing" ] && [ -f .env.testing ]; then
+    echo "Creating .env from .env.testing"
+    cp .env.testing .env
+  else
+    echo "Creating .env from .env.example"
+    cp .env.example .env
+  fi
   php artisan key:generate
   php artisan jwt:secret --force
 
