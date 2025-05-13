@@ -6,7 +6,7 @@ body {
 }
 
 /* Navbar styles */
-.navbar {
+.client-navbar {
   display: flex;
   align-items: center;
   justify-content: space-between;
@@ -21,46 +21,46 @@ body {
   z-index: 1000;
 }
 
-.navbar-left {
+.client-navbar-left {
   display: flex;
   align-items: center;
   gap: 10px;
 }
 
-.logo {
+.client-navbar-logo {
   height: 40px;
 }
 
-.navbar-title {
+.client-navbar-title {
   font-size: 28px;
   font-weight: 600;
   color: #ffffff;
   text-decoration: none;
 }
 
-.navbar-links {
+.client-navbar-links {
   display: flex;
   gap: 30px;
 }
 
-.navbar-links a:hover {
- color: #233a7e; 
+.client-navbar-links a:hover {
+  color: #233a7e;
 }
 
-.navbar-links a {
+.client-navbar-links a {
   font-size: 21px;
   font-weight: 600;
   text-decoration: none;
   color: #ffffff;
 }
 
-.navbar-right {
+.client-navbar-right {
   display: flex;
   align-items: center;
 }
 
 /* Mobile menu */
-.mobile-menu-button {
+.client-mobile-menu-button {
   display: none;
   background: none;
   border: none;
@@ -71,28 +71,28 @@ body {
 
 /* Profile */
 
-.profile-icon-container {
+.client-profile-icon-wrap {
   position: relative;
   cursor: pointer;
   margin-left: 20px;
 }
 
-.profile-icon {
+.client-profile-icon {
   font-size: 2em;
   color: #ffffff;
 }
 
-.dropdown-menu {
+.client-dropdown-menu {
   position: absolute;
-  top: 100%; /* Position below the icon */
+  top: 100%;
   right: 0;
   background-color: #233a7e;
   border-radius: 4px;
   box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
-  z-index: 10; /* Ensure it's above other elements */
+  z-index: 10;
 }
 
-.dropdown-menu a {
+.client-dropdown-menu a {
   display: flex;
   align-items: center;
   padding: 10px 15px;
@@ -102,18 +102,18 @@ body {
   transition: background-color 0.2s ease;
 }
 
-.dropdown-menu a:hover {
+.client-dropdown-menu a:hover {
   background-color: rgba(255, 255, 255, 0.1);
 }
 
-.dropdown-icon {
+.client-dropdown-icon {
   margin-right: 8px;
   font-size: 1.2em;
 }
 
 /* Logout */
 
-.dropdown-logout-button {
+.client-dropdown-logout {
   display: flex;
   align-items: center;
   padding: 10px 15px;
@@ -128,17 +128,17 @@ body {
   transition: background-color 0.2s ease;
 }
 
-.dropdown-logout-button:hover {
+.client-dropdown-logout:hover {
   background-color: rgba(255, 255, 255, 0.1);
 }
 
-.dropdown-logout-button .dropdown-icon {
+.client-dropdown-logout .client-dropdown-icon {
   margin-right: 8px;
   font-size: 1.2em;
 }
 
 /* Style for the logout button in the mobile menu */
-.mobile-menu-logout-button {
+.client-mobile-logout {
   display: block;
   font-size: 18px;
   font-weight: 600;
@@ -153,36 +153,36 @@ body {
   border-bottom: 1px solid rgba(255, 255, 255, 0.2);
 }
 
-.mobile-menu-logout-button:last-child {
+.client-mobile-logout:last-child {
   border-bottom: none;
 }
 
 /* Media Queries */
 @media screen and (max-width: 1024px) {
-  .navbar-title {
+  .client-navbar-title {
     font-size: 24px;
   }
 
-  .navbar-links a {
+  .client-navbar-links a {
     font-size: 18px;
   }
 }
 
 @media screen and (max-width: 768px) {
-  .navbar {
+  .client-navbar {
     height: 70px;
     padding: 0 20px;
   }
 
-  .navbar-links {
+  .client-navbar-links {
     display: none;
   }
 
-  .mobile-menu-button {
+  .client-mobile-menu-button {
     display: block;
   }
 
-  .mobile-menu {
+  .client-mobile-menu {
     display: flex;
     flex-direction: column;
     position: absolute;
@@ -196,11 +196,11 @@ body {
     transition: transform 0.3s ease-in-out;
   }
 
-  .mobile-menu.open {
+  .client-mobile-menu.open {
     transform: translateY(0);
   }
 
-  .mobile-menu a {
+  .client-mobile-menu a {
     font-size: 18px;
     font-weight: 600;
     text-decoration: none;
@@ -209,28 +209,28 @@ body {
     border-bottom: 1px solid rgba(255, 255, 255, 0.2);
   }
 
-  .mobile-menu a:last-child {
+  .client-mobile-menu a:last-child {
     border-bottom: none;
   }
 }
 
 @media (max-width: 768px) {
-  .profile-icon-container {
+  .client-profile-icon-wrap {
     display: none;
   }
 }
 
 @media screen and (max-width: 480px) {
-  .navbar {
+  .client-navbar {
     height: 60px;
     padding: 0 15px;
   }
 
-  .logo {
+  .client-navbar-logo {
     height: 30px;
   }
 
-  .navbar-title {
+  .client-navbar-title {
     font-size: 20px;
   }
 }

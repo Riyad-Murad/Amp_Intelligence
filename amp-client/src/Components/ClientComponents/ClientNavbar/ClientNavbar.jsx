@@ -38,41 +38,47 @@ const ClientNavbar = () => {
   };
 
   return (
-    <div className="navbar">
-      <div className="navbar-left">
-        <img src={logo} alt="Logo" className="logo" />
-        <Link to="/client/dashboard" className="navbar-title">
+    <div className="client-navbar">
+      <div className="client-navbar-left">
+        <img src={logo} alt="Logo" className="client-navbar-logo" />
+        <Link to="/client/dashboard" className="client-navbar-title">
           Amp Intelligence
         </Link>
       </div>
 
       {/* Desktop navigation links */}
-      <div className="navbar-links">
+      <div className="client-navbar-links">
         <Link to="/client/dashboard">Dashboard</Link>
         <Link to="/client/power-plan">Power Plan</Link>
       </div>
 
-      <div className="navbar-right">
+      <div className="client-navbar-right">
         {/* Conditionally render profile icon container */}
         {!mobileMenuOpen && (
           <div
-            className="profile-icon-container"
+            className="client-profile-icon-wrap"
             onClick={toggleProfileDropdown}
           >
-            <FontAwesomeIcon icon={faUserCircle} className="profile-icon" />
+            <FontAwesomeIcon
+              icon={faUserCircle}
+              className="client-profile-icon"
+            />
             {profileDropdownOpen && (
-              <div className="dropdown-menu">
+              <div className="client-dropdown-menu">
                 <Link to="/client/profile">
-                  <FontAwesomeIcon icon={faUser} className="dropdown-icon" />
+                  <FontAwesomeIcon
+                    icon={faUser}
+                    className="client-dropdown-icon"
+                  />
                   Profile
                 </Link>
                 <button
                   onClick={handleLogout}
-                  className="dropdown-logout-button"
+                  className="client-dropdown-logout"
                 >
                   <FontAwesomeIcon
                     icon={faSignOutAlt}
-                    className="dropdown-icon"
+                    className="client-dropdown-icon"
                   />
                   Logout
                 </button>
@@ -80,18 +86,21 @@ const ClientNavbar = () => {
             )}
           </div>
         )}
-        <button className="mobile-menu-button" onClick={toggleMobileMenu}>
+        <button
+          className="client-mobile-menu-button"
+          onClick={toggleMobileMenu}
+        >
           <FontAwesomeIcon icon={mobileMenuOpen ? faTimes : faBars} />
         </button>
       </div>
 
       {/* Mobile navigation menu */}
       {mobileMenuOpen && (
-        <div className={`mobile-menu ${mobileMenuOpen ? "open" : ""}`}>
+        <div className={`client-mobile-menu ${mobileMenuOpen ? "open" : ""}`}>
           <Link to="/client/profile">Profile</Link>
           <Link to="/client/dashboard">Dashboard</Link>
           <Link to="/client/power-plan">Power Plan</Link>
-          <button onClick={handleLogout} className="mobile-menu-logout-button">
+          <button onClick={handleLogout} className="client-mobile-logout">
             Logout
           </button>
         </div>
