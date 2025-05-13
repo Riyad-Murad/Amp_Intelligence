@@ -1,4 +1,4 @@
-.power-plan-container {
+.client-power-plan-container {
   padding: 20px;
 }
 
@@ -108,6 +108,14 @@
   border-left-color: #f9a43a;
   border-radius: 50%;
   animation: spin 1s linear infinite;
+}
+
+ul {
+  list-style-type: none;
+}
+
+.centering-button {
+  align-items: center;
 }
 
 @keyframes spin {
