@@ -48,4 +48,4 @@ jobs:
             -e QUEUE_CONNECTION=sync \
             --entrypoint "" \
             laravel_test_image \
-            sh -c "cp .env.testing .env && php artisan config:clear && php artisan key:generate && php artisan jwt:secret --force && php artisan migrate && php artisan test"
+            sh -c "cp .env.testing .env && composer install && php artisan config:clear && php artisan key:generate && php artisan jwt:secret --force && php artisan migrate && php artisan test"
