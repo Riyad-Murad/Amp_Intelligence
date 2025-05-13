@@ -68,7 +68,7 @@ const LoginForm = ({ onClose }) => {
               <InputField
                 label="Email"
                 placeholder="Email"
-                width="80%"
+                width="70%"
                 value={email}
                 onChange={(e) => setEmail(e.target.value)}
               />
@@ -76,16 +76,17 @@ const LoginForm = ({ onClose }) => {
                 label="Password"
                 placeholder="Password"
                 type="password"
-                width="80%"
+                width="70%"
                 value={password}
                 onChange={(e) => setPassword(e.target.value)}
-              />
+              />              
               <ActionButton
                 backgroundColor="#F9A43A"
                 color="#233A7E"
                 text={<h3>Login</h3>}
-                width="60%"
+                width="70%"
                 onClick={handleLogin}
+                margin="5px"
               />
             </>
           )}

@@ -26,3 +26,9 @@
 .feature-card .black-color {
   color: black;
 }
+
+.feature-icon {
+  font-size: 2.5rem;
+  color: #f9a43a;
+  margin-bottom: 15px;
+}

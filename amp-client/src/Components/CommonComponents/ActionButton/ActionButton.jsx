@@ -1,6 +1,6 @@
 import "./styles.css";
 
-const ActionButton = ({ backgroundColor, color, text, width, onClick  }) => {
+const ActionButton = ({ backgroundColor, color, text, width, onClick, margin  }) => {
   const buttonStyle = {
     backgroundColor: backgroundColor || "#000000",
     color: color || "#FFFFFF",
@@ -11,6 +11,7 @@ const ActionButton = ({ backgroundColor, color, text, width, onClick  }) => {
     border: "none",
     cursor: "pointer",
     width: width || "auto",
+    margin: margin || "0px",
   };
 
   return <button style={buttonStyle} onClick={onClick}>{text}</button>;
