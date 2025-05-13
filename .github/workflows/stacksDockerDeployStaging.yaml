@@ -103,9 +103,6 @@ jobs:
       - name: Checkout repository
         uses: actions/checkout@v3
 
-      - name: debugging docker-compose
-        run: cat docker-compose.yaml
-
       - name: Inject GitHub Secrets into docker-compose.yaml
         run: |
           sed -i "s|LARAVEL_DATABASE_HOST=.*|LARAVEL_DATABASE_HOST=${{ secrets.LARAVEL_DATABASE_HOST }}|g" docker-compose.yaml
@@ -115,9 +112,6 @@ jobs:
           sed -i "s|LARAVEL_DATABASE_PORT_NUMBER=.*|LARAVEL_DATABASE_PORT_NUMBER=${{ secrets.LARAVEL_DATABASE_PORT_NUMBER }}|g" docker-compose.yaml
           sed -i "s|MYSQL_ROOT_PASSWORD:.*|MYSQL_ROOT_PASSWORD: ${{ secrets.LARAVEL_DATABASE_PASSWORD }}|g" docker-compose.yaml
           sed -i "s|MYSQL_DATABASE:.*|MYSQL_DATABASE: ${{ secrets.LARAVEL_DATABASE_NAME }}|g" docker-compose.yaml
-
-      - name: debugging docker-compose after injection
-        run: cat docker-compose.yaml
 
       - name: Copy docker-compose to EC2
         uses: appleboy/scp-action@v1
