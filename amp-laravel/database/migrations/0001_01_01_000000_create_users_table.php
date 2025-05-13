@@ -14,7 +14,7 @@ return new class extends Migration
         Schema::create('users', function (Blueprint $table) {
             $table->id();
             $table->unsignedBigInteger('slave_id')->nullable();
-            $table->enum('user_type', ['Client', 'Provider', 'Admin']);
+            $table->enum('user_type', ['Client', 'Provider', 'Admin'])->index();
             $table->string('name')->nullable();
             $table->string('email')->unique()->nullable();
             $table->string('password')->nullable();

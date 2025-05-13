@@ -19,8 +19,8 @@ class MetricFactory extends Factory
     public function definition(): array
     {
         return [
-            'master_id' => Master::factory(),
-            'slave_id' => Slave::factory(),
+            'master_id' => null,
+            'slave_id' => null,
             'voltage' => $this->faker->randomFloat(2, 200, 250),
             'current' => $this->faker->randomFloat(2, 0, 100),
             'power' => $this->faker->randomFloat(2, 0, 500),

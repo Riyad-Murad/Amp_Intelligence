@@ -18,8 +18,8 @@ class SlaveFactory extends Factory
     public function definition(): array
     {
         return [
-            'master_id' => Master::factory(),
-            'modbus_id' => $this->faker->unique()->numerify('MOD###'),
+            'master_id' => null,
+            'modbus_id' => $this->faker->unique()->numberBetween(1, 999),
         ];
     }
 }

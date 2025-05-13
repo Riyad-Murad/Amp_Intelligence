@@ -78,6 +78,14 @@ jobs:
       - name: Check npm version
         run: npm -v
 
+      - name: Inject GitHub Secrets into .env.production
+        working-directory: ./amp-client
+        run: sed -i "s|VITE_API_BASE_URL=.*|VITE_API_BASE_URL=http://${{ secrets.EC2_HOST_STAGING }}:8000|g" .env.production
+                  
+      - name: Copy .env.production to .env
+        working-directory: ./amp-client
+        run: cp .env.production .env
+
       - name: Install dependencies
         working-directory: ./amp-client
         run: npm install
