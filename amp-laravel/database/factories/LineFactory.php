@@ -18,7 +18,7 @@ class LineFactory extends Factory
     public function definition(): array
     {
         return [
-            'master_id' => Master::factory(),
+            'master_id' => null,
             'voltage_l1' => $this->faker->randomFloat(2, 200, 250),
             'voltage_l2' => $this->faker->randomFloat(2, 200, 250),
             'voltage_l3' => $this->faker->randomFloat(2, 200, 250),
