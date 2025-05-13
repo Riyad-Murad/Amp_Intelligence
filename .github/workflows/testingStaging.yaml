@@ -27,22 +27,25 @@ jobs:
       - name: Checkout repository
         uses: actions/checkout@v3
 
-      - name: Set up PHP
-        uses: shivammathur/setup-php@v2
-        with:
-          php-version: 8.2
+      - name: Build Laravel Docker image
+        working-directory: ./amp-laravel
+        run: docker build -f Dockerfile-Laravel -t laravel_test_image .
 
-      - name: Install PHP dependencies and setup Laravel
+      - name: Run Laravel Tests inside Docker
         working-directory: ./amp-laravel
         run: |
-          cp .env.testing .env
-          composer install --prefer-dist --no-progress
-          php artisan config:clear
-          php artisan key:generate --env=testing
-          php artisan jwt:secret --force --env=testing
-          php artisan config:cache
-          php artisan migrate --env=testing
-
-      - name: Run Laravel tests
-        working-directory: ./amp-laravel
-        run: php artisan test
+          docker run --rm \
+            --network="host" \
+            -e APP_ENV=testing \
+            -e DB_CONNECTION=mysql \
+            -e DB_HOST=127.0.0.1 \
+            -e DB_PORT=3306 \
+            -e DB_DATABASE=testing \
+            -e DB_USERNAME=root \
+            -e DB_PASSWORD=root \
+            -e CACHE_DRIVER=array \
+            -e SESSION_DRIVER=array \
+            -e QUEUE_CONNECTION=sync \
+            --entrypoint "" \
+            laravel_test_image \
+            sh -c "cp .env.testing .env && composer install && php artisan config:clear && php artisan key:generate && php artisan jwt:secret --force && php artisan migrate && php artisan test"
