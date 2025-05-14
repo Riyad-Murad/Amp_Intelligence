@@ -5,7 +5,7 @@ const AdminContactMessages = () => {
     <>
       <div className="admin-contact-messages-container">
         <div className="main-content">
-          <h1 className="main-content-title section-titles">Contact Messages</h1>
+          <h1 className="admin-main-content-title section-titles">Contact Messages</h1>
         </div>
       </div>
     </>
