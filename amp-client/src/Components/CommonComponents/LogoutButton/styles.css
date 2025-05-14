@@ -1,6 +1,6 @@
 .logout-button {
-  border: 2px solid #223a7a;
-  color: #223a7a;
+  border: 2px solid #fff;
+  color: #fff;
   display: flex;
   align-items: center;
   justify-content: center;
@@ -14,8 +14,9 @@
 }
 
 .logout-button:hover {
-  background-color: rgba(34, 58, 122, 0.1);
-  color: #223a7a;
+  background-color: #fff;
+  border: none;
+  color: #f9a43a;
 }
 
 .logout-icon {
