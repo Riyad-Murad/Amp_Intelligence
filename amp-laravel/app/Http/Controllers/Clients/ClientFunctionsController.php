@@ -2,8 +2,8 @@
 
 namespace App\Http\Controllers\Clients;
 
-use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
+use App\Services\Client\ClientDashboardService;
 use App\Services\Client\GeneratingReportService;
 use App\Services\Client\ClientEditProfileService;
 use App\Http\Requests\Client\EditProfileRequest;
@@ -33,6 +33,16 @@ class ClientFunctionsController extends Controller
             return $this->messageResponse(true, "Profile updated successfully", 200);
         } catch (\Exception $e) {
             return $this->errorMessageResponse(false, $e->getMessage(), "Failed to update profile", 500);
+        }
+    }
+
+    public function getDashboardData($id)
+    {
+        try {
+            $dashboardData = ClientDashboardService::getDashboardData($id);
+            return $this->messageResponse(true, "Dashboard data fetched successfully", 200, $dashboardData);
+        } catch (\Exception $e) {
+            return $this->errorMessageResponse(false, "Failed to fetch dashboard data", $e->getMessage(), 500);
         }
     }
 }
