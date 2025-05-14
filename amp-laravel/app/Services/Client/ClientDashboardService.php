@@ -37,6 +37,11 @@ class ClientDashboardService
             return [$item['date'] => round($cumulativePower, 2)];
         })->toArray();
 
+        // Calculate total power usage this month
+        $totalPowerUsageThisMonth = Metric::where('slave_id', $slaveId)
+            ->whereBetween('created_at', [$startOfMonth, $endOfMonth])
+            ->sum('power');
+
         
     }
 }
