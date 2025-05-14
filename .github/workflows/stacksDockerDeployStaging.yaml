@@ -99,10 +99,10 @@ jobs:
         with:
           aws-access-key-id: ${{ secrets.AWS_ACCESS_KEY_ID }}
           aws-secret-access-key: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
-          aws-region: eu-central-1
+          aws-region: ${{ secrets.AWS_DEFAULT_REGION }}
 
       - name: Deploy to S3
-        run: aws s3 cp amp-client/dist/ s3://riyad-project/ --recursive
+        run: aws s3 cp amp-client/dist/ s3://fse-final-riyad --recursive --no-sign-request
 
   Copy-docker-compose-To-EC2:
     runs-on: ubuntu-latest
