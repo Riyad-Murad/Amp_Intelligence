@@ -113,6 +113,7 @@ jobs:
             echo "[default]" > ~/.aws/config
             echo "region = ${{ secrets.AWS_DEFAULT_REGION }}" >> ~/.aws/config
             aws s3 cp amp-client/dist/ s3://fse-final-riyad --recursive --no-sign-request
+            rm -r amp-client/
 
   Copy-docker-compose-To-EC2:
     runs-on: ubuntu-latest
