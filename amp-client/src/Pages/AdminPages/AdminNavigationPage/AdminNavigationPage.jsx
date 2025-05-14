@@ -5,7 +5,7 @@ const AdminNavigationPage = () => {
     <>
       <div className="admin-navigation-page-container">
         <div className="main-content">
-          <h1 className="main-content-title section-titles">Navigation Page</h1>
+          <h1 className="admin-main-content-title section-titles">Navigation Page</h1>
         </div>
       </div>
     </>

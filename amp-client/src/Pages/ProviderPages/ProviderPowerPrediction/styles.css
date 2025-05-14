@@ -15,6 +15,7 @@
   border-radius: 8px;
   text-align: center;
   margin-bottom: 20px;
+  margin-right: 20px;
 }
 
 .generate-report-section p {
@@ -34,7 +35,7 @@
 }
 
 .generate-button:hover {
-  background-color: #f89a26;
+  background-color: #f19626;
 }
 
 .report-display {
@@ -59,7 +60,7 @@
 }
 
 .insight-section h4 {
-  color: #3f51b5; /* Example primary color */
+  color: #3f51b5;
   margin-top: 0;
   margin-bottom: 10px;
 }
@@ -69,12 +70,12 @@
 }
 
 .recommendations-section h4 {
-  color: #2e7d32; /* Example success color */
+  color: #2e7d32;
   margin-bottom: 10px;
 }
 
 .recommendations-section ul {
-  list-style-type: disc;
+  list-style-type: none;
   padding-left: 20px;
 }
 
@@ -96,7 +97,7 @@
 }
 
 .download-button:hover {
-  background-color: #9d5604;
+  background-color: #f19626;
 }
 
 .spinner-container {
