@@ -1,8 +1,8 @@
 import "./App.css";
 import Home from "./Pages/CommonPages/Home/Home";
 import { Route, Routes } from "react-router-dom";
-import ClientDashboard from "./Pages/ClientPages/Dashboard/ClientDashboard";
-import ClientPowerPlan from "./Pages/ClientPages/PowerPlan/ClientPowerPlan";
+import ClientDashboard from "./Pages/ClientPages/ClientDashboard/ClientDashboard";
+import ClientPowerPlan from "./Pages/ClientPages/ClientPowerPlan/ClientPowerPlan";
 import ClientProfile from "./Pages/ClientPages/ClientProfile/ClientProfile";
 
 import ProviderUsers from "./Pages/ProviderPages/ProviderUsers/ProviderUsers";
