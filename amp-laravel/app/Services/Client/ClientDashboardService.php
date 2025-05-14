@@ -8,7 +8,7 @@ use App\Models\Metric;
 
 class ClientDashboardService
 {
-    public static function getDashboardData($slaveId)
+    public static function getDashboardData($slaveId): array
     {
         $timezone = new DateTimeZone('Asia/Beirut');
         $startOfMonth = (new DateTime('first day of this month', $timezone))->format('Y-m-d H:i:s');
@@ -42,6 +42,20 @@ class ClientDashboardService
             ->whereBetween('created_at', [$startOfMonth, $endOfMonth])
             ->sum('power');
 
-        
+        // Calculate average voltage reach
+        $averageVoltageReach = Metric::where('slave_id', $slaveId)
+            ->whereBetween('created_at', [$startOfMonth, $endOfMonth])
+            ->avg('voltage');
+
+        // Expected power limit
+        $expectedPowerLimit = 100;
+
+        return [
+            'powerUsagePerDay' => $powerUsagePerDay,
+            'cumulativePowerUsage' => $cumulativePowerUsage,
+            'totalPowerUsageThisMonth' => round($totalPowerUsageThisMonth, 2),
+            'averageVoltageReach' => round($averageVoltageReach, 2),
+            'expectedPowerLimit' => $expectedPowerLimit,
+        ];
     }
 }
