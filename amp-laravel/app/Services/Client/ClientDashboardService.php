@@ -24,6 +24,19 @@ class ClientDashboardService
 
         $powerUsagePerDay = $powerUsagePerDayData->pluck('total_power', 'date')->toArray();
 
+        // Fetch cumulative power usage per day for the current month
+        $cumulativePowerUsageData = Metric::where('slave_id', $slaveId)
+            ->whereBetween('created_at', [$startOfMonth, $endOfMonth])
+            ->orderBy('created_at')
+            ->selectRaw('DATE(created_at) as date, power')
+            ->get();
+
+        $cumulativePower = 0;
+        $cumulativePowerUsage = $cumulativePowerUsageData->mapWithKeys(function ($item, $key) use (&$cumulativePower) {
+            $cumulativePower += $item['power'];
+            return [$item['date'] => round($cumulativePower, 2)];
+        })->toArray();
+
         
     }
 }
