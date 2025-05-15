@@ -134,4 +134,14 @@ class ProviderFunctionsController extends Controller
             return $this->errorMessageResponse(false, $e->getMessage(), "Failed to retrieve voltage distribution", 500);
         }
     }
+
+    public function getMetricsSummary($id)
+    {
+        try {
+            $metricsSummary = GetMetricSummaryService::getMetricSummary($id);
+            return $this->messageResponse(true, "Metrics summary retrieved successfully", 200, $metricsSummary);
+        } catch (\Exception $e) {
+            return $this->errorMessageResponse(false, $e->getMessage(), "Failed to retrieve metrics summary", 500);
+        }
+    }
 }
