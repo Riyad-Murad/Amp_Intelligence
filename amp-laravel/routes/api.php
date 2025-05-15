@@ -27,14 +27,14 @@ Route::group(["prefix" => "v1"], function () {
         Route::group(["prefix" => "providers", "middleware" => "isProvider"], function () {
             Route::get("/providerReport", [ProviderFunctionsController::class, "generateReport"]);
 
-            Route::get("/getAllUsers", [ProviderFunctionsController::class, "getUsers"]);
+            Route::get("/getAllUsers/{id}", [ProviderFunctionsController::class, "getUsers"]);
             Route::get("/getAllMetrics", [ProviderFunctionsController::class, "getMetrics"]);
             Route::get("/getAllLines", [ProviderFunctionsController::class, "getLines"]);
             
             Route::post("/editProfile", [ProviderFunctionsController::class, "editProfile"]);
             Route::post("/editUser/{id}", [ProviderFunctionsController::class, "editUser"]);
         });
-        
+
         // Admin Users
         Route::group(["prefix" => "admins", "middleware" => "isAdmin"], function () {
             Route::get("/getAllProviders", [AdminFunctionsController::class, "getProviders"]);
