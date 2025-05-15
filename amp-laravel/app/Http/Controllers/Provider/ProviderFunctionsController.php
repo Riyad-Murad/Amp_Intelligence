@@ -74,10 +74,10 @@ class ProviderFunctionsController extends Controller
         }
     }
 
-    public function getLines()
+    public function getLines($id)
     {
         try {
-            $lines = GetAllLinesService::getAll();
+            $lines = GetAllLinesService::getAll($id);
 
             return $this->messageResponse(true, "Messages retrieved successfully", 200, $lines);
         } catch (\Exception $e) {
