@@ -2,13 +2,17 @@
 
 namespace App\Services\Provider;
 
+use App\Models\Master;
+use App\Models\Metric;
+
 class GetVoltageDistributionService
 {
-    /**
-     * Create a new class instance.
-     */
-    public function __construct()
+    public static function getVoltageDistribution(int $providerId): array
     {
-        //
+        $masterIds = Master::where('user_id', $providerId)->pluck('id');
+        return Metric::whereIn('master_id', $masterIds)
+            ->select(['id', 'voltage'])
+            ->get()
+            ->toArray();
     }
 }
