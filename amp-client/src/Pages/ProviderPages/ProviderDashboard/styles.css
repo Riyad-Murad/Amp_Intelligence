@@ -138,3 +138,46 @@
   background-color: #f2f2f2;
   font-weight: bold;
 }
+
+/* Media query for smaller screens (e.g., tablets) */
+@media (max-width: 768px) {
+  .provider-dashboard-container {
+    flex-direction: column;
+  }
+
+  .main-content {
+    margin-left: 300px !important;
+    margin-top: 20px;
+  }
+
+  .charts-row {
+    flex-direction: column;
+  }
+
+  .chart-widget,
+  .metric-card {
+    min-width: auto;
+    width: 100%;
+    max-width: none;
+    margin-bottom: 15px;
+  }
+
+  .all-metrics-widget {
+    max-height: none;
+  }
+}
+
+/* Media query for even smaller screens (e.g., mobile phones) */
+@media (max-width: 480px) {
+  .chart-widget h3,
+  .metric-card h3,
+  .all-metrics-widget h3 {
+    font-size: 1em;
+  }
+
+  .all-metrics-widget th,
+  .all-metrics-widget td {
+    padding: 6px;
+    font-size: 0.9em;
+  }
+}
