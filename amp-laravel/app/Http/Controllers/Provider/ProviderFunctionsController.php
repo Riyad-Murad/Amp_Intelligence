@@ -15,6 +15,7 @@ use App\Services\Provider\GetAverageVoltageService;
 use App\Services\Provider\GetTotalPowerUsageService;
 use App\Services\Provider\ProviderEditProfileService;
 use App\Services\Provider\GetAllClientMetricsService;
+use App\Services\Provider\GetPowerUsageByClientService;
 
 class ProviderFunctionsController extends Controller
 {
