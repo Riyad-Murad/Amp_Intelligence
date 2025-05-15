@@ -343,6 +343,152 @@ const ProviderDashboard = () => {
       },
     ],
   };
+
+  return (
+    <div className="provider-dashboard-container">
+      <div className="main-content">
+        <h2 className="main-content-title section-titles">Dashboard</h2>
+        {loading && (
+          <div className="spinner-container">
+            <div className="spinner"></div>
+            <p>Loading dashboard data...</p>
+          </div>
+        )}
+        {error && (
+          <div className="error-message">
+            Error loading dashboard data: {error}
+          </div>
+        )}
+        {!loading && !error && (
+          <div className="charts-row">
+            <div className="chart-widget">
+              <h3>Client Power Usage Distribution</h3>
+              {powerUsageByClient.length > 0 ? (
+                <Bar
+                  key="powerByClientChart"
+                  data={powerByClientData}
+                  options={chartOptions}
+                  ref={powerByClientChartRef}
+                />
+              ) : (
+                <p>No power usage data available for clients this month.</p>
+              )}
+            </div>
+
+            <div className="chart-widget voltage-distribution-widget">
+              <h3>Voltage Frequency Distribution</h3>
+              {voltageDistribution.length > 0 ? (
+                <Line
+                  key="voltageDistributionChart"
+                  data={voltageDistributionData}
+                  options={lineChartOptions}
+                  ref={voltageDistributionChartRef}
+                />
+              ) : (
+                <p>No voltage distribution data available.</p>
+              )}
+            </div>
+
+            <div className="chart-widget">
+              <h3>Key Metrics Snapshot</h3>
+              {metricsSummary ? (
+                <Doughnut
+                  key="metricsSummaryChart"
+                  data={metricsSummaryPieData}
+                  options={chartOptions}
+                  ref={metricsSummaryChartRef}
+                />
+              ) : (
+                <p>No metrics summary data available.</p>
+              )}
+            </div>
+
+            <div className="chart-widget">
+              <h3>Total Client Count</h3>
+              {overviewData ? (
+                <Pie
+                  key="clientCountChart"
+                  data={clientCountData}
+                  options={chartOptions}
+                  ref={clientCountChartRef}
+                />
+              ) : (
+                <p>No overview data available to display client count.</p>
+              )}
+            </div>
+
+            <div className="chart-widget">
+              <h3>Total Power Usage Over Time</h3>
+              {totalPowerUsage.length > 0 ? (
+                <Line
+                  key="totalPowerUsageChart"
+                  data={totalPowerUsageData}
+                  options={chartOptions}
+                  ref={totalPowerUsageChartRef}
+                />
+              ) : (
+                <p>No total power usage data available.</p>
+              )}
+            </div>
+
+            <div className="chart-widget">
+              <h3>Average Voltage Over Time</h3>
+              {averageVoltage.length > 0 ? (
+                <Line
+                  key="averageVoltageChart"
+                  data={averageVoltageData}
+                  options={chartOptions}
+                  ref={averageVoltageChartRef}
+                />
+              ) : (
+                <p>No average voltage data available.</p>
+              )}
+            </div>
+
+            <div className="metric-card">
+              <h3>Total Users</h3>
+              <p className="metric-value">
+                {totalUsers !== null ? totalUsers : "N/A"}
+              </p>
+            </div>
+
+            <div className="metric-card">
+              <h3>Total Lines</h3>
+              <p className="metric-value">
+                {totalLines !== null ? totalLines : "N/A"}
+              </p>
+            </div>
+
+            <div className="chart-widget all-metrics-widget">
+              <h3>All Metrics</h3>
+              {allMetrics.length > 0 ? (
+                <table>
+                  <thead>
+                    <tr>
+                      <th>Metric</th>
+                      <th>Value</th>
+                      <th>Timestamp</th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    {allMetrics.map((metric, index) => (
+                      <tr key={index}>
+                        <td>{metric.metric_name}</td>
+                        <td>{metric.metric_value}</td>
+                        <td>{new Date(metric.timestamp).toLocaleString()}</td>
+                      </tr>
+                    ))}
+                  </tbody>
+                </table>
+              ) : (
+                <p>No detailed metrics data available.</p>
+              )}
+            </div>
+          </div>
+        )}
+      </div>
+    </div>
+  );
 };
 
 export default ProviderDashboard;
