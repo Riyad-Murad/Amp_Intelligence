@@ -106,3 +106,35 @@
   font-weight: bold;
   color: #198754;
 }
+
+.all-metrics-widget {
+  flex: 1 1 100%;
+  overflow-x: auto;
+  max-height: 500px;
+}
+
+.all-metrics-widget h3 {
+  margin-top: 0;
+  font-size: 1.1em;
+  color: #333;
+  text-align: center;
+  margin-bottom: 10px;
+}
+
+.all-metrics-widget table {
+  width: 100%;
+  border-collapse: collapse;
+  margin-bottom: 15px;
+}
+
+.all-metrics-widget th,
+.all-metrics-widget td {
+  border: 1px solid #ddd;
+  padding: 8px;
+  text-align: left;
+}
+
+.all-metrics-widget th {
+  background-color: #f2f2f2;
+  font-weight: bold;
+}
