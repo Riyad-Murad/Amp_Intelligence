@@ -27,14 +27,21 @@ Route::group(["prefix" => "v1"], function () {
         Route::group(["prefix" => "providers", "middleware" => "isProvider"], function () {
             Route::get("/providerReport", [ProviderFunctionsController::class, "generateReport"]);
 
-            Route::get("/getAllUsers", [ProviderFunctionsController::class, "getUsers"]);
-            Route::get("/getAllMetrics", [ProviderFunctionsController::class, "getMetrics"]);
-            Route::get("/getAllLines", [ProviderFunctionsController::class, "getLines"]);
+            Route::get("/getAllUsers/{id}", [ProviderFunctionsController::class, "getUsers"]);
+            Route::get("/getAllMetrics/{id}", [ProviderFunctionsController::class, "getMetrics"]);
+            Route::get("/getAllLines/{id}", [ProviderFunctionsController::class, "getLines"]);
+
+            Route::get("/overview/{id}", [ProviderFunctionsController::class, "getOverviewData"]); // check for "totalPowerPerMonth"
+            Route::get("/totalPowerUsage/{id}", [ProviderFunctionsController::class, "getTotalPowerUsage"]); // check output
+            Route::get("/averageVoltage/{id}", [ProviderFunctionsController::class, "getAverageVoltage"]);
+            Route::get("/powerUsageByClient/{id}", [ProviderFunctionsController::class, "getPowerUsageByClient"]);
+            Route::get("/voltageDistribution/{id}", [ProviderFunctionsController::class, "getVoltageDistribution"]);
+            Route::get("/metricsSummary/{id}", [ProviderFunctionsController::class, "getMetricsSummary"]);
             
             Route::post("/editProfile", [ProviderFunctionsController::class, "editProfile"]);
             Route::post("/editUser/{id}", [ProviderFunctionsController::class, "editUser"]);
         });
-        
+
         // Admin Users
         Route::group(["prefix" => "admins", "middleware" => "isAdmin"], function () {
             Route::get("/getAllProviders", [AdminFunctionsController::class, "getProviders"]);
