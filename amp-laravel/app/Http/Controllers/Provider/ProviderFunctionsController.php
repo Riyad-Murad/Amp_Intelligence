@@ -114,4 +114,14 @@ class ProviderFunctionsController extends Controller
             return $this->errorMessageResponse(false, $e->getMessage(), "Failed to retrieve average voltage", 500);
         }
     }
+
+    public function getPowerUsageByClient($id)
+    {
+        try {
+            $powerUsageByClient = GetPowerUsageByClientService::getPowerUsageByClient($id);
+            return $this->messageResponse(true, "Power usage by client retrieved successfully", 200, $powerUsageByClient);
+        } catch (\Exception $e) {
+            return $this->errorMessageResponse(false, $e->getMessage(), "Failed to retrieve power usage by client", 500);
+        }
+    }
 }
