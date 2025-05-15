@@ -84,4 +84,14 @@ class ProviderFunctionsController extends Controller
             return $this->errorMessageResponse(false, $e->getMessage(), "Failed to retrieve messages", 500);
         }
     }
+
+    public function getOverviewData($id)
+    {
+        try {
+            $overviewData = GetOverviewDataService::getOverviewData($id);
+            return $this->messageResponse(true, "Overview data retrieved successfully", 200, $overviewData);
+        } catch (\Exception $e) {
+            return $this->errorMessageResponse(false, $e->getMessage(), "Failed to retrieve overview data", 500);
+        }
+    }
 }
