@@ -1,4 +1,42 @@
 import "./styles.css";
+import axiosBaseUrl from "../../../Axios/axios";
+import { useEffect, useState, useRef } from "react";
+import { useDispatch, useSelector } from "react-redux";
+import { toggleLoad } from "../../../Redux/Slices/loadingSlice";
+import {
+  Chart as ChartJS,
+  CategoryScale,
+  LinearScale,
+  PointElement,
+  LineElement,
+  BarElement,
+  PieController,
+  BarController,
+  LineController,
+  DoughnutController,
+  Title,
+  Tooltip,
+  Legend,
+  Filler,
+  ArcElement,
+} from "chart.js";
+import { Line, Bar, Pie, Doughnut } from "react-chartjs-2";
+ChartJS.register(
+  CategoryScale,
+  LinearScale,
+  PointElement,
+  LineElement,
+  BarElement,
+  PieController,
+  BarController,
+  LineController,
+  DoughnutController,
+  Title,
+  Tooltip,
+  Legend,
+  Filler,
+  ArcElement
+);
 
 const ProviderDashboard = () => {
   return (
