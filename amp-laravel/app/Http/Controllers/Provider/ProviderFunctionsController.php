@@ -94,4 +94,14 @@ class ProviderFunctionsController extends Controller
             return $this->errorMessageResponse(false, $e->getMessage(), "Failed to retrieve overview data", 500);
         }
     }
+
+    public function getTotalPowerUsage($id)
+    {
+        try {
+            $totalPower = GetTotalPowerUsageService::getTotalPowerUsage($id);
+            return $this->messageResponse(true, "Total power usage retrieved successfully", 200, $totalPower);
+        } catch (\Exception $e) {
+            return $this->errorMessageResponse(false, $e->getMessage(), "Failed to retrieve total power usage", 500);
+        }
+    }
 }
