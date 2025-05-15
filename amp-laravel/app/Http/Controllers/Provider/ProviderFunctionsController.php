@@ -12,6 +12,7 @@ use App\Services\Provider\GeneratingReportService;
 use App\Http\Requests\Provider\EditProfileRequest;
 use App\Services\Provider\GetAllClientUsersService;
 use App\Services\Provider\GetAverageVoltageService;
+use App\Services\Provider\GetTotalPowerUsageService;
 use App\Services\Provider\ProviderEditProfileService;
 use App\Services\Provider\GetAllClientMetricsService;
 
