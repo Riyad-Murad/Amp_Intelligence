@@ -124,4 +124,14 @@ class ProviderFunctionsController extends Controller
             return $this->errorMessageResponse(false, $e->getMessage(), "Failed to retrieve power usage by client", 500);
         }
     }
+
+    public function getVoltageDistribution($id)
+    {
+        try {
+            $voltageDistribution = GetVoltageDistributionService::getVoltageDistribution($id);
+            return $this->messageResponse(true, "Voltage distribution retrieved successfully", 200, $voltageDistribution);
+        } catch (\Exception $e) {
+            return $this->errorMessageResponse(false, $e->getMessage(), "Failed to retrieve voltage distribution", 500);
+        }
+    }
 }
