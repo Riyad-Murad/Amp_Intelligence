@@ -63,10 +63,10 @@ class ProviderFunctionsController extends Controller
         }
     }
 
-    public function getMetrics()
+    public function getMetrics($id)
     {
         try {
-            $metrics = GetAllClientMetricsService::getAll();
+            $metrics = GetAllClientMetricsService::getAll($id);
 
             return $this->messageResponse(true, "Messages retrieved successfully", 200, $metrics);
         } catch (\Exception $e) {
