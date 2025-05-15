@@ -52,10 +52,10 @@ class ProviderFunctionsController extends Controller
         }
     }
 
-    public function getUsers()
+    public function getUsers($id)
     {
         try {
-            $users = GetAllClientUsersService::getAll();
+            $users = GetAllClientUsersService::getAll($id);
 
             return $this->messageResponse(true, "Messages retrieved successfully", 200, $users);
         } catch (\Exception $e) {
