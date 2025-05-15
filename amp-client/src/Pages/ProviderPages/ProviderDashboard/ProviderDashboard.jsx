@@ -59,6 +59,114 @@ const ProviderDashboard = () => {
   const clientCountChartRef = useRef(null);
   const totalPowerUsageChartRef = useRef(null);
   const averageVoltageChartRef = useRef(null);
+
+  useEffect(() => {
+    const fetchDashboardData = async () => {
+      dispatch(toggleLoad(true));
+      setLoading(true);
+      setError(null);
+      try {
+        const overviewResponse = await axiosBaseUrl.get(
+          `/providers/overview/${userId}`
+        );
+        setOverviewData(overviewResponse.data.data);
+
+        const powerByClientResponse = await axiosBaseUrl.get(
+          `/providers/powerUsageByClient/${userId}`
+        );
+        setPowerUsageByClient(powerByClientResponse.data.data);
+
+        const voltageDistributionResponse = await axiosBaseUrl.get(
+          `/providers/voltageDistribution/${userId}`
+        );
+        const voltageData = voltageDistributionResponse.data.data.map(
+          (v) => v.voltage
+        );
+        const voltageCounts = {};
+        voltageData.forEach((v) => {
+          const roundedVoltage = Math.round(v);
+          voltageCounts[roundedVoltage] =
+            (voltageCounts[roundedVoltage] || 0) + 1;
+        });
+        setVoltageDistribution(
+          Object.entries(voltageCounts).sort(
+            (a, b) => parseInt(a[0]) - parseInt(b[0])
+          )
+        );
+
+        const metricsSummaryResponse = await axiosBaseUrl.get(
+          `/providers/metricsSummary/${userId}`
+        );
+        setMetricsSummary(metricsSummaryResponse.data.data);
+
+        const totalPowerUsageResponse = await axiosBaseUrl.get(
+          `/providers/totalPowerUsage/${userId}`
+        );
+        setTotalPowerUsage(
+          Array.isArray(totalPowerUsageResponse?.data?.data)
+            ? totalPowerUsageResponse.data.data
+            : []
+        );
+
+        const averageVoltageResponse = await axiosBaseUrl.get(
+          `/providers/averageVoltage/${userId}`
+        );
+        setAverageVoltage(
+          Array.isArray(averageVoltageResponse?.data?.data)
+            ? averageVoltageResponse.data.data
+            : []
+        );
+
+        const usersResponse = await axiosBaseUrl.get(
+          `/providers/getAllUsers/${userId}`
+        );
+        setTotalUsers(usersResponse?.data?.data?.length);
+
+        const allMetricsResponse = await axiosBaseUrl.get(
+          `/providers/getAllMetrics/${userId}`
+        );
+        setAllMetrics(
+          Array.isArray(allMetricsResponse?.data?.data)
+            ? allMetricsResponse.data.data
+            : []
+        );
+
+        const linesResponse = await axiosBaseUrl.get(
+          `/providers/getAllLines/${userId}`
+        );
+        setTotalLines(usersResponse?.data?.data?.length);
+      } catch (err) {
+        setError(err.message || "Failed to fetch dashboard data for charts");
+        console.error("Error fetching dashboard data for charts:", err);
+      } finally {
+        setLoading(false);
+        dispatch(toggleLoad(false));
+      }
+    };
+
+    fetchDashboardData();
+
+    return () => {
+      if (powerByClientChartRef.current) {
+        powerByClientChartRef.current.destroy();
+      }
+      if (voltageDistributionChartRef.current) {
+        voltageDistributionChartRef.current.destroy();
+      }
+      if (metricsSummaryChartRef.current) {
+        metricsSummaryChartRef.current.destroy();
+      }
+      if (clientCountChartRef.current) {
+        clientCountChartRef.current.destroy();
+      }
+      if (totalPowerUsageChartRef.current) {
+        totalPowerUsageChartRef.current.destroy();
+      }
+      if (averageVoltageChartRef.current) {
+        averageVoltageChartRef.current.destroy();
+      }
+    };
+  }, [userId, dispatch]);
 };
 
 export default ProviderDashboard;
