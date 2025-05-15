@@ -28,7 +28,7 @@ Route::group(["prefix" => "v1"], function () {
             Route::get("/providerReport", [ProviderFunctionsController::class, "generateReport"]);
 
             Route::get("/getAllUsers/{id}", [ProviderFunctionsController::class, "getUsers"]);
-            Route::get("/getAllMetrics", [ProviderFunctionsController::class, "getMetrics"]);
+            Route::get("/getAllMetrics/{id}", [ProviderFunctionsController::class, "getMetrics"]);
             Route::get("/getAllLines", [ProviderFunctionsController::class, "getLines"]);
             
             Route::post("/editProfile", [ProviderFunctionsController::class, "editProfile"]);
