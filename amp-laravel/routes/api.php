@@ -29,7 +29,7 @@ Route::group(["prefix" => "v1"], function () {
 
             Route::get("/getAllUsers/{id}", [ProviderFunctionsController::class, "getUsers"]);
             Route::get("/getAllMetrics/{id}", [ProviderFunctionsController::class, "getMetrics"]);
-            Route::get("/getAllLines", [ProviderFunctionsController::class, "getLines"]);
+            Route::get("/getAllLines/{id}", [ProviderFunctionsController::class, "getLines"]);
             
             Route::post("/editProfile", [ProviderFunctionsController::class, "editProfile"]);
             Route::post("/editUser/{id}", [ProviderFunctionsController::class, "editUser"]);
