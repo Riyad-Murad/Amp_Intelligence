@@ -39,15 +39,26 @@ ChartJS.register(
 );
 
 const ProviderDashboard = () => {
-  return (
-    <>
-      <div className="provider-dashboard-container">
-        <div className="main-content">
-          <h1 className="main-content-title section-titles">Dashboard</h1>
-        </div>
-      </div>
-    </>
-  );
+  const userId = useSelector((state) => state.user.id);
+  const dispatch = useDispatch();
+  const [overviewData, setOverviewData] = useState(null);
+  const [powerUsageByClient, setPowerUsageByClient] = useState([]);
+  const [voltageDistribution, setVoltageDistribution] = useState([]);
+  const [metricsSummary, setMetricsSummary] = useState(null);
+  const [totalPowerUsage, setTotalPowerUsage] = useState([]);
+  const [averageVoltage, setAverageVoltage] = useState([]);
+  const [totalUsers, setTotalUsers] = useState(null);
+  const [allMetrics, setAllMetrics] = useState([]);
+  const [totalLines, setTotalLines] = useState(null);
+  const [loading, setLoading] = useState(false);
+  const [error, setError] = useState(null);
+
+  const powerByClientChartRef = useRef(null);
+  const voltageDistributionChartRef = useRef(null);
+  const metricsSummaryChartRef = useRef(null);
+  const clientCountChartRef = useRef(null);
+  const totalPowerUsageChartRef = useRef(null);
+  const averageVoltageChartRef = useRef(null);
 };
 
 export default ProviderDashboard;
