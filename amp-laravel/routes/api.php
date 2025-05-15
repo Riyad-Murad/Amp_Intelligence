@@ -34,6 +34,7 @@ Route::group(["prefix" => "v1"], function () {
             Route::get("/overview/{id}", [ProviderFunctionsController::class, "getOverviewData"]); // check for "totalPowerPerMonth"
             Route::get("/totalPowerUsage/{id}", [ProviderFunctionsController::class, "getTotalPowerUsage"]); // check output
             Route::get("/averageVoltage/{id}", [ProviderFunctionsController::class, "getAverageVoltage"]);
+            Route::get("/powerUsageByClient/{id}", [ProviderFunctionsController::class, "getPowerUsageByClient"]);
             
             Route::post("/editProfile", [ProviderFunctionsController::class, "editProfile"]);
             Route::post("/editUser/{id}", [ProviderFunctionsController::class, "editUser"]);
