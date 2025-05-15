@@ -3,16 +3,16 @@
 namespace App\Http\Controllers\Provider;
 
 use App\Http\Controllers\Controller;
-use App\Services\Provider\GeneratingReportService;
-use App\Http\Requests\Provider\EditUserRequest;
-use App\Http\Requests\Provider\EditProfileRequest;
-use App\Services\Provider\EditClientUserService;
 use App\Services\Provider\GetAllLinesService;
+use App\Http\Requests\Provider\EditUserRequest;
+use App\Services\Provider\EditClientUserService;
+use App\Services\Provider\GetOverviewDataService;
+use App\Services\Provider\GeneratingReportService;
+use App\Http\Requests\Provider\EditProfileRequest;
 use App\Services\Provider\GetAllClientUsersService;
 use App\Services\Provider\ProviderEditProfileService;
-use App\Services\Provider\GetAllClientMetricsService;
 
-class ProviderFunctionsController extends Controller
+use App\Services\Provider\GetAllClientMetricsService;class ProviderFunctionsController extends Controller
 {
     public function generateReport()
     {
