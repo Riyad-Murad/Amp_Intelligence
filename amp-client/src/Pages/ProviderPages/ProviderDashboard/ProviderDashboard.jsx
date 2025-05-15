@@ -209,6 +209,140 @@ const ProviderDashboard = () => {
       },
     },
   };
+
+  const powerByClientData = {
+    labels: powerUsageByClient.map((client) => client.client_name),
+    datasets: [
+      {
+        label: "Power Usage (kWh)",
+        data: powerUsageByClient.map((client) => client.total_power),
+        backgroundColor: [
+          "rgba(255, 99, 132, 0.6)",
+          "rgba(54, 162, 235, 0.6)",
+          "rgba(255, 206, 86, 0.6)",
+          "rgba(75, 192, 192, 0.6)",
+          "rgba(153, 102, 255, 0.6)",
+          "rgba(255, 159, 64, 0.6)",
+        ],
+        borderColor: [
+          "rgba(255, 99, 132, 1)",
+          "rgba(54, 162, 235, 1)",
+          "rgba(255, 206, 86, 1)",
+          "rgba(75, 192, 192, 1)",
+          "rgba(153, 102, 255, 1)",
+          "rgba(255, 159, 64, 1)",
+        ],
+        borderWidth: 1,
+      },
+    ],
+  };
+
+  const voltageDistributionData = {
+    labels: voltageDistribution.map((v) => v[0]),
+    datasets: [
+      {
+        label: "Frequency",
+        data: voltageDistribution.map((v) => v[1]),
+        backgroundColor: "rgba(201, 203, 207, 0.8)",
+        borderColor: "rgb(201, 203, 207)",
+        borderWidth: 1,
+      },
+    ],
+  };
+
+  const metricsSummaryPieData = {
+    labels: [
+      "Min Power",
+      "Max Power",
+      "Avg Power",
+      "Min Voltage",
+      "Max Voltage",
+      "Avg Voltage",
+    ],
+    datasets: [
+      {
+        label: "Metrics",
+        data: [
+          metricsSummary?.minPower,
+          metricsSummary?.maxPower,
+          metricsSummary?.avgPower,
+          metricsSummary?.minVoltage,
+          metricsSummary?.maxVoltage,
+          metricsSummary?.avgVoltage,
+        ],
+        backgroundColor: [
+          "rgba(255, 99, 132, 0.7)",
+          "rgba(54, 162, 235, 0.7)",
+          "rgba(255, 206, 86, 0.7)",
+          "rgba(75, 192, 192, 0.7)",
+          "rgba(153, 102, 255, 0.7)",
+          "rgba(255, 159, 64, 0.7)",
+        ],
+        borderColor: [
+          "rgba(255, 99, 132, 1)",
+          "rgba(54, 162, 235, 1)",
+          "rgba(255, 206, 86, 1)",
+          "rgba(75, 192, 192, 1)",
+          "rgba(153, 102, 255, 1)",
+          "rgba(255, 159, 64, 1)",
+        ],
+        borderWidth: 1,
+      },
+    ],
+  };
+
+  const clientCountData = {
+    labels: ["Total Clients"],
+    datasets: [
+      {
+        label: "Number of Clients",
+        data: [overviewData?.totalClients || 0],
+        backgroundColor: ["rgba(99, 255, 132, 0.7)"],
+        borderColor: ["rgba(99, 255, 132, 1)"],
+        borderWidth: 1,
+      },
+    ],
+  };
+
+  const totalPowerUsageData = {
+    labels: Array.isArray(totalPowerUsage)
+      ? totalPowerUsage.map((item) =>
+          new Date(item.timestamp).toLocaleDateString()
+        )
+      : [],
+    datasets: [
+      {
+        label: "Total Power Usage (kWh)",
+        data: Array.isArray(totalPowerUsage)
+          ? totalPowerUsage.map((item) => item.total_power)
+          : [],
+        fill: false,
+        backgroundColor: "rgba(75, 192, 192, 0.6)",
+        borderColor: "rgba(75, 192, 192, 1)",
+        tension: 0.1,
+      },
+    ],
+  };
+
+  const averageVoltageData = {
+    labels: Array.isArray(averageVoltage)
+      ? averageVoltage.map((item) =>
+          new Date(item.timestamp).toLocaleDateString()
+        )
+      : [],
+    datasets: [
+      {
+        label: "Average Voltage (V)",
+        data: Array.isArray(averageVoltage)
+          ? averageVoltage.map((item) => item.average_voltage)
+          : [],
+        fill: false,
+        backgroundColor: "rgba(255, 159, 64, 0.6)",
+        borderColor: "rgba(255, 159, 64, 1)",
+        tension: 0.1,
+      },
+    ],
+  };
 };
 
 export default ProviderDashboard;
