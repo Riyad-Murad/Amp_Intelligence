@@ -2,4 +2,182 @@
 .provider-dashboard-container {
   display: flex;
   flex-direction: row;
+  flex-wrap: wrap;
+  margin-right: 15px;
+}
+
+.spinner-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  height: 150px;
+  color: #555;
+  width: 100%;
+}
+
+.spinner {
+  width: 40px;
+  height: 40px;
+  border: 4px solid rgba(0, 0, 0, 0.1);
+  border-left-color: #f9a43a;
+  border-radius: 50%;
+  animation: spin 1s linear infinite;
+  margin-bottom: 10px;
+}
+
+@keyframes spin {
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+.error-message {
+  color: #dc3545;
+  padding: 15px;
+  background-color: #f8d7da;
+  border: 1px solid #f5c6cb;
+  border-radius: 5px;
+  margin-top: 20px;
+  width: 100%;
+}
+
+.charts-row {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 20px;
+  margin-bottom: 20px;
+  width: 100%;
+}
+
+.chart-widget {
+  flex: 1;
+  min-width: 250px;
+  max-width: 500px;
+  max-height: 450px;
+  background-color: #fff;
+  padding: 15px;
+  border-radius: 8px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.05);
+  border: 1px solid #eee;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.chart-widget h3 {
+  margin-top: 0px;
+  font-size: 1em;
+  color: #333;
+  text-align: center;
+  margin-bottom: 10px;
+}
+
+.voltage-distribution-widget {
+  height: 350px;
+  max-height: 400px;
+}
+
+.metric-card {
+  flex: 1;
+  min-width: 150px;
+  max-width: 200px;
+  background-color: #fff;
+  padding: 15px;
+  border-radius: 8px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.05);
+  border: 1px solid #eee;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+}
+
+.metric-card h3 {
+  margin-top: 0;
+  font-size: 1em;
+  color: #333;
+  margin-bottom: 5px;
+}
+
+.metric-value {
+  font-size: 1.3em;
+  font-weight: bold;
+  color: #198754;
+}
+
+.all-metrics-widget {
+  flex: 1 1 100%;
+  overflow-x: auto;
+  max-height: 500px;
+}
+
+.all-metrics-widget h3 {
+  margin-top: 0;
+  font-size: 1.1em;
+  color: #333;
+  text-align: center;
+  margin-bottom: 10px;
+}
+
+.all-metrics-widget table {
+  width: 100%;
+  border-collapse: collapse;
+  margin-bottom: 15px;
+}
+
+.all-metrics-widget th,
+.all-metrics-widget td {
+  border: 1px solid #ddd;
+  padding: 8px;
+  text-align: left;
+}
+
+.all-metrics-widget th {
+  background-color: #f2f2f2;
+  font-weight: bold;
+}
+
+/* Media query for smaller screens (e.g., tablets) */
+@media (max-width: 768px) {
+  .provider-dashboard-container {
+    flex-direction: column;
+  }
+
+  .main-content {
+    margin-left: 300px !important;
+    margin-top: 20px;
+  }
+
+  .charts-row {
+    flex-direction: column;
+  }
+
+  .chart-widget,
+  .metric-card {
+    min-width: auto;
+    width: 100%;
+    max-width: none;
+    margin-bottom: 15px;
+  }
+
+  .all-metrics-widget {
+    max-height: none;
+  }
+}
+
+/* Media query for even smaller screens (e.g., mobile phones) */
+@media (max-width: 480px) {
+  .chart-widget h3,
+  .metric-card h3,
+  .all-metrics-widget h3 {
+    font-size: 1em;
+  }
+
+  .all-metrics-widget th,
+  .all-metrics-widget td {
+    padding: 6px;
+    font-size: 0.9em;
+  }
 }
