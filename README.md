@@ -9,7 +9,28 @@
 > 
 > The website will display the data that the arduino will send to the database and the users will be able to generate AI reports for their needs.
 
-<br><br>
+#### To test the website, here are some initial default data stored in the database:
+
+#### Admin Users:
+> <u><b>Email:</b></u> riyad@gmail.com, <u><b>Password:</b></u> password
+
+> <u><b>Email:</b></u> nabiha@gmail.com, <u><b>Password:</b></u> password
+
+#### Provider Users:
+> <u><b>Email:</b></u> cdaoud@gmail.com, <u><b>Password:</b></u> password
+
+> <u><b>Email:</b></u> nour@gmail.com, <u><b>Password:</b></u> password
+
+> <u><b>Email:</b></u> taha@gmail.com, <u><b>Password:</b></u> password
+
+#### Client Users:
+> <u><b>Email:</b></u> gheeda@gmail.com, <u><b>Password:</b></u> password
+
+> <u><b>Email:</b></u> joe@gmail.com, <u><b>Password:</b></u> password
+
+> <u><b>Email:</b></u> sara@gmail.com, <u><b>Password:</b></u> password
+
+<br>
 
 <!-- System Design -->
 <img src="./readme/title3.svg"/>
@@ -62,7 +83,7 @@ The Amp Intelligence platform utilizes a relational database schema designed to 
 ### Summary
 This ERD lays the foundation for Amp Intelligence’s core platform services by enabling structured, efficient, and secure energy data management while providing flexibility for future expansion, including integrations with third-party platforms, advanced reporting engines, and AI-driven anomaly detection systems.
 
-<br><br>
+<br>
 
 <!-- Project Highlights -->
 <img src="./readme/title4.svg"/>
