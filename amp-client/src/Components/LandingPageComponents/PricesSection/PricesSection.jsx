@@ -6,7 +6,7 @@ function PricesSection({ id }) {
     {
       title: "Basic Plan",
       features: [
-        "Manage and Control up to 1500 apartments",
+        "Monitor and Control up to 1500 apartments",
         "Basic reporting tools",
       ],
       price: 15000,
@@ -16,8 +16,9 @@ function PricesSection({ id }) {
     {
       title: "Advanced Plan",
       features: [
-        "Manage and Control up to 2500 apartments",
-        "Advanced reporting tools",
+        "Monitor and Control up to 2500 apartments",
+        "Advanced monitoring tools with robbery analysis",
+        "Real time generator fuel monitoring",
       ],
       price: 22000,
       badgeText: "Save 12%",
@@ -26,9 +27,10 @@ function PricesSection({ id }) {
     {
       title: "Premium Plan",
       features: [
-        "Manage and Control unlimited number of apartments",
-        "Advanced reporting tools",
-        "Access to anti-theft dashboards",
+        "Monitor and Control unlimited number of apartments",
+        "Advanced monitoring tools with robbery analysis",
+        "Real time generator fuel monitoring",
+        "AI-based energy saver system",
       ],
       price: 33000,
       badgeText: "Best",
