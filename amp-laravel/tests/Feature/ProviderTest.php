@@ -172,4 +172,20 @@ class ProviderTest extends TestCase
                 'message' => 'Total power usage retrieved successfully',
             ]);
     }
+
+    public function testGetAverageVoltage()
+    {
+        $providerRequest = $this->actingAsProvider();
+
+        $provider = User::factory()->create();
+
+        $response = $providerRequest->getJson("/api/v1/providers/averageVoltage/{$provider->id}");
+
+        $response->assertStatus(200)
+            ->assertJsonStructure(['success', 'message', 'data'])
+            ->assertJson([
+                'success' => true,
+                'message' => 'Average voltage retrieved successfully',
+            ]);
+    }
 }
