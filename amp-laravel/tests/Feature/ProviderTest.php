@@ -25,4 +25,22 @@ class ProviderTest extends TestCase
                 'data' => null,
             ]);
     }
+
+    public function testProviderCanEditAUser(): void
+    {
+        $providerRequest = $this->actingAsProvider();
+
+        $user = User::factory()->create();
+
+        $response = $providerRequest->postJson("/api/v1/providers/editUser/{$user->id}", [
+            'name' => 'Riyad Riyad',
+        ]);
+
+        $response->assertStatus(200)
+            ->assertJson([
+                'success' => true,
+                'message' => 'Profile updated successfully',
+                'data' => null,
+            ]);
+    }
 }
