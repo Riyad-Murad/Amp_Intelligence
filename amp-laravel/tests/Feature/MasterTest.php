@@ -36,4 +36,14 @@ class MasterTest extends TestCase
                 ]
             ]);
     }
+
+    public function testMasterCheckInValidationError(): void
+    {
+        $response = $this->postJson('http://localhost:8000/api/v1/masterCheckIn', []);
+
+        $response->assertStatus(422)
+            ->assertJson([
+                "success" => false
+            ]);
+    }
 }
