@@ -81,4 +81,20 @@ class AdminTest extends TestCase
                 'data' => null
             ]);
     }
+
+    public function testAdminCanEditProfile(): void
+    {
+        $payload = [
+            'name' => 'Nabiha'
+        ];
+
+        $response = $this->actingAsAdmin()->postJson('/api/v1/admins/editProfile', $payload);
+
+        $response->assertStatus(200)
+            ->assertJson([
+                'success' => true,
+                'message' => 'Profile updated successfully',
+                'data' => null
+            ]);
+    }
 }
