@@ -103,4 +103,32 @@ class ProviderTest extends TestCase
                 ]
             ]);
     }
+
+    public function testProviderCanGetAllLines(): void
+    {
+        $providerRequest = $this->actingAsProvider();
+
+        $provider = User::factory()->create();
+
+        $response = $providerRequest->getJson("/api/v1/providers/getAllLines/{$provider->id}");
+
+        $response->assertStatus(200)
+            ->assertJson([
+                'success' => true,
+                'message' => 'Lines retrieved successfully',
+            ])
+            ->assertJsonStructure([
+                'success',
+                'message',
+                'data' => [
+                    '*' => [
+                        'id',
+                        'slave_id',
+                        'status',
+                        'created_at',
+                        'updated_at',
+                    ]
+                ]
+            ]);
+    }
 }
