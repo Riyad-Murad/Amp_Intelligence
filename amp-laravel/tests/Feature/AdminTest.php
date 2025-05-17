@@ -97,4 +97,23 @@ class AdminTest extends TestCase
                 'data' => null
             ]);
     }
+
+
+    public function testAdminCanDeleteContactMessage(): void
+    {
+        $user = User::factory()->create(['user_type' => 'client']);
+
+        $contactMessage = ContactForm::factory()->create([
+            'user_id' => $user->id,
+        ]);
+
+        $response = $this->actingAsAdmin()->deleteJson("/api/v1/admins/deleteContactMessage/{$contactMessage->id}");
+
+        $response->assertStatus(200)
+            ->assertJson([
+                'success' => true,
+                'message' => 'Message deleted successfully',
+                'data' => null
+            ]);
+    }
 }
