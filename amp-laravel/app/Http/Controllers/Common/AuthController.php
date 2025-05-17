@@ -3,9 +3,11 @@
 namespace App\Http\Controllers\Common;
 
 use Throwable;
+use App\Services\ContactMessageService;
 use App\Services\UserLoginService;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\AuthRequestLogin;
+use App\Http\Requests\ContactMessageRequest;
 use Illuminate\Auth\AuthenticationException;
 
 class AuthController extends Controller
@@ -27,6 +29,26 @@ class AuthController extends Controller
             return $this->errorMessageResponse(false, "Authentication Error", $e->getMessage(), 400);
         } catch (Throwable $e) {
             return $this->errorMessageResponse(false, "Something went wrong during login", $e->getMessage(), 500);
+        }
+    }
+
+    public function insertMessage(ContactMessageRequest $request)
+    {
+        try {
+            $validatedData = $request->validated();
+            $response = ContactMessageService::insertMessage($validatedData);
+
+            $messageData = [
+                'id' => $response->id,
+                'name' => $response->name,
+                'email' => $response->email,
+                'phone_number' => $response->phone_number,
+                'message' => $response->message ?? null,
+            ];
+
+            return $this->loginMessageResponse(true, "Message Submitted Successfully", $messageData, 200);
+        } catch (Throwable $e) {
+            return $this->errorMessageResponse(false, "Something went wrong during Contact Message insertion", $e->getMessage(), 500);
         }
     }
 
