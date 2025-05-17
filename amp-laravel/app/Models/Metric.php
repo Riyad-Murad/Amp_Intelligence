@@ -19,6 +19,11 @@ class Metric extends Model
         'date_month',
     ];
 
+    protected $casts = [
+        'created_at' => 'datetime',
+        'updated_at' => 'datetime',
+    ];
+
     public function master()
     {
         return $this->belongsTo(Master::class);
