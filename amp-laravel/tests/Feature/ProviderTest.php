@@ -213,4 +213,29 @@ class ProviderTest extends TestCase
                 'message' => 'Power usage by client retrieved successfully',
             ]);
     }
+
+    public function testGetVoltageDistribution()
+    {
+        $providerRequest = $this->actingAsProvider();
+
+        $provider = User::factory()->create();
+
+        $response = $providerRequest->getJson("/api/v1/providers/voltageDistribution/{$provider->id}");
+
+        $response->assertStatus(200)
+            ->assertJsonStructure([
+                'success',
+                'message',
+                'data' => [
+                    '*' => [
+                        'id',
+                        'voltage',
+                    ]
+                ]
+            ])
+            ->assertJson([
+                'success' => true,
+                'message' => 'Voltage distribution retrieved successfully',
+            ]);
+    }
 }
