@@ -2,27 +2,39 @@
 
 namespace Tests\Feature;
 
-use Illuminate\Foundation\Testing\RefreshDatabase;
-use Illuminate\Foundation\Testing\WithFaker;
 use Tests\TestCase;
+use App\Models\Slave;
+use App\Models\Master;
+use App\Traits\ResponseTrait;
+use Illuminate\Foundation\Testing\WithFaker;
 
 class MetricTest extends TestCase
 {
-    use WithFaker;
+    use WithFaker, ResponseTrait;
 
     public function testSubmitSlaveMetricsSuccessfully(): void
     {
+        [$request, $client] = $this->actingAsClient();
+
+        $master = Master::factory()->create([
+            'user_id' => $client->id,
+        ]);
+
+        $slave = Slave::factory()->create([
+            'master_id' => $master->id,
+        ]);
+
         $payload = [
             'power' => "10",
             'energy' => "30",
             'voltage' => "220",
             'current' => "20",
-            'master_id' => 1,
+            'master_id' => $master->id,
             'date_month' => "05-16",
-            'slave_id' => 1
+            'slave_id' => $slave->id
         ];
 
-        $response = $this->postJson('http://localhost:8000/api/v1/metrics', $payload);
+        $response = $request->postJson('http://localhost:8000/api/v1/metrics', $payload);
 
         $response->assertStatus(200)
             ->assertJson([
