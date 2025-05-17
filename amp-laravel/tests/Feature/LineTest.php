@@ -4,7 +4,6 @@ namespace Tests\Feature;
 
 use Tests\TestCase;
 use Illuminate\Foundation\Testing\WithFaker;
-// use Illuminate\Foundation\Testing\RefreshDatabase;
 
 class LineTest extends TestCase
 {
@@ -44,6 +43,16 @@ class LineTest extends TestCase
                     "created_at",
                     "id"
                 ]
+            ]);
+    }
+
+    public function testSubmitMasterLinesValidationError(): void
+    {
+        $response = $this->postJson('http://localhost:8000/api/v1/lines', []);
+
+        $response->assertStatus(422)
+            ->assertJson([
+                "success" => false
             ]);
     }
 }
