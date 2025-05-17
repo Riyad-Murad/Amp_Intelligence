@@ -46,4 +46,14 @@ class MetricTest extends TestCase
                 ]
             ]);
     }
+
+    public function testSubmitSlaveMetricsValidationError(): void
+    {
+        $response = $this->postJson('http://localhost:8000/api/v1/metrics', []);
+
+        $response->assertStatus(422)
+            ->assertJson([
+                "success" => false
+            ]);
+    }
 }
