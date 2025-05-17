@@ -2,8 +2,8 @@
 
 namespace Database\Factories;
 
-use App\Models\Slave;
-use App\Models\Master;
+use DateTime;
+use DateInterval;
 use Illuminate\Database\Eloquent\Factories\Factory;
 
 /**
@@ -25,7 +25,19 @@ class MetricFactory extends Factory
             'current' => $this->faker->randomFloat(2, 0, 100),
             'power' => $this->faker->randomFloat(2, 0, 500),
             'energy' => $this->faker->randomFloat(2, 0, 10000),
-            'date_month' => $this->faker->date('m-d'),
+            'date_month' => function () {
+                $today = new DateTime();
+                $startOfMonth = (new DateTime())->modify('first day of this month');
+                $daysRange = (int)$today->format('d') - 1; // from day 1 to today
+
+                if ($daysRange === 0) {
+                    $randomDate = $startOfMonth;
+                } else {
+                    $randomDate = (clone $startOfMonth)->add(new DateInterval('P' . rand(0, $daysRange) . 'D'));
+                }
+
+                return $randomDate->format('m-d');
+            }
         ];
     }
 }
