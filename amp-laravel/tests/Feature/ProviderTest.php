@@ -238,4 +238,31 @@ class ProviderTest extends TestCase
                 'message' => 'Voltage distribution retrieved successfully',
             ]);
     }
+
+    public function testGetMetricsSummary()
+    {
+        $providerRequest = $this->actingAsProvider();
+
+        $provider = User::factory()->create();
+
+        $response = $providerRequest->getJson("/api/v1/providers/metricsSummary/{$provider->id}");
+
+        $response->assertStatus(200)
+            ->assertJsonStructure([
+                'success',
+                'message',
+                'data' => [
+                    'minPower',
+                    'maxPower',
+                    'avgPower',
+                    'minVoltage',
+                    'maxVoltage',
+                    'avgVoltage',
+                ]
+            ])
+            ->assertJson([
+                'success' => true,
+                'message' => 'Metrics summary retrieved successfully',
+            ]);
+    }
 }
