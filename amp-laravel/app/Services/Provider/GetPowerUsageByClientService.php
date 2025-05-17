@@ -10,23 +10,29 @@ class GetPowerUsageByClientService
 {
     public static function getPowerUsageByClient(int $providerId): array
     {
-        $masters = Master::where('user_id', $providerId)->with(['metrics' => function ($query) {
-            $query->whereYear('date_month', now()->year)
-                ->whereMonth('date_month', now()->month);
-        }])->get();
+        $masters = Master::where('user_id', $providerId)
+            ->with(['metrics' => function ($query) {
+                $query->whereRaw('SUBSTRING(date_month, 1, 2) = ?', [now()->format('m')]);
+            }])
+            ->get();
 
         $clientPowerUsage = [];
 
+        // Collect unique slave_ids from the loaded metrics
         $clientSlaveIds = $masters->flatMap(function ($master) {
-            return $master->metrics->pluck('slave_id')->unique();
-        })->toArray();
+            return $master->metrics->pluck('slave_id');
+        })->unique()->toArray();
 
-        $clients = User::whereIn('slave_id', $clientSlaveIds)->where('user_type', 'Client')->get(['id', 'name', 'slave_id']);
+        // Get clients matching those slave_ids
+        $clients = User::whereIn('slave_id', $clientSlaveIds)
+            ->where('user_type', 'Client')
+            ->get(['id', 'name', 'slave_id']);
 
         foreach ($clients as $client) {
-            $totalPower = $masters->flatMap(function ($master) use ($client) {
+            // Sum power for each client's slave_id across all master's metrics (already filtered by month)
+            $totalPower = $masters->sum(function ($master) use ($client) {
                 return $master->metrics->where('slave_id', $client->slave_id)->sum('power');
-            })->sum();
+            });
 
             $clientPowerUsage[] = [
                 'client_name' => $client->name,
@@ -35,9 +41,7 @@ class GetPowerUsageByClientService
         }
 
         // Sort clients by total power usage in descending order
-        usort($clientPowerUsage, function ($a, $b) {
-            return $b['total_power'] <=> $a['total_power'];
-        });
+        usort($clientPowerUsage, fn($a, $b) => $b['total_power'] <=> $a['total_power']);
 
         return $clientPowerUsage;
     }

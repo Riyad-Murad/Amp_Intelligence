@@ -2,19 +2,61 @@
 
 namespace Tests\Feature;
 
-use Illuminate\Foundation\Testing\RefreshDatabase;
-use Illuminate\Foundation\Testing\WithFaker;
 use Tests\TestCase;
+use App\Models\Master;
+use App\Traits\ResponseTrait;
+use Illuminate\Foundation\Testing\WithFaker;
 
 class LineTest extends TestCase
 {
-    /**
-     * A basic feature test example.
-     */
-    public function test_example(): void
-    {
-        $response = $this->get('/');
+    use WithFaker, ResponseTrait;
 
-        $response->assertStatus(200);
+    public function testSubmitMasterLinesSuccessfully(): void
+    {
+        $master = Master::factory()->create([]);
+
+        $payload = [
+            'master_id' => $master->id,
+            'voltage_l1' => "220.5",
+            'voltage_l2' => "219.8",
+            'voltage_l3' => "221.1",
+            'power_l1' => "50.2",
+            'power_l2' => "49.7",
+            'power_l3' => "51.3"
+        ];
+
+        $response = $this->postJson('http://localhost:8000/api/v1/lines', $payload);
+
+        $response->assertStatus(200)
+            ->assertJson([
+                "success" => true,
+                "message" => "Master lines data saved"
+            ])
+            ->assertJsonStructure([
+                "success",
+                "message",
+                "data" => [
+                    "voltage_l1",
+                    "voltage_l2",
+                    "voltage_l3",
+                    "power_l1",
+                    "power_l2",
+                    "power_l3",
+                    "master_id",
+                    "updated_at",
+                    "created_at",
+                    "id"
+                ]
+            ]);
+    }
+
+    public function testSubmitMasterLinesValidationError(): void
+    {
+        $response = $this->postJson('http://localhost:8000/api/v1/lines', []);
+
+        $response->assertStatus(422)
+            ->assertJson([
+                "success" => false
+            ]);
     }
 }

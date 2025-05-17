@@ -10,9 +10,9 @@ class GetTotalPowerUsageService
     public static function getTotalPowerUsage(int $providerId): float
     {
         $masterIds = Master::where('user_id', $providerId)->pluck('id');
+
         return round(Metric::whereIn('master_id', $masterIds)
-            ->whereYear('date_month', now()->year)
-            ->whereMonth('date_month', now()->month)
+            ->whereRaw('SUBSTRING(date_month, 1, 2) = ?', [now()->format('m')])
             ->sum('power'), 2);
     }
 }

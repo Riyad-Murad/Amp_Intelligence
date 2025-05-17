@@ -14,9 +14,9 @@ class GetOverviewDataService
         $clientSlaveIds = Metric::whereIn('master_id', $masterIds)->distinct()->pluck('slave_id');
         $totalClients = User::whereIn('slave_id', $clientSlaveIds)->where('user_type', 'Client')->count();
         $totalPowerThisMonth = Metric::whereIn('master_id', $masterIds)
-            ->whereYear('date_month', now()->year)
-            ->whereMonth('date_month', now()->month)
+            ->whereRaw('SUBSTRING(date_month, 1, 2) = ?', [now()->format('m')])
             ->sum('power');
+
         $averageVoltage = Metric::whereIn('master_id', $masterIds)->avg('voltage');
 
         return [
