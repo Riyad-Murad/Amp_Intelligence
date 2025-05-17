@@ -61,4 +61,11 @@ trait ResponseTrait
         $token = JWTAuth::fromUser($provider);
         return $this->withHeader('Authorization', "Bearer $token");
     }
+
+    public function actingAsAdmin()
+    {
+        $admin = User::factory()->create(['user_type' => 'admin']);
+        $token = JWTAuth::fromUser($admin);
+        return $this->withHeader('Authorization', "Bearer $token");
+    }
 }
