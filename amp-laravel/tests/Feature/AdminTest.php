@@ -37,4 +37,30 @@ class AdminTest extends TestCase
                 ]
             ]);
     }
+
+    public function testAdminCanGetAllContactMessages(): void
+    {
+        $response = $this->actingAsAdmin()->getJson('/api/v1/admins/getAllContactMessages');
+
+        $response->assertStatus(200)
+            ->assertJson([
+                'success' => true,
+                'message' => 'Messages retrieved successfully',
+            ])
+            ->assertJsonStructure([
+                'success',
+                'message',
+                'data' => [
+                    '*' => [
+                        'id',
+                        'name',
+                        'email',
+                        'message',
+                        'phone_number',
+                        'created_at',
+                        'updated_at'
+                    ]
+                ]
+            ]);
+    }
 }
