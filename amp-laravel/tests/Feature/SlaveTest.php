@@ -35,4 +35,14 @@ class SlaveTest extends TestCase
                 ]
             ]);
     }
+
+    public function testSlaveCheckInValidationError(): void
+    {
+        $response = $this->postJson('http://localhost:8000/api/v1/slaveCheckIn', []);
+
+        $response->assertStatus(422)
+            ->assertJson([
+                "success" => false
+            ]);
+    }
 }
