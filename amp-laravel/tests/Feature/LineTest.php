@@ -3,16 +3,20 @@
 namespace Tests\Feature;
 
 use Tests\TestCase;
+use App\Models\Master;
+use App\Traits\ResponseTrait;
 use Illuminate\Foundation\Testing\WithFaker;
 
 class LineTest extends TestCase
 {
-    use WithFaker;
+    use WithFaker, ResponseTrait;
 
     public function testSubmitMasterLinesSuccessfully(): void
     {
+        $master = Master::factory()->create([]);
+
         $payload = [
-            'master_id' => 1,
+            'master_id' => $master->id,
             'voltage_l1' => "220.5",
             'voltage_l2' => "219.8",
             'voltage_l3' => "221.1",
