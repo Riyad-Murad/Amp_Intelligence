@@ -1,0 +1,40 @@
+<?php
+
+namespace Tests\Feature;
+
+use Tests\TestCase;
+use App\Models\User;
+use App\Models\ContactForm;
+use App\Traits\ResponseTrait;
+
+class AdminTest extends TestCase
+{
+    use ResponseTrait;
+
+    public function testAdminCanGetAllProviders(): void
+    {
+        $response = $this->actingAsAdmin()->getJson('/api/v1/admins/getAllProviders');
+
+        $response->assertStatus(200)
+            ->assertJson([
+                'success' => true,
+                'message' => 'Providers retrieved successfully',
+            ])
+            ->assertJsonStructure([
+                'success',
+                'message',
+                'data' => [
+                    '*' => [
+                        'id',
+                        'slave_id',
+                        'user_type',
+                        'name',
+                        'email',
+                        'phone_number',
+                        'created_at',
+                        'updated_at'
+                    ]
+                ]
+            ]);
+    }
+}
