@@ -43,4 +43,35 @@ class ProviderTest extends TestCase
                 'data' => null,
             ]);
     }
+
+    public function testProviderCanGetAllUsers(): void
+    {
+        $providerRequest = $this->actingAsProvider();
+
+        $provider = User::factory()->create();
+
+        $response = $providerRequest->getJson("/api/v1/providers/getAllUsers/{$provider->id}");
+
+        $response->assertStatus(200)
+            ->assertJson([
+                'success' => true,
+                'message' => 'Users retrieved successfully',
+            ])
+            ->assertJsonStructure([
+                'success',
+                'message',
+                'data' => [
+                    '*' => [
+                        'id',
+                        'slave_id',
+                        'user_type',
+                        'name',
+                        'email',
+                        'phone_number',
+                        'created_at',
+                        'updated_at',
+                    ]
+                ]
+            ]);
+    }
 }
