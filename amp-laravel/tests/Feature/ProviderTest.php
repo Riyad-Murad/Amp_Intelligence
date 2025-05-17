@@ -188,4 +188,29 @@ class ProviderTest extends TestCase
                 'message' => 'Average voltage retrieved successfully',
             ]);
     }
+
+    public function testGetPowerUsageByClient()
+    {
+        $providerRequest = $this->actingAsProvider();
+
+        $provider = User::factory()->create();
+
+        $response = $providerRequest->getJson("/api/v1/providers/powerUsageByClient/{$provider->id}");
+
+        $response->assertStatus(200)
+            ->assertJsonStructure([
+                'success',
+                'message',
+                'data' => [
+                    '*' => [
+                        'client_name',
+                        'total_power',
+                    ]
+                ]
+            ])
+            ->assertJson([
+                'success' => true,
+                'message' => 'Power usage by client retrieved successfully',
+            ]);
+    }
 }
