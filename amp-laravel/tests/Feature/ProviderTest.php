@@ -156,4 +156,20 @@ class ProviderTest extends TestCase
                 'message' => 'Overview data retrieved successfully',
             ]);
     }
+
+    public function testGetTotalPowerUsage()
+    {
+        $providerRequest = $this->actingAsProvider();
+
+        $provider = User::factory()->create();
+
+        $response = $providerRequest->getJson("/api/v1/providers/totalPowerUsage/{$provider->id}");
+
+        $response->assertStatus(200)
+            ->assertJsonStructure(['success', 'message', 'data'])
+            ->assertJson([
+                'success' => true,
+                'message' => 'Total power usage retrieved successfully',
+            ]);
+    }
 }
