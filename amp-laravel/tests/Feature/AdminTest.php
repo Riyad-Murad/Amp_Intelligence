@@ -63,4 +63,22 @@ class AdminTest extends TestCase
                 ]
             ]);
     }
+
+    public function testAdminCanEditProvider(): void
+    {
+        $provider = User::factory()->create(['user_type' => 'provider']);
+
+        $payload = [
+            'phone_number' => '71-852369'
+        ];
+
+        $response = $this->actingAsAdmin()->postJson("/api/v1/admins/editProvider/{$provider->id}", $payload);
+
+        $response->assertStatus(200)
+            ->assertJson([
+                'success' => true,
+                'message' => 'Profile updated successfully',
+                'data' => null
+            ]);
+    }
 }
