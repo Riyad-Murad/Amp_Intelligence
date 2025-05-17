@@ -25,4 +25,28 @@ class ClientTest extends TestCase
                 'data' => null,
             ]);
     }
+
+    public function testClientCanGetDashboardData(): void
+    {
+        [$clientRequest, $client] = $this->actingAsClient();
+
+        $response = $clientRequest->getJson("/api/v1/clients/clientDashboardData/{$client->id}");
+
+        $response->assertStatus(200)
+            ->assertJson([
+                'success' => true,
+                'message' => 'Dashboard data fetched successfully',
+            ])
+            ->assertJsonStructure([
+                'success',
+                'message',
+                'data' => [
+                    'powerUsagePerDay',
+                    'cumulativePowerUsage',
+                    'totalPowerUsageThisMonth',
+                    'averageVoltageReach',
+                    'expectedPowerLimit',
+                ],
+            ]);
+    }
 }
