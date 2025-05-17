@@ -31,8 +31,8 @@ Route::group(["prefix" => "v1"], function () {
             Route::get("/getAllMetrics/{id}", [ProviderFunctionsController::class, "getMetrics"]);
             Route::get("/getAllLines/{id}", [ProviderFunctionsController::class, "getLines"]);
 
-            Route::get("/overview/{id}", [ProviderFunctionsController::class, "getOverviewData"]); // check for "totalPowerPerMonth"
-            Route::get("/totalPowerUsage/{id}", [ProviderFunctionsController::class, "getTotalPowerUsage"]); // check output
+            Route::get("/overview/{id}", [ProviderFunctionsController::class, "getOverviewData"]);
+            Route::get("/totalPowerUsage/{id}", [ProviderFunctionsController::class, "getTotalPowerUsage"]);
             Route::get("/averageVoltage/{id}", [ProviderFunctionsController::class, "getAverageVoltage"]);
             Route::get("/powerUsageByClient/{id}", [ProviderFunctionsController::class, "getPowerUsageByClient"]);
             Route::get("/voltageDistribution/{id}", [ProviderFunctionsController::class, "getVoltageDistribution"]);
@@ -59,7 +59,10 @@ Route::group(["prefix" => "v1"], function () {
 
     Route::post("/masterCheckIn", [ProviderCheckinController::class, "masterCheckin"]);
     Route::post("/lines", [LinesController::class, "masterLines"]);
-
+    
+    // Public Route for Contact Message Submission
+    // Route::post("/insertMessage", [AuthController::class, "insertMessage"]);
+    
     //Unauthenticated Users
     Route::post("/login", [AuthController::class, "login"])->name("login");
 });
