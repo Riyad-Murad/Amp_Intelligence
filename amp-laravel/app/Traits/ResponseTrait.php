@@ -2,7 +2,9 @@
 
 namespace App\Traits;
 
+use App\Models\User;
 use Illuminate\Contracts\Validation\Validator;
+use PHPOpenSourceSaver\JWTAuth\Facades\JWTAuth;
 use Illuminate\Http\Exceptions\HttpResponseException;
 
 trait ResponseTrait
@@ -41,5 +43,14 @@ trait ResponseTrait
             'errors' => $validator->errors(),
             'message' => 'Invalid Credentials'
         ], 422));
+    }
+
+    public function actingAsClient()
+    {
+        $client = User::factory()->create(['user_type' => 'Client']);
+        $token = JWTAuth::fromUser($client);
+        $request = $this->withHeader('Authorization', "Bearer $token");
+
+        return [$request, $client];
     }
 }
