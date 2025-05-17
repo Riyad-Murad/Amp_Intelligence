@@ -131,4 +131,29 @@ class ProviderTest extends TestCase
                 ]
             ]);
     }
+
+    public function testGetOverviewData()
+    {
+        $providerRequest = $this->actingAsProvider();
+
+        $provider = User::factory()->create();
+
+        $response = $providerRequest->getJson("/api/v1/providers/overview/{$provider->id}");
+
+        $response->assertStatus(200)
+            ->assertJsonStructure([
+                'success',
+                'message',
+                'data' => [
+                    'totalClients',
+                    'totalPowerThisMonth',
+                    'averageVoltageAcrossClients',
+                    'latestMetricTimestamp',
+                ]
+            ])
+            ->assertJson([
+                'success' => true,
+                'message' => 'Overview data retrieved successfully',
+            ]);
+    }
 }
