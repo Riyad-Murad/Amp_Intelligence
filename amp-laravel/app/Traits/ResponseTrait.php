@@ -53,4 +53,12 @@ trait ResponseTrait
 
         return [$request, $client];
     }
+
+
+    public function actingAsProvider()
+    {
+        $provider = User::factory()->create(['user_type' => 'provider']);
+        $token = JWTAuth::fromUser($provider);
+        return $this->withHeader('Authorization', "Bearer $token");
+    }
 }
