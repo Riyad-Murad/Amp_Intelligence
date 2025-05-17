@@ -57,9 +57,9 @@ class ProviderFunctionsController extends Controller
         try {
             $users = GetAllClientUsersService::getAll($id);
 
-            return $this->messageResponse(true, "Messages retrieved successfully", 200, $users);
+            return $this->messageResponse(true, "Users retrieved successfully", 200, $users);
         } catch (\Exception $e) {
-            return $this->errorMessageResponse(false, $e->getMessage(), "Failed to retrieve messages", 500);
+            return $this->errorMessageResponse(false, $e->getMessage(), "Failed to retrieve users", 500);
         }
     }
 
@@ -68,9 +68,9 @@ class ProviderFunctionsController extends Controller
         try {
             $metrics = GetAllClientMetricsService::getAll($id);
 
-            return $this->messageResponse(true, "Messages retrieved successfully", 200, $metrics);
+            return $this->messageResponse(true, "Metrics retrieved successfully", 200, $metrics);
         } catch (\Exception $e) {
-            return $this->errorMessageResponse(false, $e->getMessage(), "Failed to retrieve messages", 500);
+            return $this->errorMessageResponse(false, $e->getMessage(), "Failed to retrieve metrics", 500);
         }
     }
 
@@ -79,9 +79,9 @@ class ProviderFunctionsController extends Controller
         try {
             $lines = GetAllLinesService::getAll($id);
 
-            return $this->messageResponse(true, "Messages retrieved successfully", 200, $lines);
+            return $this->messageResponse(true, "Lines retrieved successfully", 200, $lines);
         } catch (\Exception $e) {
-            return $this->errorMessageResponse(false, $e->getMessage(), "Failed to retrieve messages", 500);
+            return $this->errorMessageResponse(false, $e->getMessage(), "Failed to retrieve lines", 500);
         }
     }
 
