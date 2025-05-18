@@ -43,9 +43,14 @@
 }
 
 .chart-widget {
-  flex: 1; 
+  flex: 1;
+  height: 350px;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-end;
   background-color: #fff;
   padding: 15px;
+  margin-top: 10px;
   border-radius: 8px;
   box-shadow: 0 4px 8px rgba(0, 0, 0, 0.05);
   border: 1px solid #eee;
@@ -77,4 +82,30 @@
   font-size: 1.3em;
   font-weight: bold;
   color: #198754;
+}
+
+.spinner-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  height: 150px;
+  color: #555;
+  width: 100%;
+}
+
+.spinner {
+  width: 40px;
+  height: 40px;
+  border: 4px solid rgba(0, 0, 0, 0.1);
+  border-left-color: #f9a43a;
+  border-radius: 50%;
+  animation: spin 1s linear infinite;
+  margin-bottom: 10px;
+}
+
+@keyframes spin {
+  to {
+    transform: rotate(360deg);
+  }
 }

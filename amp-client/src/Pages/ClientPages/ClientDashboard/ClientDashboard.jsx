@@ -1,5 +1,5 @@
 import "./styles.css";
-import { Line } from "react-chartjs-2";
+import { Line, Bar } from "react-chartjs-2";
 import { useState, useEffect } from "react";
 import axiosBaseUrl from "../../../Axios/axios";
 import { useDispatch, useSelector } from "react-redux";
@@ -10,6 +10,7 @@ import {
   LinearScale,
   PointElement,
   LineElement,
+  BarElement,
   Title,
   Tooltip,
   Legend,
@@ -20,10 +21,11 @@ ChartJS.register(
   LinearScale,
   PointElement,
   LineElement,
+  BarElement,
   Title,
   Tooltip,
   Legend,
-  Filler,
+  Filler
 );
 
 const ClientDashboard = () => {
@@ -67,7 +69,12 @@ const ClientDashboard = () => {
   }
 
   if (!dashboardData) {
-    return <div>No dashboard data available.</div>;
+    return (
+      <div className="spinner-container">
+        <div className="spinner"></div>
+        <p>Loading dashboard data...</p>
+      </div>
+    );
   }
 
   const powerUsageData = {
@@ -78,7 +85,7 @@ const ClientDashboard = () => {
         data: Object.values(dashboardData.powerUsagePerDay),
         fill: true,
         backgroundColor: "rgba(75, 192, 192, 0.6)",
-        borderColor: "#28a745", // Bootstrap success color
+        borderColor: "#28a745",
         pointBackgroundColor: "#28a745",
         pointBorderColor: "#fff",
         tension: 0.3,
@@ -91,22 +98,28 @@ const ClientDashboard = () => {
     datasets: [
       {
         label: "Cumulative Power Usage (in Kilowatts)",
-        data: Object.values(dashboardData.cumulativePowerUsage),
-        fill: true,
-        backgroundColor: "rgba(255, 193, 7, 0.6)", // Bootstrap warning color
+        data: Object.values(dashboardData.cumulativePowerUsage).map(
+          (arr) => Math.max(...arr)
+        ),
+        backgroundColor: "rgba(255, 193, 7, 0.6)",
         borderColor: "#ffc107",
-        pointBackgroundColor: "#ffc107",
-        pointBorderColor: "#fff",
-        tension: 0.3,
+        borderWidth: 1,
       },
     ],
   };
 
   const chartOptions = {
     responsive: true,
+    maintainAspectRatio: false,
+    layout: {
+      padding: {
+        top: 0,
+        bottom: 0,
+      },
+    },
     plugins: {
       legend: {
-        position: "top",
+        position: "bottom",
       },
       title: {
         display: true,
@@ -127,6 +140,8 @@ const ClientDashboard = () => {
         },
       },
       y: {
+        beginAtZero: true,
+        min: 0,
         title: {
           display: true,
           text: "Kilowatts",
@@ -135,7 +150,6 @@ const ClientDashboard = () => {
         grid: {
           borderColor: "#eee",
         },
-        beginAtZero: true,
       },
     },
   };
@@ -154,10 +168,6 @@ const ClientDashboard = () => {
                 ...chartOptions,
                 plugins: {
                   ...chartOptions.plugins,
-                  title: {
-                    ...chartOptions.plugins.title,
-                    text: "Power Usage per Day",
-                  },
                 },
               }}
             />
@@ -169,16 +179,12 @@ const ClientDashboard = () => {
         <div className="chart-widget">
           <h3>Cumulative Power Usage Per Day</h3>
           {Object.keys(cumulativePowerUsageData.labels).length > 0 ? (
-            <Line
+            <Bar
               data={cumulativePowerUsageData}
               options={{
                 ...chartOptions,
                 plugins: {
                   ...chartOptions.plugins,
-                  title: {
-                    ...chartOptions.plugins.title,
-                    text: "Cumulative Power Usage Per Day",
-                  },
                 },
               }}
             />
