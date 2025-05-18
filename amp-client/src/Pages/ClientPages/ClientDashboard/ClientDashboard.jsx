@@ -1,9 +1,10 @@
 import "./styles.css";
 import { Line, Bar } from "react-chartjs-2";
 import { useState, useEffect } from "react";
-import axiosBaseUrl from "../../../Axios/axios";
 import { useDispatch, useSelector } from "react-redux";
 import { toggleLoad } from "../../../Redux/Slices/loadingSlice";
+import ClientDashboardService from "../Services/ClientDashboardService/ClientDashboardService";
+
 import {
   Chart as ChartJS,
   CategoryScale,
@@ -16,6 +17,7 @@ import {
   Legend,
   Filler,
 } from "chart.js";
+
 ChartJS.register(
   CategoryScale,
   LinearScale,
@@ -36,21 +38,21 @@ const ClientDashboard = () => {
   const dispatch = useDispatch();
 
   useEffect(() => {
-    const fetchDashboardData = async () => {
+    const fetchData = async () => {
       dispatch(toggleLoad(true));
       try {
-        const response = await axiosBaseUrl.get(
-          `/clients/clientDashboardData/${userId}`
-        );
-        setDashboardData(response.data.data);
-        dispatch(toggleLoad(false));
-      } catch (error) {
-        setError(error.message);
+        const data = await ClientDashboardService.fetchClientDashboardData(userId);
+        setDashboardData(data);
+      } catch (err) {
+        setError(err.message);
+      } finally {
         dispatch(toggleLoad(false));
       }
     };
 
-    fetchDashboardData();
+    if (userId) {
+      fetchData();
+    }
   }, [userId, dispatch]);
 
   if (loading) {
@@ -98,8 +100,8 @@ const ClientDashboard = () => {
     datasets: [
       {
         label: "Cumulative Power Usage (in Kilowatts)",
-        data: Object.values(dashboardData.cumulativePowerUsage).map(
-          (arr) => Math.max(...arr)
+        data: Object.values(dashboardData.cumulativePowerUsage).map((arr) =>
+          Math.max(...arr)
         ),
         backgroundColor: "rgba(255, 193, 7, 0.6)",
         borderColor: "#ffc107",

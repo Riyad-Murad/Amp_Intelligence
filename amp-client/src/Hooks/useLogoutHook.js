@@ -1,5 +1,5 @@
 import { toast } from "react-toastify";
-import axiosBaseUrl from "../Axios/axios";
+import axiosInstance from "../Axios/axios";
 import { useDispatch } from "react-redux";
 import { persistor } from "../Redux/store";
 import { useNavigate } from "react-router-dom";
@@ -11,7 +11,7 @@ export const useLogout = () => {
 
   const handleLogout = async () => {
     try {
-      const response = await axiosBaseUrl.post("/logout");
+      const response = await axiosInstance.post("/logout");
       if (response.data.success === true) {
         localStorage.clear();
         await persistor.purge();

@@ -1,7 +1,11 @@
 /* ContactUsSection.css */
 .section-center {
   text-align: center;
-  padding: 30px;
+  padding-top: 30px;
+}
+
+.less-margin {
+  margin-bottom: 0px;
 }
 
 .contact-us-section {
