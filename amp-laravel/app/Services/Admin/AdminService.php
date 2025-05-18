@@ -4,7 +4,7 @@ namespace App\Services\Admin;
 
 use PHPOpenSourceSaver\JWTAuth\Facades\JWTAuth;
 
-class editProfileService
+class AdminService
 {
     public static function editProfile(array $data){
         $user = JWTAuth::user();
