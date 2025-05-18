@@ -10,10 +10,6 @@ class ProviderEditProfileService
     {
         $user = JWTAuth::user();
 
-        if (isset($data['name'])) {
-            $user->name = $data['name'];
-        }
-
         if (isset($data['email'])) {
             $user->email = $data['email'];
         }

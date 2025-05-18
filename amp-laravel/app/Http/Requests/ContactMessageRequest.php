@@ -25,7 +25,7 @@ class ContactMessageRequest extends FormRequest
             'name' => 'required|string|max:255',
             'email' => 'required|email|max:255',
             'phone_number' => 'required|string|max:20',
-            'message' => 'sometimes|required|string|max:1000',
+            'message' => 'nullable|string|max:1000',
         ];
     }
 }

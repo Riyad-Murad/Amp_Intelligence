@@ -6,6 +6,10 @@
   margin-right: 15px;
 }
 
+.un-centered {
+  text-align: left;
+}
+
 .spinner-container {
   display: flex;
   flex-direction: column;
