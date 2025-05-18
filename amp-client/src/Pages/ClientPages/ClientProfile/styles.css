@@ -1,3 +1,47 @@
 .client-profile-container {
-    padding: 20px;
+  padding: 20px;
+  background-color: #fff9f3;
+  max-width: 500px;
+  margin: 50px auto;
+  border-radius: 10px;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+}
+
+h2 {
+  margin-bottom: 30px;
+}
+
+.password-form {
+  display: flex;
+  flex-direction: column;
+}
+
+.form-group {
+  margin-bottom: 20px;
+}
+
+.form-group h4 {
+  display: block;
+  margin-bottom: 5px;
+}
+
+.password-form input {
+  padding: 10px;
+  font-size: 16px;
+  border: 1px solid #ccc;
+  border-radius: 6px;
+  width: 95%;
+}
+
+.form-message {
+  margin-top: 15px;
+  color: #d00;
+  font-weight: 500;
+}
+
+.password-form label {
+  font-weight: 500;
+  margin-bottom: 5px;
+  margin-top: 10px;
+  display: block;
 }
