@@ -6,7 +6,6 @@ use Tests\TestCase;
 use App\Models\User;
 use Illuminate\Foundation\Testing\WithFaker;
 use PHPOpenSourceSaver\JWTAuth\Facades\JWTAuth;
-// use Illuminate\Foundation\Testing\RefreshDatabase;
 
 class UserTest extends TestCase
 {

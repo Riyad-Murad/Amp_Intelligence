@@ -4,12 +4,12 @@ namespace Tests\Feature;
 
 use Tests\TestCase;
 use App\Models\User;
+use App\Traits\TestTrait;
 use App\Models\ContactForm;
-use App\Traits\ResponseTrait;
 
 class AdminTest extends TestCase
 {
-    use ResponseTrait;
+    use TestTrait;
 
     public function testAdminCanGetAllProviders(): void
     {
@@ -103,9 +103,7 @@ class AdminTest extends TestCase
     {
         $user = User::factory()->create(['user_type' => 'client']);
 
-        $contactMessage = ContactForm::factory()->create([
-            'user_id' => $user->id,
-        ]);
+        $contactMessage = ContactForm::factory()->create([]);
 
         $response = $this->actingAsAdmin()->deleteJson("/api/v1/admins/deleteContactMessage/{$contactMessage->id}");
 

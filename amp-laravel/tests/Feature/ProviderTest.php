@@ -4,11 +4,11 @@ namespace Tests\Feature;
 
 use Tests\TestCase;
 use App\Models\User;
-use App\Traits\ResponseTrait;
+use App\Traits\TestTrait;
 
 class ProviderTest extends TestCase
 {
-    use ResponseTrait;
+    use TestTrait;
 
     public function testProviderCanEditOwnProfile(): void
     {

@@ -3,22 +3,15 @@
 namespace App\Http\Controllers\Provider;
 
 use App\Http\Controllers\Controller;
-use App\Services\Provider\GetAllLinesService;
-use App\Http\Requests\Provider\EditUserRequest;
-use App\Services\Provider\EditClientUserService;
-use App\Services\Provider\GetOverviewDataService;
-use App\Services\Provider\GetMetricSummaryService;
-use App\Services\Provider\GeneratingReportService;
-use App\Http\Requests\Provider\EditProfileRequest;
-use App\Services\Provider\GetAllClientUsersService;
-use App\Services\Provider\GetAverageVoltageService;
-use App\Services\Provider\GetTotalPowerUsageService;
-use App\Services\Provider\ProviderEditProfileService;
-use App\Services\Provider\GetAllClientMetricsService;
-use App\Services\Provider\GetPowerUsageByClientService;
-use App\Services\Provider\GetVoltageDistributionService;
+use App\Http\Requests\Provider\EditUserRequest; //
+use App\Http\Requests\Provider\EditProfileRequest; //
 
-class ProviderFunctionsController extends Controller
+use App\Services\Provider\EditClientUserService; //
+use App\Services\Provider\ProviderEditProfileService; //
+use App\Services\Provider\DashboardService; //
+use App\Services\Provider\GeneratingReportService;
+
+class ProviderController extends Controller
 {
     public function generateReport()
     {
@@ -55,7 +48,7 @@ class ProviderFunctionsController extends Controller
     public function getUsers($id)
     {
         try {
-            $users = GetAllClientUsersService::getAll($id);
+            $users = DashboardService::getAllClients($id);
 
             return $this->messageResponse(true, "Users retrieved successfully", 200, $users);
         } catch (\Exception $e) {
@@ -66,7 +59,7 @@ class ProviderFunctionsController extends Controller
     public function getMetrics($id)
     {
         try {
-            $metrics = GetAllClientMetricsService::getAll($id);
+            $metrics = DashboardService::getAllMetrics($id);
 
             return $this->messageResponse(true, "Metrics retrieved successfully", 200, $metrics);
         } catch (\Exception $e) {
@@ -77,7 +70,7 @@ class ProviderFunctionsController extends Controller
     public function getLines($id)
     {
         try {
-            $lines = GetAllLinesService::getAll($id);
+            $lines = DashboardService::getAllLines($id);
 
             return $this->messageResponse(true, "Lines retrieved successfully", 200, $lines);
         } catch (\Exception $e) {
@@ -88,7 +81,7 @@ class ProviderFunctionsController extends Controller
     public function getOverviewData($id)
     {
         try {
-            $overviewData = GetOverviewDataService::getOverviewData($id);
+            $overviewData = DashboardService::getOverviewData($id);
             return $this->messageResponse(true, "Overview data retrieved successfully", 200, $overviewData);
         } catch (\Exception $e) {
             return $this->errorMessageResponse(false, $e->getMessage(), "Failed to retrieve overview data", 500);
@@ -98,7 +91,7 @@ class ProviderFunctionsController extends Controller
     public function getTotalPowerUsage($id)
     {
         try {
-            $totalPower = GetTotalPowerUsageService::getTotalPowerUsage($id);
+            $totalPower = DashboardService::getTotalPowerUsage($id);
             return $this->messageResponse(true, "Total power usage retrieved successfully", 200, $totalPower);
         } catch (\Exception $e) {
             return $this->errorMessageResponse(false, $e->getMessage(), "Failed to retrieve total power usage", 500);
@@ -108,7 +101,7 @@ class ProviderFunctionsController extends Controller
     public function getAverageVoltage($id)
     {
         try {
-            $averageVoltage = GetAverageVoltageService::getAverageVoltage($id);
+            $averageVoltage = DashboardService::getAverageVoltage($id);
             return $this->messageResponse(true, "Average voltage retrieved successfully", 200, $averageVoltage);
         } catch (\Exception $e) {
             return $this->errorMessageResponse(false, $e->getMessage(), "Failed to retrieve average voltage", 500);
@@ -118,7 +111,7 @@ class ProviderFunctionsController extends Controller
     public function getPowerUsageByClient($id)
     {
         try {
-            $powerUsageByClient = GetPowerUsageByClientService::getPowerUsageByClient($id);
+            $powerUsageByClient = DashboardService::getPowerUsageByClient($id);
             return $this->messageResponse(true, "Power usage by client retrieved successfully", 200, $powerUsageByClient);
         } catch (\Exception $e) {
             return $this->errorMessageResponse(false, $e->getMessage(), "Failed to retrieve power usage by client", 500);
@@ -128,7 +121,7 @@ class ProviderFunctionsController extends Controller
     public function getVoltageDistribution($id)
     {
         try {
-            $voltageDistribution = GetVoltageDistributionService::getVoltageDistribution($id);
+            $voltageDistribution = DashboardService::getVoltageDistribution($id);
             return $this->messageResponse(true, "Voltage distribution retrieved successfully", 200, $voltageDistribution);
         } catch (\Exception $e) {
             return $this->errorMessageResponse(false, $e->getMessage(), "Failed to retrieve voltage distribution", 500);
@@ -138,7 +131,7 @@ class ProviderFunctionsController extends Controller
     public function getMetricsSummary($id)
     {
         try {
-            $metricsSummary = GetMetricSummaryService::getMetricSummary($id);
+            $metricsSummary = DashboardService::getMetricSummary($id);
             return $this->messageResponse(true, "Metrics summary retrieved successfully", 200, $metricsSummary);
         } catch (\Exception $e) {
             return $this->errorMessageResponse(false, $e->getMessage(), "Failed to retrieve metrics summary", 500);
