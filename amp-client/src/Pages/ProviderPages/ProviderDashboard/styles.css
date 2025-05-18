@@ -79,6 +79,29 @@
   max-height: 450px;
 }
 
+.chart-widget.all-metrics-widget {
+  max-height: 450px;
+  overflow: hidden;
+}
+
+.scrollable-table {
+  max-height: 450px;
+  overflow-y: auto;
+  border: 1px solid #ccc;
+}
+
+.scrollable-table table {
+  width: 100%;
+  border-collapse: collapse;
+}
+
+.scrollable-table th,
+.scrollable-table td {
+  padding: 8px;
+  text-align: left;
+  border-bottom: 1px solid #eee;
+}
+
 .metric-card {
   flex: 1;
   min-width: 150px;
