@@ -532,38 +532,6 @@ const ProviderDashboard = () => {
                 <p>No detailed metrics data available.</p>
               )}
             </div>
-
-            {/* <div className="chart-widget all-metrics-widget">
-              <h3>All Metrics</h3>
-              {allMetrics && Object.keys(allMetrics).length > 0 ? (
-                <table>
-                  <thead>
-                    <tr>
-                      <th>ID</th>
-                      <th>Voltage</th>
-                      <th>Current</th>
-                      <th>Power</th>
-                      <th>Energy</th>
-                      <th>Timestamp</th>
-                    </tr>
-                  </thead>
-                  <tbody>
-                    {allMetrics.map((metric, index) => (
-                      <tr key={metric.id}>
-                        <td>{metric.id}</td>
-                        <td>{metric.voltage}</td>
-                        <td>{metric.current}</td>
-                        <td>{metric.power}</td>
-                        <td>{metric.energy}</td>
-                        <td>{new Date(metric.created_at).toLocaleString()}</td>
-                      </tr>
-                    ))}
-                  </tbody>
-                </table>
-              ) : (
-                <p>No detailed metrics data available.</p>
-              )}
-            </div> */}
           </div>
         )}
       </div>
