@@ -4,6 +4,7 @@ import { toast } from "react-toastify";
 import { useNavigate } from "react-router-dom";
 import "react-toastify/dist/ReactToastify.css";
 import axiosBaseUrl from "../../../Axios/axios";
+import InputField from "../../../Components/CommonComponents/InputField/InputField";
 import ActionButton from "../../../Components/CommonComponents/ActionButton/ActionButton";
 
 const ClientProfile = () => {
@@ -44,38 +45,35 @@ const ClientProfile = () => {
       <h2>Change Password</h2>
       <form className="password-form" onSubmit={handleSubmit}>
         <div className="form-group">
-          <h4 htmlFor="current-password">Current Password:</h4>
-          <input
-            id="current-password"
-            type="password"
+          <InputField
+            label="Current Password"
             placeholder="Enter current password"
             value={currentPassword}
             onChange={(e) => setCurrentPassword(e.target.value)}
-            required
+            type="password"
+            width="90%"
           />
         </div>
 
         <div className="form-group">
-          <h4 htmlFor="new-password">New Password:</h4>
-          <input
-            id="new-password"
-            type="password"
+          <InputField
+            label="New Password"
             placeholder="Enter new password"
             value={newPassword}
             onChange={(e) => setNewPassword(e.target.value)}
-            required
+            type="password"
+            width="90%"
           />
         </div>
 
         <div className="form-group">
-          <h4 htmlFor="confirm-password">Confirm New Password:</h4>
-          <input
-            id="confirm-password"
-            type="password"
+          <InputField
+            label="Confirm New Password"
             placeholder="Confirm new password"
             value={confirmPassword}
             onChange={(e) => setConfirmPassword(e.target.value)}
-            required
+            type="password"
+            width="90%"
           />
         </div>
 
@@ -83,10 +81,9 @@ const ClientProfile = () => {
           text="Save Changes"
           backgroundColor="#233A7E"
           color="#FFF"
-          width="100%"
+          width="50%"
           margin="20px 0 0"
         />
-        {/* {message && <p className="form-message">{message}</p>} */}
       </form>
     </div>
   );
