@@ -102,20 +102,24 @@ const ProviderDashboard = () => {
         const totalPowerUsageResponse = await axiosBaseUrl.get(
           `/providers/totalPowerUsage/${userId}`
         );
-        setTotalPowerUsage(
-          Array.isArray(totalPowerUsageResponse?.data?.data)
-            ? totalPowerUsageResponse.data.data
-            : []
-        );
+        const totalPowerUsageArray = Object.entries(
+          totalPowerUsageResponse.data.data
+        ).map(([date, power]) => ({
+          timestamp: new Date(date).toISOString(),
+          total_power: power,
+        }));
+        setTotalPowerUsage(totalPowerUsageArray);
 
         const averageVoltageResponse = await axiosBaseUrl.get(
           `/providers/averageVoltage/${userId}`
         );
-        setAverageVoltage(
-          Array.isArray(averageVoltageResponse?.data?.data)
-            ? averageVoltageResponse.data.data
-            : []
-        );
+        const averageVoltageArray = Object.entries(
+          averageVoltageResponse.data.data
+        ).map(([date, voltage]) => ({
+          timestamp: new Date(date).toISOString(),
+          average_voltage: voltage,
+        }));
+        setAverageVoltage(averageVoltageArray);
 
         const usersResponse = await axiosBaseUrl.get(
           `/providers/getAllUsers/${userId}`
@@ -134,9 +138,14 @@ const ProviderDashboard = () => {
         const linesResponse = await axiosBaseUrl.get(
           `/providers/getAllLines/${userId}`
         );
-        setTotalLines(usersResponse?.data?.data?.length);
+        setTotalLines(linesResponse?.data?.data?.length);
       } catch (err) {
-        setError(err.message || "Failed to fetch dashboard data for charts");
+        if (err.code === "ECONNABORTED") {
+          setError("Request timed out. Please try again.");
+        } else {
+          setError(err.message || "Failed to fetch dashboard data for charts");
+        }
+        // setError(err.message || "Failed to fetch dashboard data for charts");
         console.error("Error fetching dashboard data for charts:", err);
       } finally {
         setLoading(false);
@@ -177,6 +186,7 @@ const ProviderDashboard = () => {
       },
       title: {
         display: true,
+        text: "Chart",
         font: {
           size: 14,
         },
@@ -185,6 +195,29 @@ const ProviderDashboard = () => {
     scales: {
       y: {
         beginAtZero: true,
+      },
+    },
+  };
+
+  const voltageLineChartOptions = {
+    responsive: true,
+    maintainAspectRatio: false,
+    plugins: {
+      legend: {
+        position: "bottom",
+      },
+      title: {
+        display: true,
+        font: {
+          size: 14,
+        },
+      },
+    },
+    scales: {
+      y: {
+        beginAtZero: true,
+        min: 200,
+        max: 250,
       },
     },
   };
@@ -206,6 +239,7 @@ const ProviderDashboard = () => {
     scales: {
       y: {
         beginAtZero: true,
+        // min: 100,
       },
     },
   };
@@ -243,7 +277,7 @@ const ProviderDashboard = () => {
       {
         label: "Frequency",
         data: voltageDistribution.map((v) => v[1]),
-        backgroundColor: "rgba(201, 203, 207, 0.8)",
+        backgroundColor: "rgba(3, 60, 173, 0.8)",
         borderColor: "rgb(201, 203, 207)",
         borderWidth: 1,
       },
@@ -307,7 +341,9 @@ const ProviderDashboard = () => {
   const totalPowerUsageData = {
     labels: Array.isArray(totalPowerUsage)
       ? totalPowerUsage.map((item) =>
-          new Date(item.timestamp).toLocaleDateString()
+          item.timestamp
+            ? new Date(item.timestamp).toLocaleDateString()
+            : "Invalid"
         )
       : [],
     datasets: [
@@ -367,7 +403,7 @@ const ProviderDashboard = () => {
                 <Bar
                   key="powerByClientChart"
                   data={powerByClientData}
-                  options={chartOptions}
+                  options={lineChartOptions}
                   ref={powerByClientChartRef}
                 />
               ) : (
@@ -382,6 +418,7 @@ const ProviderDashboard = () => {
                   key="voltageDistributionChart"
                   data={voltageDistributionData}
                   options={lineChartOptions}
+                  // options={chartOptions}
                   ref={voltageDistributionChartRef}
                 />
               ) : (
@@ -419,11 +456,11 @@ const ProviderDashboard = () => {
 
             <div className="chart-widget">
               <h3>Total Power Usage Over Time</h3>
-              {totalPowerUsage.length > 0 ? (
+              {totalPowerUsage !== null && totalPowerUsage !== undefined ? (
                 <Line
                   key="totalPowerUsageChart"
                   data={totalPowerUsageData}
-                  options={chartOptions}
+                  options={lineChartOptions}
                   ref={totalPowerUsageChartRef}
                 />
               ) : (
@@ -433,11 +470,12 @@ const ProviderDashboard = () => {
 
             <div className="chart-widget">
               <h3>Average Voltage Over Time</h3>
-              {averageVoltage.length > 0 ? (
+              {averageVoltage !== null && averageVoltage !== undefined ? (
                 <Line
                   key="averageVoltageChart"
                   data={averageVoltageData}
-                  options={chartOptions}
+                  options={voltageLineChartOptions}
+                  // options={chartOptions}
                   ref={averageVoltageChartRef}
                 />
               ) : (
@@ -461,21 +499,27 @@ const ProviderDashboard = () => {
 
             <div className="chart-widget all-metrics-widget">
               <h3>All Metrics</h3>
-              {allMetrics.length > 0 ? (
+              {allMetrics && Object.keys(allMetrics).length > 0 ? (
                 <table>
                   <thead>
                     <tr>
-                      <th>Metric</th>
-                      <th>Value</th>
+                      <th>ID</th>
+                      <th>Voltage</th>
+                      <th>Current</th>
+                      <th>Power</th>
+                      <th>Energy</th>
                       <th>Timestamp</th>
                     </tr>
                   </thead>
                   <tbody>
                     {allMetrics.map((metric, index) => (
-                      <tr key={index}>
-                        <td>{metric.metric_name}</td>
-                        <td>{metric.metric_value}</td>
-                        <td>{new Date(metric.timestamp).toLocaleString()}</td>
+                      <tr key={metric.id}>
+                        <td>{metric.id}</td>
+                        <td>{metric.voltage}</td>
+                        <td>{metric.current}</td>
+                        <td>{metric.power}</td>
+                        <td>{metric.energy}</td>
+                        <td>{new Date(metric.created_at).toLocaleString()}</td>
                       </tr>
                     ))}
                   </tbody>
