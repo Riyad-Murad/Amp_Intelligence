@@ -4,9 +4,9 @@ namespace App\Services\Admin;
 
 use App\Models\User;
 
-class AdminEditProviderProfileService
+class ProviderService
 {
-    public static function editProfile(int $id, array $data)
+        public static function editProfile(int $id, array $data)
     {
         $user = User::where('id', $id)->where('user_type', 'Provider')->firstOrFail();        
 
@@ -29,5 +29,10 @@ class AdminEditProviderProfileService
         $user->save();
 
         return $user;
+    }
+
+    public static function getAll()
+    {
+        return User::where('user_type', 'Provider')->get();
     }
 }

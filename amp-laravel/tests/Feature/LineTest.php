@@ -4,12 +4,12 @@ namespace Tests\Feature;
 
 use Tests\TestCase;
 use App\Models\Master;
-use App\Traits\ResponseTrait;
+use App\Traits\TestTrait;
 use Illuminate\Foundation\Testing\WithFaker;
 
 class LineTest extends TestCase
 {
-    use WithFaker, ResponseTrait;
+    use WithFaker, TestTrait;
 
     public function testSubmitMasterLinesSuccessfully(): void
     {

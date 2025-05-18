@@ -3,12 +3,11 @@
 namespace Tests\Feature;
 
 use Tests\TestCase;
-use App\Traits\ResponseTrait;
-use Illuminate\Support\Facades\Auth;
+use App\Traits\TestTrait;
 
 class ClientTest extends TestCase
 {
-    use ResponseTrait;
+    use TestTrait;
 
     public function testClientCanEditProfile(): void
     {

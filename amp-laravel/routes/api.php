@@ -1,14 +1,11 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\Common\IotController;
 use App\Http\Controllers\Common\AuthController;
-use App\Http\Controllers\Common\LinesController;
-use App\Http\Controllers\Common\MetricsController;
-use App\Http\Controllers\Common\ClientCheckinController;
-use App\Http\Controllers\Common\ProviderCheckinController;
-use App\Http\Controllers\Admin\AdminFunctionsController;
-use App\Http\Controllers\Clients\ClientFunctionsController;
-use App\Http\Controllers\Provider\ProviderFunctionsController;
+use App\Http\Controllers\Admin\AdminController;
+use App\Http\Controllers\Client\ClientController;
+use App\Http\Controllers\Provider\ProviderController;
 
 Route::group(["prefix" => "v1"], function () {
     //Authenticated Users
@@ -18,47 +15,47 @@ Route::group(["prefix" => "v1"], function () {
 
         // Slave/Client Users
         Route::group(["prefix" => "clients", "middleware" => "isClient"], function () {
-            Route::get("/clientReport/{id}", [ClientFunctionsController::class, "generateReport"]);
-            Route::get("/clientDashboardData/{id}", [ClientFunctionsController::class, "getDashboardData"]);
-            Route::post("/editProfile", [ClientFunctionsController::class, "editProfile"]);
+            Route::get("/clientReport/{id}", [ClientController::class, "generateReport"]);
+            Route::get("/clientDashboardData/{id}", [ClientController::class, "getDashboardData"]);
+            Route::post("/editProfile", [ClientController::class, "editProfile"]);
         });
 
         // Master/Provider Users
         Route::group(["prefix" => "providers", "middleware" => "isProvider"], function () {
-            Route::get("/providerReport", [ProviderFunctionsController::class, "generateReport"]);
+            Route::get("/providerReport", [ProviderController::class, "generateReport"]);
 
-            Route::get("/getAllUsers/{id}", [ProviderFunctionsController::class, "getUsers"]);
-            Route::get("/getAllMetrics/{id}", [ProviderFunctionsController::class, "getMetrics"]);
-            Route::get("/getAllLines/{id}", [ProviderFunctionsController::class, "getLines"]);
+            Route::get("/getAllUsers/{id}", [ProviderController::class, "getUsers"]);
+            Route::get("/getAllMetrics/{id}", [ProviderController::class, "getMetrics"]);
+            Route::get("/getAllLines/{id}", [ProviderController::class, "getLines"]);
 
-            Route::get("/overview/{id}", [ProviderFunctionsController::class, "getOverviewData"]);
-            Route::get("/totalPowerUsage/{id}", [ProviderFunctionsController::class, "getTotalPowerUsage"]);
-            Route::get("/averageVoltage/{id}", [ProviderFunctionsController::class, "getAverageVoltage"]);
-            Route::get("/powerUsageByClient/{id}", [ProviderFunctionsController::class, "getPowerUsageByClient"]);
-            Route::get("/voltageDistribution/{id}", [ProviderFunctionsController::class, "getVoltageDistribution"]);
-            Route::get("/metricsSummary/{id}", [ProviderFunctionsController::class, "getMetricsSummary"]);
+            Route::get("/overview/{id}", [ProviderController::class, "getOverviewData"]);
+            Route::get("/totalPowerUsage/{id}", [ProviderController::class, "getTotalPowerUsage"]);
+            Route::get("/averageVoltage/{id}", [ProviderController::class, "getAverageVoltage"]);
+            Route::get("/powerUsageByClient/{id}", [ProviderController::class, "getPowerUsageByClient"]);
+            Route::get("/voltageDistribution/{id}", [ProviderController::class, "getVoltageDistribution"]);
+            Route::get("/metricsSummary/{id}", [ProviderController::class, "getMetricsSummary"]);
             
-            Route::post("/editProfile", [ProviderFunctionsController::class, "editProfile"]);
-            Route::post("/editUser/{id}", [ProviderFunctionsController::class, "editUser"]);
+            Route::post("/editProfile", [ProviderController::class, "editProfile"]);
+            Route::post("/editUser/{id}", [ProviderController::class, "editUser"]);
         });
 
         // Admin Users
         Route::group(["prefix" => "admins", "middleware" => "isAdmin"], function () {
-            Route::get("/getAllProviders", [AdminFunctionsController::class, "getProviders"]);
-            Route::get("/getAllContactMessages", [AdminFunctionsController::class, "getContactMessages"]);
+            Route::get("/getAllProviders", [AdminController::class, "getProviders"]);
+            Route::get("/getAllContactMessages", [AdminController::class, "getContactMessages"]);
 
-            Route::post("/editProvider/{id}", [AdminFunctionsController::class, "editProvider"]);
-            Route::post("/editProfile", [AdminFunctionsController::class, "editProfile"]);
-            Route::delete("/deleteContactMessage/{id}", [AdminFunctionsController::class, "deleteMessage"]);
+            Route::post("/editProvider/{id}", [AdminController::class, "editProvider"]);
+            Route::post("/editProfile", [AdminController::class, "editProfile"]);
+            Route::delete("/deleteContactMessage/{id}", [AdminController::class, "deleteMessage"]);
         });
     });
 
     // Public Routes for Data Entry
-    Route::post("/slaveCheckIn", [ClientCheckinController::class, "slaveCheckin"]);
-    Route::post("/metrics", [MetricsController::class, "slaveMetrics"]);
+    Route::post("/slaveCheckIn", [IotController::class, "slaveCheckin"]);
+    Route::post("/metrics", [IotController::class, "slaveMetrics"]);
 
-    Route::post("/masterCheckIn", [ProviderCheckinController::class, "masterCheckin"]);
-    Route::post("/lines", [LinesController::class, "masterLines"]);
+    Route::post("/masterCheckIn", [IotController::class, "masterCheckin"]);
+    Route::post("/lines", [IotController::class, "masterLines"]);
     
     // Public Route for Contact Message Submission
     // Route::post("/insertMessage", [AuthController::class, "insertMessage"]);

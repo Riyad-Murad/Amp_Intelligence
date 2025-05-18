@@ -15,9 +15,4 @@ class ContactForm extends Model
         'phone_number',
         'message',
     ];
-
-    public function user()
-    {
-        return $this->belongsTo(User::class);
-    }
 }

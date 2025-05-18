@@ -5,9 +5,14 @@ namespace App\Services\Client;
 use DateTime;
 use DateTimeZone;
 use App\Models\Metric;
+use Prism\Prism\Prism;
+use App\Utils\ClientPrompt;
+use Prism\Prism\Enums\Provider;
 use Illuminate\Support\Collection;
+use App\Utils\Schemas\ClientPrismSchema;
+use PHPOpenSourceSaver\JWTAuth\Facades\JWTAuth;
 
-class ClientDashboardService
+class ClientService
 {
     public static function getDashboardData($slaveId): array
     {
@@ -61,5 +66,37 @@ class ClientDashboardService
             'averageVoltageReach' => round($averageVoltageReach, 2),
             'expectedPowerLimit' => $expectedPowerLimit,
         ];
+    }
+
+    public static function editProfile(array $data)
+    {
+        $user = JWTAuth::user();
+        
+        if (!empty($data['password'])) {
+            $user->password = bcrypt($data['password']);
+        }
+
+        $user->save();
+
+        return $user;
+    }
+
+    public static function generateReport($slaveId)
+    {
+        $prompt = ClientPrompt::clientBuildPromptFromMetrics($slaveId);
+        $schema = ClientPrismSchema::metricsReportSchema();
+
+        $response = Prism::structured()
+            ->using(Provider::OpenAI, 'gpt-4.1')
+            ->withSchema($schema)
+            ->withPrompt($prompt)
+            ->asStructured();
+
+        $structured = $response->structured;
+
+        $structured['recommendations'] = str_replace('\n', "\n", $structured['recommendations']);
+        $structured['summary'] = preg_replace('/device\s+\d+/i', 'the device', $structured['summary']);
+
+        return $structured;
     }
 }
