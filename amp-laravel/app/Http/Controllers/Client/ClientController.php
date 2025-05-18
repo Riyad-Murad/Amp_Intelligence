@@ -1,14 +1,12 @@
 <?php
 
-namespace App\Http\Controllers\Clients;
+namespace App\Http\Controllers\Client;
 
 use App\Http\Controllers\Controller;
-use App\Services\Client\ClientDashboardService;
-use App\Services\Client\GeneratingReportService;
-use App\Services\Client\ClientEditProfileService;
+use App\Services\Client\ClientService;
 use App\Http\Requests\Client\EditProfileRequest;
 
-class ClientFunctionsController extends Controller
+class ClientController extends Controller
 {
     public function generateReport($id)
     {
@@ -18,7 +16,7 @@ class ClientFunctionsController extends Controller
                 return $this->messageResponse(false, "Route ID not provided", 400, null);
             }
 
-            $report = GeneratingReportService::generateReport($id);
+            $report = ClientService::generateReport($id);
             return $this->messageResponse(true, "Report Generated", 200, $report);
         } catch (\Exception $e) {
             return $this->errorMessageResponse(false, "Failed to generate report ", $e->getMessage(), 500);
@@ -28,7 +26,7 @@ class ClientFunctionsController extends Controller
     public function editProfile(EditProfileRequest $request)
     {
         try {
-            ClientEditProfileService::editProfile($request->validated());
+            ClientService::editProfile($request->validated());
 
             return $this->messageResponse(true, "Profile updated successfully", 200);
         } catch (\Exception $e) {
@@ -39,7 +37,7 @@ class ClientFunctionsController extends Controller
     public function getDashboardData($id)
     {
         try {
-            $dashboardData = ClientDashboardService::getDashboardData($id);
+            $dashboardData = ClientService::getDashboardData($id);
             return $this->messageResponse(true, "Dashboard data fetched successfully", 200, $dashboardData);
         } catch (\Exception $e) {
             return $this->errorMessageResponse(false, "Failed to fetch dashboard data", $e->getMessage(), 500);

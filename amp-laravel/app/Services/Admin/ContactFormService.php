@@ -5,7 +5,7 @@ namespace App\Services\Admin;
 use App\Models\ContactForm;
 use Illuminate\Database\Eloquent\ModelNotFoundException;
 
-class DeleteContactMessageService
+class ContactFormService
 {
     public static function delete($id): bool
     {
@@ -16,5 +16,10 @@ class DeleteContactMessageService
         }
 
         return $message->delete();
+    }
+
+    public static function getAll()
+    {
+        return ContactForm::all();
     }
 }
