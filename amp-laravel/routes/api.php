@@ -58,7 +58,7 @@ Route::group(["prefix" => "v1"], function () {
     Route::post("/lines", [IotController::class, "masterLines"]);
     
     // Public Route for Contact Message Submission
-    // Route::post("/insertMessage", [AuthController::class, "insertMessage"]);
+    Route::post("/insertMessage", [AuthController::class, "insertMessage"]);
     
     //Unauthenticated Users
     Route::post("/login", [AuthController::class, "login"])->name("login");

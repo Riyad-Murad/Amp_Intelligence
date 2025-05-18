@@ -2,7 +2,7 @@ import "./styles.css";
 import { useState } from "react";
 import { Link } from "react-router-dom";
 import logo from "../../../assets/logo.png";
-import axiosBaseUrl from "../../../Axios/axios";
+import axiosInstance from "../../../Axios/axios";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import {
   faUserCircle,

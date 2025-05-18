@@ -1,5 +1,4 @@
 import "./styles.css";
-import axiosBaseUrl from "../../../Axios/axios";
 import { useLogout } from "../../../Hooks/useLogoutHook";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faSignOutAlt } from "@fortawesome/free-solid-svg-icons";

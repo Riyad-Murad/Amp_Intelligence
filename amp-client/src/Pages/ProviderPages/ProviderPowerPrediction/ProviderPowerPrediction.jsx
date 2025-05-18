@@ -1,8 +1,8 @@
 import "./styles.css";
 import { useState } from "react";
-import axiosBaseUrl from "../../../Axios/axios";
 import { useDispatch, useSelector } from "react-redux";
 import { toggleLoad } from "../../../Redux/Slices/loadingSlice";
+import ProviderPowerPredictionService from "../Services/ProviderPowerPredictionService/ProviderPowerPredictionService";
 
 const ProviderPowerPrediction = () => {
   const [predictionData, setPredictionData] = useState(null);
@@ -14,11 +14,10 @@ const ProviderPowerPrediction = () => {
     setPredictionData(null);
 
     try {
-      const response = await axiosBaseUrl.get("/providers/providerReport");
-      const data = response.data;
-      setPredictionData(data.data);
+      const data = await ProviderPowerPredictionService.fetchPowerPrediction();
+      setPredictionData(data);
     } catch (error) {
-      console.error("Error fetching power prediction:", error);
+      console.error("Error fetching power prediction:", error.message);
       setPredictionData(null);
     } finally {
       dispatch(toggleLoad(false));
@@ -27,9 +26,6 @@ const ProviderPowerPrediction = () => {
 
   return (
     <div className="provider-power-prediction-container">
-      {/* <div className="fixing">
-
-      </div> */}
       <div className="main-content">
         <h1 className="main-content-title section-titles">Power Prediction</h1>
 
@@ -83,8 +79,8 @@ const ProviderPowerPrediction = () => {
                   <ul>
                     {predictionData.recommendations
                       .split("\n")
-                      .map((recommendation, index) => (
-                        <li key={index}>{recommendation}</li>
+                      .map((rec, idx) => (
+                        <li key={idx}>{rec}</li>
                       ))}
                   </ul>
                 </div>

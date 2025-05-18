@@ -1,8 +1,8 @@
 import "./styles.css";
-import axiosBaseUrl from "../../../Axios/axios";
 import { useEffect, useState, useRef } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { toggleLoad } from "../../../Redux/Slices/loadingSlice";
+import ProviderDashboardService from "../Services/ProviderDashboardService/ProviderDashboardService";
 import {
   Chart as ChartJS,
   CategoryScale,
@@ -41,112 +41,60 @@ ChartJS.register(
 const ProviderDashboard = () => {
   const userId = useSelector((state) => state.user.id);
   const dispatch = useDispatch();
-  const [overviewData, setOverviewData] = useState(null);
-  const [powerUsageByClient, setPowerUsageByClient] = useState([]);
-  const [voltageDistribution, setVoltageDistribution] = useState([]);
-  const [metricsSummary, setMetricsSummary] = useState(null);
-  const [totalPowerUsage, setTotalPowerUsage] = useState([]);
-  const [averageVoltage, setAverageVoltage] = useState([]);
-  const [totalUsers, setTotalUsers] = useState(null);
-  const [allMetrics, setAllMetrics] = useState([]);
-  const [totalLines, setTotalLines] = useState(null);
+
+  // State declarations
+  const [dashboardData, setDashboardData] = useState({
+    overviewData: null,
+    powerUsageByClient: [],
+    voltageDistribution: [],
+    metricsSummary: null,
+    totalPowerUsage: [],
+    averageVoltage: [],
+    totalUsers: null,
+    allMetrics: [],
+    totalLines: null,
+  });
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState(null);
 
-  const powerByClientChartRef = useRef(null);
-  const voltageDistributionChartRef = useRef(null);
-  const metricsSummaryChartRef = useRef(null);
-  const clientCountChartRef = useRef(null);
-  const totalPowerUsageChartRef = useRef(null);
-  const averageVoltageChartRef = useRef(null);
+  // Destructure data from state for easier access
+  const {
+    overviewData,
+    powerUsageByClient,
+    voltageDistribution,
+    metricsSummary,
+    totalPowerUsage,
+    averageVoltage,
+    totalUsers,
+    allMetrics,
+    totalLines,
+  } = dashboardData;
 
+  // Chart refs for cleanup
+  const chartRefs = {
+    powerByClientChart: useRef(null),
+    voltageDistributionChart: useRef(null),
+    metricsSummaryChart: useRef(null),
+    clientCountChart: useRef(null),
+    totalPowerUsageChart: useRef(null),
+    averageVoltageChart: useRef(null),
+  };
+
+  // Fetch data on component mount
   useEffect(() => {
     const fetchDashboardData = async () => {
       dispatch(toggleLoad(true));
       setLoading(true);
       setError(null);
+
       try {
-        const overviewResponse = await axiosBaseUrl.get(
-          `/providers/overview/${userId}`
+        const data = await ProviderDashboardService.fetchAllDashboardData(
+          userId
         );
-        setOverviewData(overviewResponse.data.data);
-
-        const powerByClientResponse = await axiosBaseUrl.get(
-          `/providers/powerUsageByClient/${userId}`
-        );
-        setPowerUsageByClient(powerByClientResponse.data.data);
-
-        const voltageDistributionResponse = await axiosBaseUrl.get(
-          `/providers/voltageDistribution/${userId}`
-        );
-        const voltageData = voltageDistributionResponse.data.data.map(
-          (v) => v.voltage
-        );
-        const voltageCounts = {};
-        voltageData.forEach((v) => {
-          const roundedVoltage = Math.round(v);
-          voltageCounts[roundedVoltage] =
-            (voltageCounts[roundedVoltage] || 0) + 1;
-        });
-        setVoltageDistribution(
-          Object.entries(voltageCounts).sort(
-            (a, b) => parseInt(a[0]) - parseInt(b[0])
-          )
-        );
-
-        const metricsSummaryResponse = await axiosBaseUrl.get(
-          `/providers/metricsSummary/${userId}`
-        );
-        setMetricsSummary(metricsSummaryResponse.data.data);
-
-        const totalPowerUsageResponse = await axiosBaseUrl.get(
-          `/providers/totalPowerUsage/${userId}`
-        );
-        const totalPowerUsageArray = Object.entries(
-          totalPowerUsageResponse.data.data
-        ).map(([date, power]) => ({
-          timestamp: new Date(date).toISOString(),
-          total_power: power,
-        }));
-        setTotalPowerUsage(totalPowerUsageArray);
-
-        const averageVoltageResponse = await axiosBaseUrl.get(
-          `/providers/averageVoltage/${userId}`
-        );
-        const averageVoltageArray = Object.entries(
-          averageVoltageResponse.data.data
-        ).map(([date, voltage]) => ({
-          timestamp: new Date(date).toISOString(),
-          average_voltage: voltage,
-        }));
-        setAverageVoltage(averageVoltageArray);
-
-        const usersResponse = await axiosBaseUrl.get(
-          `/providers/getAllUsers/${userId}`
-        );
-        setTotalUsers(usersResponse?.data?.data?.length);
-
-        const allMetricsResponse = await axiosBaseUrl.get(
-          `/providers/getAllMetrics/${userId}`
-        );
-        setAllMetrics(
-          Array.isArray(allMetricsResponse?.data?.data)
-            ? allMetricsResponse.data.data
-            : []
-        );
-
-        const linesResponse = await axiosBaseUrl.get(
-          `/providers/getAllLines/${userId}`
-        );
-        setTotalLines(linesResponse?.data?.data?.length);
+        setDashboardData(data);
       } catch (err) {
-        if (err.code === "ECONNABORTED") {
-          setError("Request timed out. Please try again.");
-        } else {
-          setError(err.message || "Failed to fetch dashboard data for charts");
-        }
-        // setError(err.message || "Failed to fetch dashboard data for charts");
-        console.error("Error fetching dashboard data for charts:", err);
+        setError(err.message || "Failed to fetch dashboard data");
+        console.error("Error fetching dashboard data:", err);
       } finally {
         setLoading(false);
         dispatch(toggleLoad(false));
@@ -155,334 +103,320 @@ const ProviderDashboard = () => {
 
     fetchDashboardData();
 
+    // Cleanup function for chart instances
     return () => {
-      if (powerByClientChartRef.current) {
-        powerByClientChartRef.current.destroy();
-      }
-      if (voltageDistributionChartRef.current) {
-        voltageDistributionChartRef.current.destroy();
-      }
-      if (metricsSummaryChartRef.current) {
-        metricsSummaryChartRef.current.destroy();
-      }
-      if (clientCountChartRef.current) {
-        clientCountChartRef.current.destroy();
-      }
-      if (totalPowerUsageChartRef.current) {
-        totalPowerUsageChartRef.current.destroy();
-      }
-      if (averageVoltageChartRef.current) {
-        averageVoltageChartRef.current.destroy();
-      }
+      Object.values(chartRefs).forEach((ref) => {
+        if (ref.current) {
+          ref.current.destroy();
+        }
+      });
     };
   }, [userId, dispatch]);
 
-  const chartOptions = {
-    responsive: true,
-    maintainAspectRatio: true,
-    plugins: {
-      legend: {
-        position: "bottom",
+  // Chart configuration objects
+  const chartConfigs = {
+    standard: {
+      responsive: true,
+      maintainAspectRatio: true,
+      plugins: {
+        legend: { position: "bottom" },
+        title: {
+          display: true,
+          text: "Chart",
+          font: { size: 14 },
+        },
       },
-      title: {
-        display: true,
-        text: "Chart",
-        font: {
-          size: 14,
+      scales: {
+        y: { beginAtZero: true },
+      },
+    },
+
+    voltage: {
+      responsive: true,
+      maintainAspectRatio: false,
+      plugins: {
+        legend: { position: "bottom" },
+        title: {
+          display: true,
+          font: { size: 14 },
+        },
+      },
+      scales: {
+        y: {
+          beginAtZero: true,
+          min: 200,
+          max: 250,
         },
       },
     },
-    scales: {
-      y: {
-        beginAtZero: true,
-      },
-    },
-  };
 
-  const voltageLineChartOptions = {
-    responsive: true,
-    maintainAspectRatio: false,
-    plugins: {
-      legend: {
-        position: "bottom",
-      },
-      title: {
-        display: true,
-        font: {
-          size: 14,
+    line: {
+      responsive: true,
+      maintainAspectRatio: false,
+      plugins: {
+        legend: { position: "bottom" },
+        title: {
+          display: true,
+          font: { size: 14 },
         },
       },
-    },
-    scales: {
-      y: {
-        beginAtZero: true,
-        min: 200,
-        max: 250,
+      scales: {
+        y: { beginAtZero: true },
       },
     },
   };
 
-  const lineChartOptions = {
-    responsive: true,
-    maintainAspectRatio: false,
-    plugins: {
-      legend: {
-        position: "bottom",
-      },
-      title: {
-        display: true,
-        font: {
-          size: 14,
+  // Chart data preparation
+  const chartData = {
+    powerByClient: {
+      labels: powerUsageByClient.map((client) => client.client_name),
+      datasets: [
+        {
+          label: "Power Usage (kWh)",
+          data: powerUsageByClient.map((client) => client.total_power),
+          backgroundColor: [
+            "rgba(255, 99, 132, 0.6)",
+            "rgba(54, 162, 235, 0.6)",
+            "rgba(255, 206, 86, 0.6)",
+            "rgba(75, 192, 192, 0.6)",
+            "rgba(153, 102, 255, 0.6)",
+            "rgba(255, 159, 64, 0.6)",
+          ],
+          borderColor: [
+            "rgba(255, 99, 132, 1)",
+            "rgba(54, 162, 235, 1)",
+            "rgba(255, 206, 86, 1)",
+            "rgba(75, 192, 192, 1)",
+            "rgba(153, 102, 255, 1)",
+            "rgba(255, 159, 64, 1)",
+          ],
+          borderWidth: 1,
         },
-      },
+      ],
     },
-    scales: {
-      y: {
-        beginAtZero: true,
-        // min: 100,
-      },
+
+    voltageDistribution: {
+      labels: voltageDistribution.map((v) => v[0]),
+      datasets: [
+        {
+          label: "Frequency",
+          data: voltageDistribution.map((v) => v[1]),
+          backgroundColor: "rgba(3, 60, 173, 0.8)",
+          borderColor: "rgb(201, 203, 207)",
+          borderWidth: 1,
+        },
+      ],
+    },
+
+    metricsSummary: {
+      labels: [
+        "Min Power",
+        "Max Power",
+        "Avg Power",
+        "Min Voltage",
+        "Max Voltage",
+        "Avg Voltage",
+      ],
+      datasets: [
+        {
+          label: "Metrics",
+          data: [
+            metricsSummary?.minPower,
+            metricsSummary?.maxPower,
+            metricsSummary?.avgPower,
+            metricsSummary?.minVoltage,
+            metricsSummary?.maxVoltage,
+            metricsSummary?.avgVoltage,
+          ],
+          backgroundColor: [
+            "rgba(255, 99, 132, 0.7)",
+            "rgba(54, 162, 235, 0.7)",
+            "rgba(255, 206, 86, 0.7)",
+            "rgba(75, 192, 192, 0.7)",
+            "rgba(153, 102, 255, 0.7)",
+            "rgba(255, 159, 64, 0.7)",
+          ],
+          borderColor: [
+            "rgba(255, 99, 132, 1)",
+            "rgba(54, 162, 235, 1)",
+            "rgba(255, 206, 86, 1)",
+            "rgba(75, 192, 192, 1)",
+            "rgba(153, 102, 255, 1)",
+            "rgba(255, 159, 64, 1)",
+          ],
+          borderWidth: 1,
+        },
+      ],
+    },
+
+    clientCount: {
+      labels: ["Total Clients"],
+      datasets: [
+        {
+          label: "Number of Clients",
+          data: [overviewData?.totalClients || 0],
+          backgroundColor: ["rgba(99, 255, 132, 0.7)"],
+          borderColor: ["rgba(99, 255, 132, 1)"],
+          borderWidth: 1,
+        },
+      ],
+    },
+
+    totalPowerUsage: {
+      labels: totalPowerUsage.map((item) =>
+        new Date(item.timestamp).toLocaleDateString()
+      ),
+      datasets: [
+        {
+          label: "Total Power Usage (kWh)",
+          data: totalPowerUsage.map((item) => item.total_power),
+          fill: false,
+          backgroundColor: "rgba(75, 192, 192, 0.6)",
+          borderColor: "rgba(75, 192, 192, 1)",
+          tension: 0.1,
+        },
+      ],
+    },
+
+    averageVoltage: {
+      labels: averageVoltage.map((item) =>
+        new Date(item.timestamp).toLocaleDateString()
+      ),
+      datasets: [
+        {
+          label: "Average Voltage (V)",
+          data: averageVoltage.map((item) => item.average_voltage),
+          fill: false,
+          backgroundColor: "rgba(255, 159, 64, 0.6)",
+          borderColor: "rgba(255, 159, 64, 1)",
+          tension: 0.1,
+        },
+      ],
     },
   };
 
-  const powerByClientData = {
-    labels: powerUsageByClient.map((client) => client.client_name),
-    datasets: [
-      {
-        label: "Power Usage (kWh)",
-        data: powerUsageByClient.map((client) => client.total_power),
-        backgroundColor: [
-          "rgba(255, 99, 132, 0.6)",
-          "rgba(54, 162, 235, 0.6)",
-          "rgba(255, 206, 86, 0.6)",
-          "rgba(75, 192, 192, 0.6)",
-          "rgba(153, 102, 255, 0.6)",
-          "rgba(255, 159, 64, 0.6)",
-        ],
-        borderColor: [
-          "rgba(255, 99, 132, 1)",
-          "rgba(54, 162, 235, 1)",
-          "rgba(255, 206, 86, 1)",
-          "rgba(75, 192, 192, 1)",
-          "rgba(153, 102, 255, 1)",
-          "rgba(255, 159, 64, 1)",
-        ],
-        borderWidth: 1,
-      },
-    ],
-  };
-
-  const voltageDistributionData = {
-    labels: voltageDistribution.map((v) => v[0]),
-    datasets: [
-      {
-        label: "Frequency",
-        data: voltageDistribution.map((v) => v[1]),
-        backgroundColor: "rgba(3, 60, 173, 0.8)",
-        borderColor: "rgb(201, 203, 207)",
-        borderWidth: 1,
-      },
-    ],
-  };
-
-  const metricsSummaryPieData = {
-    labels: [
-      "Min Power",
-      "Max Power",
-      "Avg Power",
-      "Min Voltage",
-      "Max Voltage",
-      "Avg Voltage",
-    ],
-    datasets: [
-      {
-        label: "Metrics",
-        data: [
-          metricsSummary?.minPower,
-          metricsSummary?.maxPower,
-          metricsSummary?.avgPower,
-          metricsSummary?.minVoltage,
-          metricsSummary?.maxVoltage,
-          metricsSummary?.avgVoltage,
-        ],
-        backgroundColor: [
-          "rgba(255, 99, 132, 0.7)",
-          "rgba(54, 162, 235, 0.7)",
-          "rgba(255, 206, 86, 0.7)",
-          "rgba(75, 192, 192, 0.7)",
-          "rgba(153, 102, 255, 0.7)",
-          "rgba(255, 159, 64, 0.7)",
-        ],
-        borderColor: [
-          "rgba(255, 99, 132, 1)",
-          "rgba(54, 162, 235, 1)",
-          "rgba(255, 206, 86, 1)",
-          "rgba(75, 192, 192, 1)",
-          "rgba(153, 102, 255, 1)",
-          "rgba(255, 159, 64, 1)",
-        ],
-        borderWidth: 1,
-      },
-    ],
-  };
-
-  const clientCountData = {
-    labels: ["Total Clients"],
-    datasets: [
-      {
-        label: "Number of Clients",
-        data: [overviewData?.totalClients || 0],
-        backgroundColor: ["rgba(99, 255, 132, 0.7)"],
-        borderColor: ["rgba(99, 255, 132, 1)"],
-        borderWidth: 1,
-      },
-    ],
-  };
-
-  const totalPowerUsageData = {
-    labels: Array.isArray(totalPowerUsage)
-      ? totalPowerUsage.map((item) =>
-          item.timestamp
-            ? new Date(item.timestamp).toLocaleDateString()
-            : "Invalid"
-        )
-      : [],
-    datasets: [
-      {
-        label: "Total Power Usage (kWh)",
-        data: Array.isArray(totalPowerUsage)
-          ? totalPowerUsage.map((item) => item.total_power)
-          : [],
-        fill: false,
-        backgroundColor: "rgba(75, 192, 192, 0.6)",
-        borderColor: "rgba(75, 192, 192, 1)",
-        tension: 0.1,
-      },
-    ],
-  };
-
-  const averageVoltageData = {
-    labels: Array.isArray(averageVoltage)
-      ? averageVoltage.map((item) =>
-          new Date(item.timestamp).toLocaleDateString()
-        )
-      : [],
-    datasets: [
-      {
-        label: "Average Voltage (V)",
-        data: Array.isArray(averageVoltage)
-          ? averageVoltage.map((item) => item.average_voltage)
-          : [],
-        fill: false,
-        backgroundColor: "rgba(255, 159, 64, 0.6)",
-        borderColor: "rgba(255, 159, 64, 1)",
-        tension: 0.1,
-      },
-    ],
+  // Helper function to check if data is available
+  const hasData = (data) => {
+    if (Array.isArray(data)) {
+      return data.length > 0;
+    }
+    return data !== null && data !== undefined;
   };
 
   return (
     <div className="provider-dashboard-container">
       <div className="main-content">
-        <h2 className="main-content-title section-titles">Dashboard</h2>
+        <h2 className="main-content-title section-titles un-centered">Dashboard</h2>
+
+        {/* Loading state */}
         {loading && (
           <div className="spinner-container">
             <div className="spinner"></div>
             <p>Loading dashboard data...</p>
           </div>
         )}
+
+        {/* Error state */}
         {error && (
           <div className="error-message">
             Error loading dashboard data: {error}
           </div>
         )}
+
+        {/* Dashboard content */}
         {!loading && !error && (
           <div className="charts-row">
+            {/* Power Usage By Client Chart */}
             <div className="chart-widget">
               <h3>Client Power Usage Distribution</h3>
-              {powerUsageByClient.length > 0 ? (
+              {hasData(powerUsageByClient) ? (
                 <Bar
                   key="powerByClientChart"
-                  data={powerByClientData}
-                  options={lineChartOptions}
-                  ref={powerByClientChartRef}
+                  data={chartData.powerByClient}
+                  options={chartConfigs.line}
+                  ref={chartRefs.powerByClientChart}
                 />
               ) : (
                 <p>No power usage data available for clients this month.</p>
               )}
             </div>
 
+            {/* Voltage Distribution Chart */}
             <div className="chart-widget voltage-distribution-widget">
               <h3>Voltage Frequency Distribution</h3>
-              {voltageDistribution.length > 0 ? (
+              {hasData(voltageDistribution) ? (
                 <Line
                   key="voltageDistributionChart"
-                  data={voltageDistributionData}
-                  options={lineChartOptions}
-                  // options={chartOptions}
-                  ref={voltageDistributionChartRef}
+                  data={chartData.voltageDistribution}
+                  options={chartConfigs.line}
+                  ref={chartRefs.voltageDistributionChart}
                 />
               ) : (
                 <p>No voltage distribution data available.</p>
               )}
             </div>
 
+            {/* Metrics Summary Chart */}
             <div className="chart-widget">
               <h3>Key Metrics Snapshot</h3>
-              {metricsSummary ? (
+              {hasData(metricsSummary) ? (
                 <Doughnut
                   key="metricsSummaryChart"
-                  data={metricsSummaryPieData}
-                  options={chartOptions}
-                  ref={metricsSummaryChartRef}
+                  data={chartData.metricsSummary}
+                  options={chartConfigs.standard}
+                  ref={chartRefs.metricsSummaryChart}
                 />
               ) : (
                 <p>No metrics summary data available.</p>
               )}
             </div>
 
+            {/* Client Count Chart */}
             <div className="chart-widget">
               <h3>Total Client Count</h3>
-              {overviewData ? (
+              {hasData(overviewData) ? (
                 <Pie
                   key="clientCountChart"
-                  data={clientCountData}
-                  options={chartOptions}
-                  ref={clientCountChartRef}
+                  data={chartData.clientCount}
+                  options={chartConfigs.standard}
+                  ref={chartRefs.clientCountChart}
                 />
               ) : (
                 <p>No overview data available to display client count.</p>
               )}
             </div>
 
+            {/* Total Power Usage Chart */}
             <div className="chart-widget">
               <h3>Total Power Usage Over Time</h3>
-              {totalPowerUsage !== null && totalPowerUsage !== undefined ? (
+              {hasData(totalPowerUsage) ? (
                 <Line
                   key="totalPowerUsageChart"
-                  data={totalPowerUsageData}
-                  options={lineChartOptions}
-                  ref={totalPowerUsageChartRef}
+                  data={chartData.totalPowerUsage}
+                  options={chartConfigs.line}
+                  ref={chartRefs.totalPowerUsageChart}
                 />
               ) : (
                 <p>No total power usage data available.</p>
               )}
             </div>
 
+            {/* Average Voltage Chart */}
             <div className="chart-widget">
               <h3>Average Voltage Over Time</h3>
-              {averageVoltage !== null && averageVoltage !== undefined ? (
+              {hasData(averageVoltage) ? (
                 <Line
                   key="averageVoltageChart"
-                  data={averageVoltageData}
-                  options={voltageLineChartOptions}
-                  // options={chartOptions}
-                  ref={averageVoltageChartRef}
+                  data={chartData.averageVoltage}
+                  options={chartConfigs.voltage}
+                  ref={chartRefs.averageVoltageChart}
                 />
               ) : (
                 <p>No average voltage data available.</p>
               )}
             </div>
 
+            {/* Metric Cards */}
             <div className="metric-card">
               <h3>Total Users</h3>
               <p className="metric-value">
@@ -497,9 +431,10 @@ const ProviderDashboard = () => {
               </p>
             </div>
 
+            {/* All Metrics Table */}
             <div className="chart-widget all-metrics-widget">
               <h3>All Metrics</h3>
-              {allMetrics && Object.keys(allMetrics).length > 0 ? (
+              {hasData(allMetrics) ? (
                 <div className="scrollable-table">
                   <table>
                     <thead>

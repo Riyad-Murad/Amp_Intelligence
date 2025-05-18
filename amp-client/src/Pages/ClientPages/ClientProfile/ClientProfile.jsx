@@ -1,18 +1,17 @@
 import "./styles.css";
 import { useState } from "react";
 import { toast } from "react-toastify";
-import { useNavigate } from "react-router-dom";
 import "react-toastify/dist/ReactToastify.css";
-import axiosBaseUrl from "../../../Axios/axios";
 import InputField from "../../../Components/CommonComponents/InputField/InputField";
 import ActionButton from "../../../Components/CommonComponents/ActionButton/ActionButton";
+import ClientProfileService from "../Services/ClientProfileService/ClientProfileService";
 
 const ClientProfile = () => {
   const [currentPassword, setCurrentPassword] = useState("");
   const [newPassword, setNewPassword] = useState("");
   const [confirmPassword, setConfirmPassword] = useState("");
 
-  const navigate = useNavigate();
+  const { updatePassword } = ClientProfileService();
 
   const handleSubmit = async (e) => {
     e.preventDefault();
@@ -22,22 +21,7 @@ const ClientProfile = () => {
       return;
     }
 
-    const password = newPassword;
-
-    try {
-      const response = await axiosBaseUrl.post("/clients/editProfile", {
-        password,
-      });
-
-      if (response.data.success) {
-        toast.success("Password updated successfully.");
-        setTimeout(() => navigate("/client/dashboard"), 1000);
-      } else {
-        toast.error(response.data.message || "Failed to update password.");
-      }
-    } catch (error) {
-      toast.error("An error occurred. Please try again.");
-    }
+    await updatePassword({ password: newPassword });
   };
 
   return (
