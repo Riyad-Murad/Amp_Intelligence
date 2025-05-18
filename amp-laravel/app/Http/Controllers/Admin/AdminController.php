@@ -2,10 +2,10 @@
 
 namespace App\Http\Controllers\Admin;
 
+use App\Services\Admin\AdminService;
 use App\Http\Controllers\Controller;
 use App\Services\Admin\ProviderService;
 use App\Services\Admin\ContactFormService;
-use App\Services\Admin\EditProfileService;
 use App\Http\Requests\Admin\EditProfileRequest;
 use App\Http\Requests\Admin\EditProviderRequest;
 use Illuminate\Database\Eloquent\ModelNotFoundException;
@@ -61,7 +61,7 @@ class AdminController extends Controller
     public function editProfile(EditProfileRequest $request)
     {
         try {
-            EditProfileService::editProfile($request->validated());
+            AdminService::editProfile($request->validated());
 
             return $this->messageResponse(true, "Profile updated successfully", 200);
         } catch (\Exception $e) {
