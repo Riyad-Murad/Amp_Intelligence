@@ -17,20 +17,26 @@
 ### ER Diagram
 
 <center>
-<img src="./readme/demo/ERD.png"/>
+<img src="./readme/demo/Diagrams/ERD.png"/>
 </center>
 
 ### Component Diagram
 
 <center>
-<img src="./readme/demo/Component Diagram 2.0.png"/>
+<img src="./readme/demo/Diagrams/Component Diagram.png"/>
 </center>
 
 ### Flow Diagram
 
 <center>
-<img src="./readme/demo/Flow Diagram.png"/>
+<img src="./readme/demo/Diagrams/Flow Diagram.png"/>
 </center>
+
+### Project Box Design
+
+| Power Box 1                             | Power Box 2                       | Power Box 3                        |
+| --------------------------------------- | ------------------------------------- | ------------------------------------- |
+| ![PowerBox](./readme/demo/Project_Box/Power_Room_1.jpg) | ![PowerBox](./readme/demo/Project_Box/Power_Room_2.jpg) | ![PowerBox](./readme/demo/Project_Box/Power_Room_3.jpg) |
 
 <br><br>
 
@@ -50,11 +56,20 @@
 <!-- Demo -->
 <img src="./readme/title5.svg"/>
 
-### User Screens (Mobile)
+### Client Screens (Web)
 
-| Login screen                            | Register screen                       | Register screen                       |
-| --------------------------------------- | ------------------------------------- | ------------------------------------- |
-| ![Landing](./readme/demo/1440x1024.png) | ![fsdaf](./readme/demo/1440x1024.png) | ![fsdaf](./readme/demo/1440x1024.png) |
+| Login screen                            | Register screen                       |
+| --------------------------------------- | ------------------------------------- |
+| ![Landing](./readme/demo/1440x1024.png) | ![fsdaf](./readme/demo/1440x1024.png) |
+
+
+
+### Provider Screens (Web)
+
+| Login screen                            | Register screen                       |
+| --------------------------------------- | ------------------------------------- |
+| ![Landing](./readme/demo/1440x1024.png) | ![fsdaf](./readme/demo/1440x1024.png) |
+
 
 
 ### Admin Screens (Web)
@@ -69,27 +84,59 @@
 <!-- Development & Testing -->
 <img src="./readme/title6.svg"/>
 
-### Add Title Here
+### Code Test Cases
 
-
-| Services                            | Validation                       | Testing                        |
+| Test Case                            | Test Case                       | Test Case                        |
 | --------------------------------------- | ------------------------------------- | ------------------------------------- |
-| ![Landing](./readme/demo/1440x1024.png) | ![fsdaf](./readme/demo/1440x1024.png) | ![fsdaf](./readme/demo/1440x1024.png) |
+| ![TestCase](./readme/demo/Testing/User_Test.png) | ![TestCase](./readme/demo/testing/Client_Dashboard_Test.png) | ![TestCase](./readme/demo/Testing/Provider_Overview_Test.png) |
 
+### GitHub Testing Pull Request
+
+| GitHub Testing Pipeline                            | GitHub Pull Request                       | Testing Output                       |
+| --------------------------------------- | ------------------------------------- | ------------------------------------- |
+| ![GitHubTestPipeline](./readme/demo/Testing/Laravel_Test_Staging.png) | ![GitHubPullRequest](./readme/demo/Testing/Pull%20Request%20Test%20Success.png) | ![LaravelTest](./readme/demo/Testing/php_artisan_test_success.png) |
+
+<br><br>
+
+<!-- AI-Power APP -->
+<img src="./readme/title7.svg"/>
+
+### OpenAI Intengration
+
+- Description here.
+
+| Prism Function Call                            | Prism Client Prompt                       | Prism Provider Prompt                        |
+| --------------------------------------- | ------------------------------------- | ------------------------------------- |
+| ![PrismCall](./readme/demo/AI/PrismFunctionCall.png) | ![ClientPrompt](./readme/demo/AI/PrismClientPrompt.png) | ![ProviderPrompt](./readme/demo/AI/PrismProviderPrompt.png) |
+
+### Server Response with Database Indexing
+
+- Provider user response time difference
+
+| Postman API Before Indexing                            | Postman API After Indexing                       |
+| --------------------------------------- | ------------------------------------- |
+| ![BeforeIndex](./readme/demo/AI/Provider%20Report%20Before%20Indexing.png) | ![AfterIndex](./readme/demo/AI/Provider%20Report%20After%20Indexing.png) |
+
+### Server Response with Database Indexing
+
+- Client user response time difference
+
+| Postman API Before Indexing                            | Postman API After Indexing                       |
+| --------------------------------------- | ------------------------------------- |
+| ![BeforeIndex](./readme/demo/AI/Client%20Report%20Before%20Indexing.png) | ![AfterIndex](./readme/demo/AI/Client%20Report%20After%20Indexing.png) |
 
 <br><br>
 
 <!-- Deployment -->
-<img src="./readme/title7.svg"/>
+<img src="./readme/title8.svg"/>
 
-### Add Title Here
+### EC2 Docker containers deployment
 
-- Description here.
+- You can check the full API documentation using this [link]().
 
-
-| Postman API 1                            | Postman API 2                       | Postman API 3                        |
+| Deployment Pipeline Sample                            | GitHub Deployment Pipeline Success                       | EC2 Instance docker deployed                        |
 | --------------------------------------- | ------------------------------------- | ------------------------------------- |
-| ![Landing](./readme/demo/1440x1024.png) | ![fsdaf](./readme/demo/1440x1024.png) | ![fsdaf](./readme/demo/1440x1024.png) |
+| ![PipelineSample](./readme/demo/Deployment/Deployment%20Pipeline%201.png) | ![PipelineSuccess](./readme/demo/Deployment/GitHub_Deploy_Staging_Pipeline.png) | ![EC2Deployed](./readme/demo/Deployment/Node_Server_Docker_Deployed.png) |
 
 <br><br>
 
