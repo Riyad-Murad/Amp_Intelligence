@@ -86,9 +86,13 @@
 
 ### Code Test Cases
 
-| Test Case                            | Test Case                       | Test Case                        |
-| --------------------------------------- | ------------------------------------- | ------------------------------------- |
-| ![TestCase](./readme/demo/Testing/User_Test.png) | ![TestCase](./readme/demo/testing/Client_Dashboard_Test.png) | ![TestCase](./readme/demo/Testing/Provider_Overview_Test.png) |
+| Test Case                           | Test Case                       |
+| --------------------------------------- | ------------------------------------- |
+| ![TestCase](./readme/demo/Testing/User_Test.png) | ![TestCase](./readme/demo/Testing/Client_Dashboard_Test.png) |
+
+|Test Case                           | Test Case                       |
+| --------------------------------------- | ------------------------------------- |
+| ![TestCase](./readme/demo/Testing/Provider_Overview_Test.png) | ![TestCase](./readme/demo/Testing/Metric_Test.png) |
 
 ### GitHub Testing Pull Request
 
@@ -132,7 +136,7 @@
 
 ### EC2 Docker containers deployment
 
-- You can check the full API documentation using this [link]().
+- You can check the full API documentation using this [link](https://documenter.getpostman.com/view/42830816/2sB2qXji4H).
 
 | Deployment Pipeline Sample                            | GitHub Deployment Pipeline Success                       | EC2 Instance docker deployed                        |
 | --------------------------------------- | ------------------------------------- | ------------------------------------- |
