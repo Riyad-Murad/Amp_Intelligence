@@ -1,15 +1,29 @@
 // ProviderPowerPredictionService.js
+import { useDispatch } from "react-redux";
 import axiosInstance from "../../../../Axios/axios";
+import { toggleLoad } from "../../../../Redux/Slices/loadingSlice";
 
-const ProviderPowerPredictionService = {
-  async fetchPowerPrediction() {
+const ProviderPowerPredictionService = () => {
+  const dispatch = useDispatch();
+
+  const fetchProviderPredictionReport = async (userId, setReportData) => {
+    dispatch(toggleLoad(true));
+    setReportData(null);
+
     try {
-      const response = await axiosInstance.get("/providers/providerReport");
-      return response.data.data;
+      const response = await axiosInstance.get(
+        `/providers/providerReport/${userId}`
+      );
+      setReportData(response.data.data);
     } catch (error) {
-      throw new Error(error.response?.data?.message || error.message);
+      console.error("Error fetching provider prediction report:", error);
+      setReportData(null);
+    } finally {
+      dispatch(toggleLoad(false));
     }
-  },
+  };
+
+  return { fetchProviderPredictionReport };
 };
 
 export default ProviderPowerPredictionService;

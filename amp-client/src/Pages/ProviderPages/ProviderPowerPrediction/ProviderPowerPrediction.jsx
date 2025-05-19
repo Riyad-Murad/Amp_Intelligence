@@ -1,96 +1,94 @@
 import "./styles.css";
 import { useState } from "react";
-import { useDispatch, useSelector } from "react-redux";
-import { toggleLoad } from "../../../Redux/Slices/loadingSlice";
-import ProviderPowerPredictionService from "../Services/ProviderPowerPredictionService/ProviderPowerPredictionService";
+import { useSelector } from "react-redux";
+import ActionButton from "../../../Components/CommonComponents/ActionButton/ActionButton";
+import ProviderPredictionService from "../Services/ProviderPowerPredictionService/ProviderPowerPredictionService";
 
 const ProviderPowerPrediction = () => {
-  const [predictionData, setPredictionData] = useState(null);
+  const [reportData, setReportData] = useState(null);
   const loading = useSelector((state) => state.loading.loadingState);
-  const dispatch = useDispatch();
+  const userId = useSelector((state) => state.user.id);
 
-  const fetchPowerPrediction = async () => {
-    dispatch(toggleLoad(true));
-    setPredictionData(null);
-
-    try {
-      const data = await ProviderPowerPredictionService.fetchPowerPrediction();
-      setPredictionData(data);
-    } catch (error) {
-      console.error("Error fetching power prediction:", error.message);
-      setPredictionData(null);
-    } finally {
-      dispatch(toggleLoad(false));
-    }
-  };
+  const { fetchProviderPredictionReport } = ProviderPredictionService();
 
   return (
-    <div className="provider-power-prediction-container">
-      <div className="main-content">
-        <h1 className="main-content-title section-titles">Power Prediction</h1>
+    <div className="provider-container">
+      <header className="provider-header">
+        <h1 className="provider-title">Provider Power Forecast</h1>
+        <p className="provider-subtitle">
+          Smart metrics-based prediction to optimize your grid efficiency
+        </p>
+      </header>
 
-        {!predictionData && !loading && (
-          <div className="generate-report-section">
-            <p>Click the button to generate the power prediction.</p>
-            <button onClick={fetchPowerPrediction} className="generate-button">
-              Generate Prediction
-            </button>
+      {reportData && !loading && (
+        <div className="provider-download-top">
+          <ActionButton
+            text="Download Forecast"
+            className="provider-download-action-button"
+            color="#FFFFFF"
+            onClick={() => console.log("Download triggered")}
+            width="250px"
+            margin="20px auto"
+          />
+        </div>
+      )}
+
+      {!reportData && !loading && (
+        <div className="provider-generate-card">
+          <p>
+            Analyze 10 months of aggregated metrics to forecast your upcoming
+            energy demand and resource allocation.
+          </p>
+          <ActionButton
+            text="Generate Forecast"
+            className="provider-generate-action-button"
+            color="#FFFFFF"
+            onClick={() => fetchProviderPredictionReport(userId, setReportData)}
+            width="250px"
+            margin="20px auto 0"
+          />
+        </div>
+      )}
+
+      {loading ? (
+        <div className="provider-loading-overlay">
+          <div className="provider-spinner" />
+          <p>Generating prediction...</p>
+        </div>
+      ) : (
+        reportData && (
+          <div className="provider-report-card">
+            <section className="provider-summary-section">
+              <h3>Summary</h3>
+              <p>{reportData.summary}</p>
+            </section>
+
+            <section className="provider-insight-grid">
+              <div className="provider-insight-box">
+                <h4>Voltage Trends</h4>
+                <p>{reportData.voltageInsights}</p>
+              </div>
+              <div className="provider-insight-box">
+                <h4>Power Load</h4>
+                <p>{reportData.powerInsights}</p>
+              </div>
+              <div className="provider-insight-box">
+                <h4>Energy Patterns</h4>
+                <p>{reportData.energyInsights}</p>
+              </div>
+            </section>
+
+            <section className="provider-recommendation-section">
+              <h4>Optimization Strategies</h4>
+              <ul>
+                {reportData.recommendations.split("\n").map((rec, index) => (
+                  <li key={index}>{rec}</li>
+                ))}
+              </ul>
+            </section>
           </div>
-        )}
-
-        {loading ? (
-          <div className="spinner-container">
-            <div className="spinner"></div>
-          </div>
-        ) : (
-          predictionData && (
-            <div className="report-display">
-              <h3>Prediction Summary</h3>
-              {predictionData.summary ? (
-                <p>{predictionData.summary}</p>
-              ) : (
-                <p>No summary available.</p>
-              )}
-
-              {predictionData.voltageInsights && (
-                <div className="insight-section">
-                  <h4>Voltage Insights</h4>
-                  <p>{predictionData.voltageInsights}</p>
-                </div>
-              )}
-
-              {predictionData.powerInsights && (
-                <div className="insight-section">
-                  <h4>Power Insights</h4>
-                  <p>{predictionData.powerInsights}</p>
-                </div>
-              )}
-
-              {predictionData.energyInsights && (
-                <div className="insight-section">
-                  <h4>Energy Insights</h4>
-                  <p>{predictionData.energyInsights}</p>
-                </div>
-              )}
-
-              {predictionData.recommendations && (
-                <div className="recommendations-section">
-                  <h4>Recommendations</h4>
-                  <ul>
-                    {predictionData.recommendations
-                      .split("\n")
-                      .map((rec, idx) => (
-                        <li key={idx}>{rec}</li>
-                      ))}
-                  </ul>
-                </div>
-              )}
-
-              <button className="download-button">Download Prediction</button>
-            </div>
-          )
-        )}
-      </div>
+        )
+      )}
     </div>
   );
 };
