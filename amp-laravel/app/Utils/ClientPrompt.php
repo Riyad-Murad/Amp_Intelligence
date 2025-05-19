@@ -23,21 +23,48 @@ class ClientPrompt
         })->implode("\n");
 
         $prompt = <<<EOT
-                    You are an AI assistant that analyzes monthly energy usage metrics and generates structured, in-depth reports.
+                    You are an intelligent energy assistant specializing in personalized energy consumption insights.
 
-                    Based on the following device readings, provide a **comprehensive and detailed** analysis including:
+                    You will be given up to 10 months of historical energy data from a single user's device. Your task is to generate a **well-structured JSON report** that provides a technical yet user-friendly power usage summary.
 
-                    - **Performance Summary** — A thorough overview of overall energy usage patterns, key events, and trends.
-                    - **Voltage Insights** — Analyze stability, peaks, troughs, and possible causes of fluctuations.
-                    - **Power Usage Insights** — Identify high-load events, consistent patterns, and anomalies.
-                    - **Energy Usage Insights** — Discuss consumption levels, distribution over time, and periods of peak/low usage.
-                    - **Actionable Recommendations** — Provide clear, technical, and practical suggestions (start each on a new line using a bullet point), and **do not mention device IDs**.
+                    Based on the data provided, include the following sections:
 
-                    Ensure each section provides detailed insights and explanations that a technical team or energy manager would find useful.
+                    - **summary** — Describe how the user's power consumption evolved over time. Mention trends, unusual behaviors, or noticeable shifts in usage.
+                    - **voltageInsights** — Evaluate voltage stability, spikes, and dips. Explain what they could mean for the user's hardware or grid conditions.
+                    - **powerInsights** — Analyze the magnitude and frequency of power demand. Highlight any months with high peaks or irregular loads.
+                    - **energyInsights** — Detail the user's energy consumption in kWh. Identify patterns in low or high consumption months and whether it follows a seasonal pattern.
+                    - **recommendations** — Provide 3–5 practical steps the user can follow to improve energy efficiency. Keep each point concise and impactful. Use a bullet point for each. Do **not** refer to device or user IDs.
 
-                    Data:
+                    Output the result in this exact JSON structure:
+                    {
+                    "summary": "...",
+                    "voltageInsights": "...",
+                    "powerInsights": "...",
+                    "energyInsights": "...",
+                    "recommendations": "• Recommendation 1\n• Recommendation 2\n• Recommendation 3"
+                    }
+
+                    Metrics:
                     $metricsText
                     EOT;
+
+
+        // $prompt = <<<EOT
+        //             You are an AI assistant that analyzes monthly energy usage metrics and generates structured, in-depth reports.
+
+        //             Based on the following device readings, provide a **comprehensive and detailed** analysis including:
+
+        //             - **Performance Summary** — A thorough overview of overall energy usage patterns, key events, and trends.
+        //             - **Voltage Insights** — Analyze stability, peaks, troughs, and possible causes of fluctuations.
+        //             - **Power Usage Insights** — Identify high-load events, consistent patterns, and anomalies.
+        //             - **Energy Usage Insights** — Discuss consumption levels, distribution over time, and periods of peak/low usage.
+        //             - **Actionable Recommendations** — Provide clear, technical, and practical suggestions (start each on a new line using a bullet point), and **do not mention device IDs**.
+
+        //             Ensure each section provides detailed insights and explanations that a technical team or energy manager would find useful.
+
+        //             Data:
+        //             $metricsText
+        //             EOT;
 
         return $prompt;
     }
