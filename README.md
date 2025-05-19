@@ -23,7 +23,7 @@
 ### Component Diagram
 
 <center>
-<img src="./readme/demo/Component Diagram.png"/>
+<img src="./readme/demo/Component Diagram 2.0.png"/>
 </center>
 
 ### Flow Diagram
