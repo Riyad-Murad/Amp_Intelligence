@@ -34,6 +34,10 @@
 
 ### Project Box Design
 
+This box is a demostration of a power room that contain elecrical wire lines and the microcontroller is connected to the circuit.
+
+I used for this project ESP32 DevKit V1. It is based on the ESP32 microcontroller that boasts Wifi, Bluetooth, Ethernet and Low Power support all in a single chip.
+
 | Power Box 1                             | Power Box 2                       | Power Box 3                        |
 | --------------------------------------- | ------------------------------------- | ------------------------------------- |
 | ![PowerBox](./readme/demo/Project_Box/Power_Room_1.jpg) | ![PowerBox](./readme/demo/Project_Box/Power_Room_2.jpg) | ![PowerBox](./readme/demo/Project_Box/Power_Room_3.jpg) |
@@ -105,9 +109,9 @@
 <!-- AI-Power APP -->
 <img src="./readme/title7.svg"/>
 
-### OpenAI Intengration
+### Prism OpenAI Intengration
 
-- Description here.
+- Prism is a powerful Laravel package for integrating Large Language Models (LLMs) into your applications.
 
 | Prism Function Call                            | Prism Client Prompt                       | Prism Provider Prompt                        |
 | --------------------------------------- | ------------------------------------- | ------------------------------------- |
@@ -117,7 +121,7 @@
 
 - Provider user response time difference
 
-| Postman API Before Indexing                            | Postman API After Indexing                       |
+| Postman API Before Indexing (22.28s)                           | Postman API After Indexing (15.5s)                      |
 | --------------------------------------- | ------------------------------------- |
 | ![BeforeIndex](./readme/demo/AI/Provider%20Report%20Before%20Indexing.png) | ![AfterIndex](./readme/demo/AI/Provider%20Report%20After%20Indexing.png) |
 
@@ -125,7 +129,7 @@
 
 - Client user response time difference
 
-| Postman API Before Indexing                            | Postman API After Indexing                       |
+| Postman API Before Indexing (17s)                           | Postman API After Indexing (8.28 s)                      |
 | --------------------------------------- | ------------------------------------- |
 | ![BeforeIndex](./readme/demo/AI/Client%20Report%20Before%20Indexing.png) | ![AfterIndex](./readme/demo/AI/Client%20Report%20After%20Indexing.png) |
 
@@ -142,7 +146,7 @@
 | --------------------------------------- | ------------------------------------- | ------------------------------------- |
 | ![PipelineSample](./readme/demo/Deployment/Deployment%20Pipeline%201.png) | ![PipelineSuccess](./readme/demo/Deployment/GitHub_Deploy_Staging_Pipeline.png) | ![EC2Deployed](./readme/demo/Deployment/Node_Server_Docker_Deployed.png) |
 
-<br><br>
+<br>
 
 #### To test the website, here are some initial default data stored in the database:
 
