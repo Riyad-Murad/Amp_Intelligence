@@ -67,7 +67,7 @@
 | ![ClientProfile](./readme/demo/Client/Client_Profile.png) |
 
 
-### Provider Screens (Web)
+### Provider Screens
 
 | Provider Dashboard screen                            | Provider Report screen                       |
 | --------------------------------------- | ------------------------------------- |
@@ -109,9 +109,9 @@ I used for this project ESP32 DevKit V1. It is based on the ESP32 microcontrolle
 
 ### GitHub Testing Pull Request
 
-| GitHub Testing Pipeline                            | GitHub Pull Request                       | Testing Output                       |
-| --------------------------------------- | ------------------------------------- | ------------------------------------- |
-| ![GitHubTestPipeline](./readme/demo/Testing/Laravel_Test_Staging.png) | ![GitHubPullRequest](./readme/demo/Testing/Pull%20Request%20Test%20Success.png) | ![LaravelTest](./readme/demo/Testing/php_artisan_test_success.png) |
+| GitHub Testing Pipeline                           | GitHub Pull Request                      |
+| --------------------------------------- | ------------------------------------- |
+| ![GitHubTestPipeline](./readme/demo/Testing/Laravel_Test_Production.png) | ![GitHubPullRequest](./readme/demo/Testing/Pull%20Request%20Test%20Success.png) |
 
 <br><br>
 
@@ -122,13 +122,21 @@ I used for this project ESP32 DevKit V1. It is based on the ESP32 microcontrolle
 
 - Prism is a powerful Laravel package for integrating Large Language Models (LLMs) into your applications.
 
-| Prism Function Call                            | Prism Client Prompt                       | Prism Provider Prompt                        |
-| --------------------------------------- | ------------------------------------- | ------------------------------------- |
-| ![PrismCall](./readme/demo/AI/PrismFunctionCall.png) | ![ClientPrompt](./readme/demo/AI/PrismClientPrompt.png) | ![ProviderPrompt](./readme/demo/AI/PrismProviderPrompt.png) |
+| Prism Provider Prompt                           | Prism Client Prompt                      |
+| --------------------------------------- | ------------------------------------- |
+| ![ProviderPrompt](./readme/demo/AI/PrismProviderPrompt.png) | ![ClientPrompt](./readme/demo/AI/PrismClientPrompt.png) |
+
+| Prism Function Call                           | Controller                      |
+| --------------------------------------- | ------------------------------------- |
+| ![PrismCall](./readme/demo/AI/PrismFunctionCall.png) | ![Controller](./readme/demo/Testing/Controller.png) |
+
+| Routes                           | Testing Pipeline                      |
+| --------------------------------------- | ------------------------------------- |
+| ![Routes](./readme/demo/Testing/Routes.png) | ![TestingPipeline](./readme/demo/Testing/Testing_Pipeline_Code.png) |
 
 ### Server Response with Database Indexing
 
-- Provider user response time difference
+- Provider user AI generated response time difference
 
 | Postman API Before Indexing (22.28s)                           | Postman API After Indexing (15.5s)                      |
 | --------------------------------------- | ------------------------------------- |
@@ -136,11 +144,15 @@ I used for this project ESP32 DevKit V1. It is based on the ESP32 microcontrolle
 
 ### Server Response with Database Indexing
 
-- Client user response time difference
+- Client user AI generated response time difference
 
 | Postman API Before Indexing (17s)                           | Postman API After Indexing (8.28 s)                      |
 | --------------------------------------- | ------------------------------------- |
 | ![BeforeIndex](./readme/demo/AI/Client%20Report%20Before%20Indexing.png) | ![AfterIndex](./readme/demo/AI/Client%20Report%20After%20Indexing.png) |
+
+| Users Table user_type indexed                           | Metrics Table slave_id indexed                      |
+| --------------------------------------- | ------------------------------------- |
+| ![UserTypeIndex](./readme/demo/Testing/user_type_indexed.png) | ![SlaveIdIndex](./readme/demo/Testing/slave_id_index.png) |
 
 <br><br>
 
@@ -155,14 +167,25 @@ I used for this project ESP32 DevKit V1. It is based on the ESP32 microcontrolle
 
 ### EC2 Docker containers deployment
 
-| Deployment Pipeline Sample                            | GitHub Deployment Pipeline Success                       | EC2 Instance docker deployed                        |
-| --------------------------------------- | ------------------------------------- | ------------------------------------- |
-| ![PipelineSample](./readme/demo/Deployment/Deployment%20Pipeline%201.png) | ![PipelineSuccess](./readme/demo/Deployment/GitHub_Deploy_Staging_Pipeline.png) | ![EC2Deployed](./readme/demo/Deployment/Node_Server_Docker_Deployed.png) |
+| Deployment Pipeline 1                            | Deployment Pipeline 2                       |
+| --------------------------------------- | ------------------------------------- |
+| ![Pipeline1](./readme/demo/Deployment/Deployment%20Pipeline%201.png) | ![Pipeline2](./readme/demo/Deployment/Deployment%20Pipeline%202.png) |
 
+| Deployment Pipeline 3                            | Deployment Pipeline 4                       |
+| --------------------------------------- | ------------------------------------- |
+| ![Pipeline3](./readme/demo/Deployment/Deployment%20Pipeline%203.png) | ![Pipeline4](./readme/demo/Deployment/Deployment%20Pipeline%204.png) |
+
+| GitHub Deployment Pipeline Success                            | EC2 Instance docker deployed                       |
+| --------------------------------------- | ------------------------------------- |
+| ![PipelineSuccess](./readme/demo/Deployment/GitHub_Deploy_Staging_Pipeline.png) | ![EC2Deployed](./readme/demo/Deployment/Node_Server_Docker_Deployed.png) |
+
+| EC2 Node Server Logs                            | ESP32 Serial Monitor Output                       |
+| --------------------------------------- | ------------------------------------- |
+| ![NodeLogs](./readme/demo/Deployment/Node_Server_Data.png) | ![ESP32Monitor](./readme/demo/Deployment/ESP32_Serial_Monitor.png) |
 
 | AWS S3 Bucket React files                            | S3 bucket public IP website                       |
 | --------------------------------------- | ------------------------------------- |
-| ![Landing](./readme/demo/Deployment/S3_React_Deployed.png) | ![fsdaf](./readme/demo/Deployment/S3_Website_Deployed.png) |
+| ![S3React](./readme/demo/Deployment/S3_React_Deployed.png) | ![S3PubliLink](./readme/demo/Deployment/S3_Website_Deployed.png) |
 
 <br>
 
