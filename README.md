@@ -20,21 +20,11 @@
 <img src="./readme/demo/Diagrams/ERD.png"/>
 </center>
 
-### System Architect Diagram
+### Component Diagram
 
 <center>
-<img src="./readme/demo/Diagrams/System Architect Diagram.png"/>
+<img src="./readme/demo/Diagrams/Component Diagram Light.png"/>
 </center>
-
-### Project Box Design
-
-This box is a demostration of a power room that contain elecrical wire lines and the microcontroller is connected to the circuit.
-
-I used for this project ESP32 DevKit V1. It is based on the ESP32 microcontroller that boasts Wifi, Bluetooth, Ethernet and Low Power support all in a single chip.
-
-| Power Box 1                             | Power Box 2                       | Power Box 3                        |
-| --------------------------------------- | ------------------------------------- | ------------------------------------- |
-| ![PowerBox](./readme/demo/Project_Box/Power_Room_1.jpg) | ![PowerBox](./readme/demo/Project_Box/Power_Room_2.jpg) | ![PowerBox](./readme/demo/Project_Box/Power_Room_3.jpg) |
 
 <br><br>
 
@@ -49,7 +39,7 @@ I used for this project ESP32 DevKit V1. It is based on the ESP32 microcontrolle
 
 - <b>Personalized AI Optimization Plans:</b> Clients receive intelligent, data-driven strategies to optimize energy usage, reduce costs, and promote sustainability based on their consumption behaviors.
 
-### Remarkable Features
+### Features Highlight
 
 <center>
 <img src="./readme/demo/Highlights/Highlight Section.png"/>
@@ -60,33 +50,48 @@ I used for this project ESP32 DevKit V1. It is based on the ESP32 microcontrolle
 <!-- Demo -->
 <img src="./readme/title5.svg"/>
 
-### Client Screens (Web)
+### Landing Screens
 
-| Login screen                            | Register screen                       |
+| Landing Screen                            | Login screen                       |
 | --------------------------------------- | ------------------------------------- |
-| ![Landing](./readme/demo/1440x1024.png) | ![fsdaf](./readme/demo/1440x1024.png) |
+| ![Landing](./readme/demo/Landing/Landing%20Page.gif) | ![Login](./readme/demo/Landing/Login.gif) |
 
+### Client Screens
+
+| Client Dashboard screen                            | Client Report screen                       |
+| --------------------------------------- | ------------------------------------- |
+| ![ClientDashboard](./readme/demo/Client/Client%20Dashboard.gif) | ![ClientReport](./readme/demo/Client/Client%20Report.gif) |
+
+| Client Profile screen                            |
+| --------------------------------------- |
+| ![ClientProfile](./readme/demo/Client/Client_Profile.png) |
 
 
 ### Provider Screens (Web)
 
-| Login screen                            | Register screen                       |
+| Provider Dashboard screen                            | Provider Report screen                       |
 | --------------------------------------- | ------------------------------------- |
-| ![Landing](./readme/demo/1440x1024.png) | ![fsdaf](./readme/demo/1440x1024.png) |
+| ![ProviderDashboard](./readme/demo/Provider/Provider%20Dashboard.gif) | ![ProviderReport](./readme/demo/Provider/Provider%20Report.gif) |
 
-
-
-### Admin Screens (Web)
-
-| Login screen                            | Register screen                       |
+| Provider Show Users screen                            | Provider Edit Profile screen                       |
 | --------------------------------------- | ------------------------------------- |
-| ![Landing](./readme/demo/1440x1024.png) | ![fsdaf](./readme/demo/1440x1024.png) |
+| ![ProviderUsers](./readme/demo/Provider/Provider_Users.png) | ![ProviderProfile](./readme/demo/Provider/Provider_Profile.png) |
 
 
 <br><br>
 
 <!-- Development & Testing -->
 <img src="./readme/title6.svg"/>
+
+### Project Box Design
+
+This box is a demostration of a power room that contain elecrical wire lines and the microcontroller is connected to the circuit.
+
+I used for this project ESP32 DevKit V1. It is based on the ESP32 microcontroller that boasts Wifi, Bluetooth, Ethernet and Low Power support all in a single chip.
+
+| Power Box 1                             | Power Box 2                       | Power Box 3                        |
+| --------------------------------------- | ------------------------------------- | ------------------------------------- |
+| ![PowerBox](./readme/demo/Project_Box/Power_Room_1.jpg) | ![PowerBox](./readme/demo/Project_Box/Power_Room_2.jpg) | ![PowerBox](./readme/demo/Project_Box/Power_Room_3.jpg) |
 
 #### Postman API Documentation
 
@@ -153,6 +158,11 @@ I used for this project ESP32 DevKit V1. It is based on the ESP32 microcontrolle
 | Deployment Pipeline Sample                            | GitHub Deployment Pipeline Success                       | EC2 Instance docker deployed                        |
 | --------------------------------------- | ------------------------------------- | ------------------------------------- |
 | ![PipelineSample](./readme/demo/Deployment/Deployment%20Pipeline%201.png) | ![PipelineSuccess](./readme/demo/Deployment/GitHub_Deploy_Staging_Pipeline.png) | ![EC2Deployed](./readme/demo/Deployment/Node_Server_Docker_Deployed.png) |
+
+
+| AWS S3 Bucket React files                            | S3 bucket public IP website                       |
+| --------------------------------------- | ------------------------------------- |
+| ![Landing](./readme/demo/Deployment/S3_React_Deployed.png) | ![fsdaf](./readme/demo/Deployment/S3_Website_Deployed.png) |
 
 <br>
 
