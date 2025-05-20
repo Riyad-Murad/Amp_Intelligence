@@ -1,7 +1,7 @@
 import "./styles.css";
 import { Link } from "react-router-dom";
 import logo from "../../../assets/logo.png";
-import LogoutButton from "../../CommonComponents/LogoutButton/LogoutButton";
+import ProfileMenu from "../../CommonComponents/ProfileMenu/ProfileMenu";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import {
   faTachometerAlt,
@@ -34,13 +34,9 @@ const ProviderSidebar = () => {
           <FontAwesomeIcon icon={faBolt} className="sidebar-icon" />
           <span className="link-text">Power Prediction</span>
         </Link>
-        <Link to="/provider/profile" className="sidebar-link">
-          <FontAwesomeIcon icon={faUser} className="sidebar-icon" />
-          <span className="link-text">Profile</span>
-        </Link>
       </nav>
       <div className="sidebar-footer">
-        <LogoutButton />
+        <ProfileMenu />
       </div>
     </div>
   );

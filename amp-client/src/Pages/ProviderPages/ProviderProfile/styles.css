@@ -1,5 +1,54 @@
 /* ProviderProfile.css */
-.provider-profile-container {
+.provider-profile-wrapper {
   display: flex;
-  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+  min-height: 100vh;
+  margin-left: 300px;
+  background-color: #f8f8f8;
+  padding: 20px;
+}
+
+.provider-profile-main {
+  width: 100%;
+  max-width: 600px;
+}
+
+.provider-profile-heading {
+  text-align: center;
+  margin-bottom: 30px;
+}
+
+.provider-profile-card {
+  background-color: #fff9f3;
+  padding: 30px;
+  border-radius: 12px;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.08);
+}
+
+.provider-profile-subtitle {
+  margin-bottom: 25px;
+  text-align: center;
+}
+
+.provider-profile-form {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.provider-profile-form-group {
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  margin-bottom: 20px;
+}
+
+.submit-action-button {
+  background-color:  #f9a43a;
+  color: #ffffff;
+}
+
+.submit-action-button:hover {
+  background-color: #f19626;
 }
