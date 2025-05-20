@@ -22,17 +22,13 @@ const AdminSidebar = () => {
         </Link>
       </div>
       <nav className="sidebar-nav">
-        <Link to="/admin/navigation-page" className="sidebar-link">
-          <FontAwesomeIcon icon={faFileAlt} className="sidebar-icon" />
-          <span className="link-text">Navigation Page</span>
+        <Link to="/admin/view-providers" className="sidebar-link">
+          <FontAwesomeIcon icon={faEye} className="sidebar-icon" />
+          <span className="link-text">View Providers</span>
         </Link>
         <Link to="/admin/edit-provider" className="sidebar-link">
           <FontAwesomeIcon icon={faUserEdit} className="sidebar-icon" />
           <span className="link-text">Edit Provider</span>
-        </Link>
-        <Link to="/admin/view-providers" className="sidebar-link">
-          <FontAwesomeIcon icon={faEye} className="sidebar-icon" />
-          <span className="link-text">View Providers</span>
         </Link>
         <Link to="/admin/contact-messages" className="sidebar-link">
           <FontAwesomeIcon icon={faEnvelope} className="sidebar-icon" />
