@@ -2,9 +2,9 @@ import "./styles.css";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faPenToSquare } from "@fortawesome/free-solid-svg-icons";
 
-const CustomTable = ({ headers, data }) => {
+const Table = ({ headers, data }) => {
   return (
-    <table className="custom-table">
+    <table className="admin-table">
       <thead>
         <tr>
           {headers.map((header, idx) => (
@@ -13,13 +13,14 @@ const CustomTable = ({ headers, data }) => {
         </tr>
       </thead>
       <tbody>
-        {data.map((user, idx) => (
+        {data.map((item, idx) => (
           <tr key={idx}>
-            <td>{user.name}</td>
-            <td>{user.email}</td>
-            <td>{user.phone_number}</td>
+            <td>{item.name}</td>
+            <td>{item.email}</td>
+            <td>{item.phone_number}</td>
+            <td>{item.message}</td>
             <td>
-              <FontAwesomeIcon icon={faPenToSquare} className="edit-icon" />
+              <FontAwesomeIcon icon={faPenToSquare} className="admin-edit-icon" />
             </td>
           </tr>
         ))}
@@ -28,4 +29,4 @@ const CustomTable = ({ headers, data }) => {
   );
 };
 
-export default CustomTable;
+export default Table;

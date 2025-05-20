@@ -8,6 +8,9 @@
   color: #fff;
   padding: 20px;
   box-sizing: border-box;
+  position: fixed;
+  top: 0;
+  left: 0;
 }
 
 .sidebar-header {
@@ -54,10 +57,11 @@
   border-top: 1px solid rgba(255, 255, 255, 0.2);
 }
 
-.main-content {
+.admin-main-content {
   flex: 1;
-  margin-left: 300px;
+  margin-left: 330px;
   margin-top: 20px;
+  margin-right: 30px;
 }
 
 .admin-main-content-title {
