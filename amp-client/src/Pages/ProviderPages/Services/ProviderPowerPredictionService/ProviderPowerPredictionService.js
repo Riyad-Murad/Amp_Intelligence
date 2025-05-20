@@ -12,7 +12,7 @@ const ProviderPowerPredictionService = () => {
 
     try {
       const response = await axiosInstance.get(
-        `/providers/providerReport/${userId}`
+        `/providers/providerReport/`
       );
       setReportData(response.data.data);
     } catch (error) {

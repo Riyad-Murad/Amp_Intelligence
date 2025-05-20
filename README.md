@@ -20,16 +20,10 @@
 <img src="./readme/demo/Diagrams/ERD.png"/>
 </center>
 
-### Component Diagram
+### System Architect Diagram
 
 <center>
-<img src="./readme/demo/Diagrams/Component Diagram.png"/>
-</center>
-
-### Flow Diagram
-
-<center>
-<img src="./readme/demo/Diagrams/Flow Diagram.png"/>
+<img src="./readme/demo/Diagrams/System Architect Diagram.png"/>
 </center>
 
 ### Project Box Design
@@ -54,6 +48,12 @@ I used for this project ESP32 DevKit V1. It is based on the ESP32 microcontrolle
 - <b>AI-Powered Consumption Forecasting:</b> Advanced AI models analyze historical patterns to help energy providers anticipate demand and optimize resource allocation.
 
 - <b>Personalized AI Optimization Plans:</b> Clients receive intelligent, data-driven strategies to optimize energy usage, reduce costs, and promote sustainability based on their consumption behaviors.
+
+### Remarkable Features
+
+<center>
+<img src="./readme/demo/Highlights/Highlight Section.png"/>
+</center>
 
 <br><br>
 
@@ -87,6 +87,10 @@ I used for this project ESP32 DevKit V1. It is based on the ESP32 microcontrolle
 
 <!-- Development & Testing -->
 <img src="./readme/title6.svg"/>
+
+#### Postman API Documentation
+
+- You can check the full API documentation using this [link](https://documenter.getpostman.com/view/42830816/2sB2qXji4H).
 
 ### Code Test Cases
 
@@ -138,9 +142,13 @@ I used for this project ESP32 DevKit V1. It is based on the ESP32 microcontrolle
 <!-- Deployment -->
 <img src="./readme/title8.svg"/>
 
-### EC2 Docker containers deployment
+### Deployment Diagram
 
-- You can check the full API documentation using this [link](https://documenter.getpostman.com/view/42830816/2sB2qXji4H).
+<center>
+<img src="./readme/demo/Diagrams/Flow Diagram.png"/>
+</center>
+
+### EC2 Docker containers deployment
 
 | Deployment Pipeline Sample                            | GitHub Deployment Pipeline Success                       | EC2 Instance docker deployed                        |
 | --------------------------------------- | ------------------------------------- | ------------------------------------- |
