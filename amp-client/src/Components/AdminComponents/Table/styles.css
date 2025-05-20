@@ -1,0 +1,30 @@
+/* Table.css */
+.admin-table {
+  width: 100%;
+  border-collapse: collapse;
+  margin-top: 20px;
+  margin-bottom: 50px;
+}
+
+.admin-table thead tr {
+  background-color: #f9a43a;
+  color: #000000;
+  text-align: left;
+}
+
+.admin-table th,
+.admin-table td {
+  padding: 12px 15px;
+}
+
+.admin-table tbody tr {
+  background-color: #fff9f3;
+  color: #000000;
+  border-bottom: 1px solid #ddd;
+}
+
+.admin-edit-icon {
+  cursor: pointer;
+  color: #000000;
+  font-size: 18px;
+}
