@@ -1,0 +1,29 @@
+/* CustomTable.css */
+.custom-table {
+  width: 100%;
+  border-collapse: collapse;
+  margin-top: 20px;
+}
+
+.custom-table thead tr {
+  background-color: #f9a43a;
+  color: #000000;
+  text-align: left;
+}
+
+.custom-table th,
+.custom-table td {
+  padding: 12px 15px;
+}
+
+.custom-table tbody tr {
+  background-color: #fff9f3;
+  color: #000000;
+  border-bottom: 1px solid #ddd;
+}
+
+.edit-icon {
+  cursor: pointer;
+  color: #000000;
+  font-size: 18px;
+}
