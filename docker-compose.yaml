@@ -13,23 +13,34 @@ services:
       - mysql-database
     restart: always
     command: ./dockerShell.sh
+    mem_limit: 300m
+    cpus: 0.35
 
   mysql-database:
     image: mysql:8.0
     restart: always
+    ports:
+      - 3306:3306
     environment:
       MYSQL_ROOT_PASSWORD: placeholder
       MYSQL_DATABASE: placeholder
     volumes:
       - mysql-data:/var/lib/mysql
-    ports:
-      - 3306:3306
+      - ./mysql-lowmem.cnf:/etc/mysql/conf.d/custom.cnf
+    mem_limit: 400m
+    cpus: 0.40
+    
+      
 
   node-server:
     image: riyadmurad44/node_amp_intelligence:latest
     ports:
       - 3001:3001
     restart: always
+    environment:
+      - NODE_OPTIONS=--max-old-space-size=128
+    mem_limit: 150m
+    cpus: 0.25
 
 volumes:
   mysql-data:
