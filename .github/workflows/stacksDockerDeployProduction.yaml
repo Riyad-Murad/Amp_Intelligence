@@ -23,6 +23,7 @@ jobs:
         working-directory: amp-laravel
         run: |
           echo "APP_KEY=${{ secrets.LARAVEL_APP_KEY }}" > .env.example
+          echo "APP_URL=http://${{ secrets.EC2_HOST_STAGING }}:8000" > .env.example
           echo "DB_CONNECTION=mysql" >> .env.example
           echo "DB_HOST=${{ secrets.LARAVEL_DATABASE_HOST }}" >> .env.example
           echo "DB_PORT=${{ secrets.LARAVEL_DATABASE_PORT_NUMBER }}" >> .env.example
