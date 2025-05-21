@@ -191,6 +191,14 @@ I used for this project ESP32 DevKit V1. It is based on the ESP32 microcontrolle
 | --------------------------------------- | ------------------------------------- |
 | ![S3React](./readme/demo/Deployment/S3_React_Deployed.png) | ![S3PubliLink](./readme/demo/Deployment/S3_Website_Deployed.png) |
 
+| Database Backup CLI Script Run                            | Database Backup Cronjob                        |
+| --------------------------------------- | ------------------------------------- |
+| ![DBCLIScriptRun](./readme/demo/Deployment/Database_backup_CLI.png) | ![DBCronjob](./readme/demo/Deployment/Database_backup_cronjob.png) |
+
+| Database Backup Script Code                            | Database Backup S3                      |
+| --------------------------------------- | ------------------------------------- |
+| ![DBScriptCode](./readme/demo/Deployment/Database_backup_script.png) | ![DBBackupS3](./readme/demo/Deployment/Database_backup_S3.png) |
+
 <br>
 
 #### To test the website, here are some initial default data stored in the database:
