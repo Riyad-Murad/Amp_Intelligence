@@ -141,6 +141,15 @@ jobs:
           source: "docker-compose.yaml"
           target: "/home/${{ secrets.EC2_USER }}/"
 
+      - name: Copy Database Low Memory cofiguration file to EC2
+        uses: appleboy/scp-action@v1
+        with:
+          host: ${{ secrets.EC2_HOST_STAGING }}
+          username: ${{ secrets.EC2_USER }}
+          key: ${{ secrets.EC2_KEY }}
+          source: "mysql-lowmem.cnf"
+          target: "/home/${{ secrets.EC2_USER }}/"
+
   Deploy-To-EC2:
     needs:
       [
